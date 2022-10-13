@@ -1,4 +1,5 @@
 #include "Core.h"
+#include "Entity.h"
 
 namespace myengine
 {
@@ -11,4 +12,27 @@ namespace myengine
 		return rtn;
 	}
 
+	void Core::start()
+	{
+		m_running = true;
+
+		while (m_running)
+		{
+			//do game
+		}
+	}
+
+	void Core::stop()
+	{
+		m_running = false;
+	}
+
+	std::shared_ptr<Entity> Core::addEntity()
+	{
+		std::shared_ptr<Entity> rtn = std::make_shared<Entity>();
+
+		m_entities.push_back(rtn);
+
+		return rtn;
+	}
 }

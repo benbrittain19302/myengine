@@ -14,6 +14,9 @@ add_library(myengine
 
 	src/myengine/Core.h
 	src/myengine/Core.cpp
+
+	src/myengine/Entity.h
+	src/myengine/Entity.cpp
 )
 
 target_link_libraries(game myengine)

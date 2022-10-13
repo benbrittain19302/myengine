@@ -10,5 +10,9 @@ int main()
 
 	std::shared_ptr<Core> core = Core::initialize();
 
+	std::shared_ptr<Entity> e = core->addEntity();
+
+	core->start();
+
 	return 0;
 }
