@@ -3,5 +3,6 @@
 
 #include "Core.h"
 #include "Entity.h"
+#include "Component.h"
 
 #endif // !MY_ENGINE_MYENGINE_H

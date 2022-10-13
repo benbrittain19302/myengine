@@ -18,7 +18,10 @@ namespace myengine
 
 		while (m_running)
 		{
-			//do game
+			for (std::list<std::shared_ptr<Entity> >::iterator itr = m_entities.begin(); itr != m_entities.end(); itr++)
+			{
+				(*itr)->tick();
+			}
 		}
 	}
 
