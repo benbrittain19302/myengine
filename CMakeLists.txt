@@ -3,6 +3,11 @@ project(MYENGINE)
 
 include_directories(
 	src
+	contrib/windows-cl-amd64/include
+)
+
+link_directories(
+	${PROJECT_SOURCE_DIR}/contrib/windows-cl-amd64/lib
 )
 
 add_executable(game
@@ -23,3 +28,5 @@ add_library(myengine
 )
 
 target_link_libraries(game myengine)
+
+target_link_libraries(myengine SDL2 SDL2Main)

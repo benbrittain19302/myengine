@@ -1,5 +1,10 @@
+#include <SDL2/SDL.h>
+
 #include <memory>
 #include <list>
+
+#define INITIAL_WIDTH 640
+#define INITIAL_HEIGHT 480
 
 namespace myengine
 {
@@ -8,6 +13,7 @@ namespace myengine
 	struct Core
 	{
 		static std::shared_ptr<Core> initialize();
+		~Core();
 
 		void start();
 
@@ -21,6 +27,12 @@ namespace myengine
 		bool m_running;
 
 		std::list<std::shared_ptr<Entity> > m_entities;
+
+		std::shared_ptr<Core> m_self;
+
+		SDL_Window* m_window;
+
+		SDL_GLContext m_context;
 	};
 
 }
