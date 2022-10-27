@@ -18,7 +18,7 @@ namespace myengine
 			throw std::runtime_error("failed to init sdl");
 		}
 
-		if (!(rtn->m_window = SDL_CreateWindow("SDL2 Platform", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+		if (!(rtn->m_window = SDL_CreateWindow("MP Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 			INITIAL_WIDTH, INITIAL_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL) ) )
 		{
 			SDL_Quit();
@@ -51,6 +51,11 @@ namespace myengine
 			for (std::list<std::shared_ptr<Entity> >::iterator itr = m_entities.begin(); itr != m_entities.end(); itr++)
 			{
 				(*itr)->tick();
+			}
+
+			for (std::list<std::shared_ptr<Entity> >::iterator itr = m_entities.begin(); itr != m_entities.end(); itr++)
+			{
+				(*itr)->display();
 			}
 		}
 	}

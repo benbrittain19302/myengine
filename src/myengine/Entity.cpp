@@ -13,7 +13,10 @@ namespace myengine
 
 	void Entity::display()
 	{
-
+		for (std::vector<std::shared_ptr<Component> >::iterator itr = m_components.begin(); itr != m_components.end(); itr++)
+		{
+			(*itr)->display();
+		}
 	}
 
 }

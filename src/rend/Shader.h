@@ -9,7 +9,10 @@ namespace rend
 
 struct Shader : sys::EnablePtr
 {
+  static const int BASIC = 1;
+
   Shader(const sys::String& _vertPath, const sys::String& _fragPath);
+  Shader(int _type);
   ~Shader();
 
   GLuint id();
