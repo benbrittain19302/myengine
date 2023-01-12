@@ -22,13 +22,13 @@ namespace myengine
 		std::shared_ptr<Entity> addEntity();
 
 	private:
+		std::weak_ptr<Core> m_self;
+
 		int m_dummy;
 
 		bool m_running;
 
 		std::list<std::shared_ptr<Entity> > m_entities;
-
-		std::shared_ptr<Core> m_self;
 
 		SDL_Window* m_window;
 

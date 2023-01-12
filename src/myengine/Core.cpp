@@ -69,6 +69,8 @@ namespace myengine
 	{
 		std::shared_ptr<Entity> rtn = std::make_shared<Entity>();
 
+		rtn->m_core = m_self;
+		rtn->m_self = rtn;
 		m_entities.push_back(rtn);
 
 		return rtn;

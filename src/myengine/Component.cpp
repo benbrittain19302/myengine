@@ -1,4 +1,5 @@
 #include "Component.h"
+#include "Entity.h"
 
 namespace myengine
 {
@@ -13,5 +14,10 @@ namespace myengine
 	void Component::display()
 	{
 		onDisplay();
+	}
+
+	std::shared_ptr<Entity> Component::getEntity()
+	{
+		return m_entity.lock();
 	}
 }

@@ -4,7 +4,6 @@
 namespace myengine
 {
 	struct Core;
-
 	struct Component;
 
 	struct Entity
@@ -14,13 +13,20 @@ namespace myengine
 		{
 			std::shared_ptr<T> rtn = std::make_shared<T>();
 
+			rtn->m_entity = m_self;
+
 			m_components.push_back(rtn);
 
 			return rtn;
 		}
 
+		std::shared_ptr<Core> getCore();
+
 	private:
 		friend struct Core;
+
+		std::weak_ptr<Core> m_core;
+		std::weak_ptr<Entity> m_self;
 
 		std::vector<std::shared_ptr<Component> > m_components;
 

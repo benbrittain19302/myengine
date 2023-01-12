@@ -1,6 +1,7 @@
 #ifndef MYENGINE_COMPONENT_H
 #define MYENGINE_COMPONENT_H
 
+#include <memory>
 
 namespace myengine
 {
@@ -8,11 +9,14 @@ namespace myengine
 
 	struct Component
 	{
+		virtual void onTick();
+		virtual void onDisplay();
+
+		std::shared_ptr<Entity> getEntity();
 	private:
 		friend struct Entity;
 
-		virtual void onTick();
-		virtual void onDisplay();
+		std::weak_ptr<Entity> m_entity;
 
 		void tick();
 		void display();

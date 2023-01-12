@@ -22,7 +22,6 @@ int main(int argc, char *argv[])
 	std::shared_ptr<Core> core = Core::initialize();
 
 	std::shared_ptr<Entity> e = core->addEntity();
-
 	e->addComponent<Player>();
 
 	core->start();

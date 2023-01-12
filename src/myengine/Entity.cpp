@@ -1,5 +1,6 @@
 #include "Entity.h"
 #include "Component.h"
+#include "Core.h"
 
 namespace myengine
 {
@@ -17,6 +18,11 @@ namespace myengine
 		{
 			(*itr)->display();
 		}
+	}
+
+	std::shared_ptr<Core> Entity::getCore()
+	{
+		return m_core.lock();
 	}
 
 }
