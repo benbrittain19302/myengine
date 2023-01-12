@@ -3,6 +3,8 @@
 
 namespace myengine
 {
+	struct Core;
+
 	struct Component;
 
 	struct Entity
@@ -17,13 +19,15 @@ namespace myengine
 			return rtn;
 		}
 
-		void tick();
-
-		void display();
-
 	private:
+		friend struct Core;
 
 		std::vector<std::shared_ptr<Component> > m_components;
 
+		bool m_alive;
+
+		void tick();
+
+		void display();
 	};
 }
