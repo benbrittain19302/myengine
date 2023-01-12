@@ -10,9 +10,20 @@ link_directories(
 	${PROJECT_SOURCE_DIR}/contrib/windows-cl-amd64/lib
 )
 
-add_executable(game
-	src/game/main.cpp
+add_library(rend
+	src/rend/Animation.cpp
+	src/rend/Buffer.cpp
+	src/rend/Mesh.cpp
+	src/rend/Model.cpp
+	src/rend/ModelRenderer.cpp
+	src/rend/RenderTexture.cpp
+	src/rend/Renderer.cpp
+	src/rend/Shader.cpp
+	src/rend/Texture.cpp
+	src/rend/rendmath.cpp
 )
+
+target_link_libraries(rend GLEW32 OPENGL32)
 
 add_library(myengine
 	src/myengine/myengine.h
@@ -27,6 +38,10 @@ add_library(myengine
 	src/myengine/Component.cpp
 )
 
-target_link_libraries(game myengine)
+target_link_libraries(myengine SDL2 SDL2Main rend)
 
-target_link_libraries(myengine SDL2 SDL2Main)
+add_executable(game
+	src/game/main.cpp
+)
+
+target_link_libraries(game myengine)

@@ -1,5 +1,8 @@
 #include "Core.h"
 #include "Entity.h"
+
+#include <rend/rend.h>
+
 #include <stdexcept>
 
 namespace myengine
@@ -45,18 +48,31 @@ namespace myengine
 	void Core::start()
 	{
 		m_running = true;
+		SDL_Event event = {0};
 
 		while (m_running)
 		{
+			while (SDL_PollEvent(&event))
+			{
+				if (event.type == SDL_QUIT)
+				{
+					m_running = false;
+				}
+			}
 			for (std::list<std::shared_ptr<Entity> >::iterator itr = m_entities.begin(); itr != m_entities.end(); itr++)
 			{
 				(*itr)->tick();
 			}
 
+			rend::Renderer r(INITIAL_WIDTH, INITIAL_HEIGHT);
+			r.clear();
+
 			for (std::list<std::shared_ptr<Entity> >::iterator itr = m_entities.begin(); itr != m_entities.end(); itr++)
 			{
 				(*itr)->display();
 			}
+
+			SDL_GL_SwapWindow(m_window);
 		}
 	}
 
