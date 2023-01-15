@@ -36,6 +36,9 @@ add_library(myengine
 
 	src/myengine/Component.h
 	src/myengine/Component.cpp
+
+	src/myengine/TriangleRenderer.h
+	src/myengine/TriangleRenderer.cpp
 )
 
 target_link_libraries(myengine SDL2 SDL2Main rend)
