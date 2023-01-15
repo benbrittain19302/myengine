@@ -1,5 +1,6 @@
 #include "Core.h"
 #include "Entity.h"
+#include "Transform.h"
 
 #include <rend/rend.h>
 
@@ -87,6 +88,9 @@ namespace myengine
 
 		rtn->m_core = m_self;
 		rtn->m_self = rtn;
+
+		rtn->m_transform = rtn->addComponent<Transform>();
+
 		m_entities.push_back(rtn);
 
 		return rtn;

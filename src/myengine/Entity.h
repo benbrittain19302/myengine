@@ -5,6 +5,7 @@ namespace myengine
 {
 	struct Core;
 	struct Component;
+	struct Transform;
 
 	struct Entity
 	{
@@ -21,6 +22,7 @@ namespace myengine
 		}
 
 		std::shared_ptr<Core> getCore();
+		std::shared_ptr<Transform> getTransform();
 
 	private:
 		friend struct Core;
@@ -29,6 +31,8 @@ namespace myengine
 		std::weak_ptr<Entity> m_self;
 
 		std::vector<std::shared_ptr<Component> > m_components;
+
+		std::weak_ptr<Transform> m_transform;
 
 		bool m_alive;
 

@@ -39,6 +39,9 @@ add_library(myengine
 
 	src/myengine/TriangleRenderer.h
 	src/myengine/TriangleRenderer.cpp
+
+	src/myengine/Transform.h
+	src/myengine/Transform.cpp
 )
 
 target_link_libraries(myengine SDL2 SDL2Main rend)
