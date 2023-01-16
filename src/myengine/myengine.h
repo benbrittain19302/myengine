@@ -6,5 +6,6 @@
 #include "Component.h"
 #include "TriangleRenderer.h"
 #include "Transform.h"
+#include "SoundSource.h"
 
 #endif // !MY_ENGINE_MYENGINE_H

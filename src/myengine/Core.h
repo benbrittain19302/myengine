@@ -1,4 +1,6 @@
 #include <SDL2/SDL.h>
+#include <AL/al.h>
+#include <AL/alc.h>
 
 #include <memory>
 #include <list>
@@ -33,6 +35,10 @@ namespace myengine
 		SDL_Window* m_window;
 
 		SDL_GLContext m_context;
+
+		ALCdevice* m_aDevice;
+
+		ALCcontext* m_aContext;
 	};
 
 }

@@ -42,9 +42,12 @@ add_library(myengine
 
 	src/myengine/Transform.h
 	src/myengine/Transform.cpp
+
+	src/myengine/SoundSource.h
+	src/myengine/SoundSource.cpp
 )
 
-target_link_libraries(myengine SDL2 SDL2Main rend)
+target_link_libraries(myengine SDL2 SDL2Main rend openal32)
 
 add_executable(game
 	src/game/main.cpp

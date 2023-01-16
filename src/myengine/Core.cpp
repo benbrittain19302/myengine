@@ -36,11 +36,38 @@ namespace myengine
 			throw std::runtime_error("Failed to create OpenGL context");
 		}
 
+		rtn->m_aDevice = alcOpenDevice(NULL);
+
+		if (!rtn->m_aDevice)
+		{
+			throw std::runtime_error("Failed to open audio device");
+		}
+
+		rtn->m_aContext = alcCreateContext(rtn->m_aDevice, NULL);
+
+		if (!rtn->m_aContext)
+		{
+			alcCloseDevice(rtn->m_aDevice);
+			throw std::runtime_error("Failed to create audio context");
+		}
+
+		if (!alcMakeContextCurrent(rtn->m_aContext))
+		{
+			alcDestroyContext(rtn->m_aContext);
+			alcCloseDevice(rtn->m_aDevice);
+			throw std::runtime_error("Failed to make context current");
+		}
+
+		alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f); //update this to camera posittion when thats implemented
+
 		return rtn;
 	}
 
 	Core::~Core()
 	{
+		alcMakeContextCurrent(NULL);
+		alcDestroyContext(m_aContext);
+		alcCloseDevice(m_aDevice);
 		SDL_GL_DeleteContext(m_context);
 		SDL_DestroyWindow(m_window);
 		SDL_Quit();
