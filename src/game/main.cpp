@@ -12,6 +12,12 @@ struct Player : Component
 		m_angle += 0.25f;
 
 		getEntity()->getTransform()->setRotation(rend::vec3(0, m_angle, 0));
+		
+		if (m_angle > 20.0f && !sound)
+		{
+			getEntity()->getComponent<SoundSource>()->play();
+			sound = true;
+		}
 	}
 
 	void onDisplay()
@@ -22,6 +28,8 @@ struct Player : Component
 private:
 
 	float m_angle;
+
+	bool sound = false;
 };
 
 int main(int argc, char *argv[])
@@ -31,6 +39,10 @@ int main(int argc, char *argv[])
 	std::shared_ptr<Entity> e = core->addEntity();
 	e->addComponent<Player>();
 	e->addComponent<TriangleRenderer>();
+	e->addComponent<SoundSource>();
+	e->getComponent<SoundSource>()->load("../src/assests/sounds/bingchilling.ogg");
+	std::shared_ptr<Entity> Cam = core->addEntity();
+	Cam->addComponent<Camera>();
 	e->getTransform()->setPosition(rend::vec3(0, 0, -5));
 
 	core->start();

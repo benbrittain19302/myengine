@@ -2,6 +2,7 @@
 #include "Component.h"
 #include "Core.h"
 #include "Transform.h"
+#include "SoundSource.h"
 
 namespace myengine
 {
@@ -26,9 +27,8 @@ namespace myengine
 		return m_core.lock();
 	}
 
-	std::shared_ptr <Transform> Entity::getTransform()
+	std::shared_ptr<Transform> Entity::getTransform()
 	{
 		return m_transform.lock();
 	}
-
 }

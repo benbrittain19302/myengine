@@ -45,6 +45,11 @@ add_library(myengine
 
 	src/myengine/SoundSource.h
 	src/myengine/SoundSource.cpp
+
+	src/myengine/Camera.h
+	src/myengine/Camera.cpp
+
+	src/myengine/stb_vorbis.c
 )
 
 target_link_libraries(myengine SDL2 SDL2Main rend openal32)

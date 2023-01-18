@@ -23,6 +23,8 @@ namespace myengine
 
 		std::shared_ptr<Entity> addEntity();
 
+		std::shared_ptr<Entity> getCamera();
+
 	private:
 		std::weak_ptr<Core> m_self;
 

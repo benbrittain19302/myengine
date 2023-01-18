@@ -31,4 +31,9 @@ namespace myengine
 	{
 		m_rotation = _rotation;
 	}
+
+	void Transform::setScale(const rend::vec3& _scale)
+	{
+		m_scale = _scale;
+	}
 }

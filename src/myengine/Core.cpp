@@ -1,6 +1,7 @@
 #include "Core.h"
 #include "Entity.h"
 #include "Transform.h"
+#include "Camera.h"
 
 #include <rend/rend.h>
 
@@ -120,6 +121,29 @@ namespace myengine
 
 		m_entities.push_back(rtn);
 
+		return rtn;
+	}
+
+	std::shared_ptr<Entity> Core::getCamera()
+	{
+		std::shared_ptr<Entity> rtn = std::make_shared<Entity>();
+		//Go through every Entity
+		for (std::list<std::shared_ptr<Entity> >::iterator itr = m_entities.begin(); itr != m_entities.end(); itr++)
+		{
+
+			//Go through each component in entity
+			for (std::vector<std::shared_ptr<Component> >::iterator iter = (*itr)->m_components.begin(); iter != (*itr)->m_components.end(); iter++)
+			{
+				std::shared_ptr<Component> c = (*iter);
+
+				std::shared_ptr<Camera> t = std::dynamic_pointer_cast<Camera>(c);
+
+				if (t)
+				{
+					rtn = (*itr);
+				}
+			}
+		}
 		return rtn;
 	}
 

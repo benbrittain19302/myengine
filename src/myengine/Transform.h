@@ -13,6 +13,11 @@ namespace myengine
 
 		void setPosition(const rend::vec3& _position);
 		void setRotation(const rend::vec3& _rotation);
+		void setScale(const rend::vec3& _scale);
+
+		rend::vec3 getPosition() { return m_position; }
+		rend::vec3 getRotation() { return m_rotation; }
+		rend::vec3 getScale() { return m_scale; }
 
 	private:
 		rend::vec3 m_position;

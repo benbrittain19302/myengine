@@ -7,5 +7,6 @@
 #include "TriangleRenderer.h"
 #include "Transform.h"
 #include "SoundSource.h"
+#include "Camera.h"
 
 #endif // !MY_ENGINE_MYENGINE_H
