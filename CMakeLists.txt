@@ -49,6 +49,21 @@ add_library(myengine
 	src/myengine/Camera.h
 	src/myengine/Camera.cpp
 
+	src/myengine/Resources.h
+	src/myengine/Resources.cpp
+
+	src/myengine/Resource.h
+	src/myengine/Resource.cpp
+
+	src/myengine/Texture.h
+	src/myengine/Texture.cpp
+	
+	src/myengine/Sound.h
+	src/myengine/Sound.cpp
+
+	src/myengine/Model.h
+	src/myengine/Model.cpp
+
 	src/myengine/stb_vorbis.c
 )
 

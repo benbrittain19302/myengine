@@ -41,9 +41,10 @@ int main(int argc, char *argv[])
 	e->addComponent<TriangleRenderer>();
 	e->addComponent<SoundSource>();
 	e->getComponent<SoundSource>()->load("../src/assests/sounds/bingchilling.ogg");
+	e->getTransform()->setPosition(rend::vec3(0, 0, -5));
+
 	std::shared_ptr<Entity> Cam = core->addEntity();
 	Cam->addComponent<Camera>();
-	e->getTransform()->setPosition(rend::vec3(0, 0, -5));
 
 	core->start();
 
