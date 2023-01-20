@@ -8,7 +8,7 @@ namespace myengine
 	TriangleRenderer::TriangleRenderer() :
 		m_mesh(rend::Mesh::TRIANGLE),
 		m_shader(rend::Shader::BASIC),
-		m_texture("hello.png")
+		m_texture("../src/assests/textures/MUDKIP.png")
 	{}
 
 	void TriangleRenderer::onDisplay()
