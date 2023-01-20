@@ -10,7 +10,7 @@ namespace myengine
 
 	struct Resource
 	{
-		std::string getPath() { return m_path; }//move to cpp later
+		std::string getPath(); 
 
 		virtual void onLoad() {}
 

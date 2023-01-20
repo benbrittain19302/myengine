@@ -7,7 +7,8 @@ namespace myengine
 
 	TriangleRenderer::TriangleRenderer() :
 		m_mesh("../src/assests/models/curuthers.obj"),
-		m_shader("",),
+		m_shader("../src/assests/shaders/basic.vert", "../src/assests/shaders/basic.frag"),
+		//m_shadowShader(), ///< Shadow Shader initialisation here
 		m_texture("../src/assests/textures/Whiskers_diffuse.png")
 	{}
 
