@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include "Transform.h"
 #include "Camera.h"
+#include "Resources.h"
 
 #include <rend/rend.h>
 
@@ -60,6 +61,8 @@ namespace myengine
 		}
 
 		alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f); //update this to camera posittion when thats implemented
+
+		rtn->m_resources = std::make_shared<Resources>();
 
 		return rtn;
 	}
@@ -147,4 +150,8 @@ namespace myengine
 		return rtn;
 	}
 
+	std::shared_ptr<Resources> Core::getResources()
+	{
+		return m_resources;
+	}
 }

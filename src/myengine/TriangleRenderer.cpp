@@ -7,7 +7,8 @@ namespace myengine
 
 	TriangleRenderer::TriangleRenderer() :
 		m_mesh(rend::Mesh::TRIANGLE),
-		m_shader(rend::Shader::BASIC)
+		m_shader(rend::Shader::BASIC),
+		m_texture("hello.png")
 	{}
 
 	void TriangleRenderer::onDisplay()
@@ -16,6 +17,7 @@ namespace myengine
 
 		r.shader(&m_shader);
 		r.mesh(&m_mesh);
+		r.texture(&m_texture);
 
 		r.projection(rend::perspective(rend::radians(45.0f), 1.0f, 0.1f, 100.0f));
 		r.model(getEntity()->getTransform()->getModel());

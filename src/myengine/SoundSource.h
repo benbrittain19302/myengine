@@ -1,37 +1,25 @@
 #include "Component.h"
 
 #include <AL/al.h>
-#include <AL/alc.h>
-
-#include <vector>
-#include <string>
-#include <stdexcept>
+#include <memory>
 
 namespace myengine
 {
-	struct Entity;
-	struct Component;
+	struct Sound;
 
 	struct SoundSource : Component
 	{
 		SoundSource();
 		~SoundSource();
 
-		void load(const std::string& _path);
-		void play();
+		//void play();
+
+		void setSound(std::shared_ptr<Sound> _sound);
 
 	private:
-		bool m_loaded;
+		std::shared_ptr<Sound> m_sound;
 
-		ALenum m_format;
-		ALsizei m_freq;
-
-		std::vector<unsigned char> m_bufferData;
-
-		ALuint m_bufferId;
 		ALuint m_sourceId;
-
-		void load_ogg(const std::string& _path);
 
 		void onTick();
 	};

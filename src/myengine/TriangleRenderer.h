@@ -4,6 +4,7 @@
 
 namespace myengine
 {
+	struct Texture;
 	
 	struct TriangleRenderer : Component
 	{
@@ -12,6 +13,9 @@ namespace myengine
 	private:
 		rend::Mesh m_mesh;
 		rend::Shader m_shader;
+		rend::Texture m_texture;
+		
+		//std::shared_ptr<Texture> m_texture;
 
 		void onDisplay();
 	};

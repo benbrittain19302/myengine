@@ -11,6 +11,7 @@
 namespace myengine
 {
 	struct Entity;
+	struct Resources;
 
 	struct Core
 	{
@@ -25,6 +26,8 @@ namespace myengine
 
 		std::shared_ptr<Entity> getCamera();
 
+		std::shared_ptr<Resources> getResources();
+
 	private:
 		std::weak_ptr<Core> m_self;
 
@@ -33,6 +36,8 @@ namespace myengine
 		bool m_running;
 
 		std::list<std::shared_ptr<Entity> > m_entities;
+
+		std::shared_ptr<Resources> m_resources;
 
 		SDL_Window* m_window;
 
