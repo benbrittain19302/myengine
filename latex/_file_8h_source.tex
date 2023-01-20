@@ -1,0 +1,181 @@
+\hypertarget{_file_8h_source}{}\doxysection{File.\+h}
+\label{_file_8h_source}\index{src/rend/sys/File.h@{src/rend/sys/File.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SYS\_FILE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SYS\_FILE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Zero.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}String.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Exception.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}panic.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Vector.h"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }sys}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_file}{File}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \mbox{\hyperlink{structsys_1_1_file}{File}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_string}{String}}\&\ \_path)\ :\ m\_path(\_path)\ \{\ \}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \mbox{\hyperlink{structsys_1_1_file}{\string~File}}()}
+\DoxyCodeLine{00020\ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordflow}{if}(m\_raw)}
+\DoxyCodeLine{00022\ \ \ \ \ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ fclose(m\_raw);}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ \ \ \}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \textcolor{keywordtype}{size\_t}\ read(\mbox{\hyperlink{structsys_1_1_vector}{Vector<unsigned\ char>}}\&\ \_output)}
+\DoxyCodeLine{00028\ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{if}(m\_mode\ !=\ 1)}
+\DoxyCodeLine{00030\ \ \ \ \ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ openRead();}
+\DoxyCodeLine{00032\ \ \ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordflow}{return}\ fread(\_output.unsafe\_raw(),\ \textcolor{keyword}{sizeof}(\_output[0]),\ \_output.size(),\ m\_raw);}
+\DoxyCodeLine{00035\ \ \ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{void}\ write\_line(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_string}{String}}\&\ \_line)}
+\DoxyCodeLine{00038\ \ \ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordflow}{if}(m\_mode\ !=\ 2)}
+\DoxyCodeLine{00040\ \ \ \ \ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ openWrite();}
+\DoxyCodeLine{00042\ \ \ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{if}(fputs(\_line.unsafe\_raw(),\ m\_raw)\ <\ 0)}
+\DoxyCodeLine{00045\ \ \ \ \ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{structsys_1_1_exception}{Exception}}(\textcolor{stringliteral}{"{}Failed\ to\ write"{}});}
+\DoxyCodeLine{00047\ \ \ \ \ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordflow}{if}(fputs(\textcolor{stringliteral}{"{}\(\backslash\)n"{}},\ m\_raw)\ <\ 0)}
+\DoxyCodeLine{00050\ \ \ \ \ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{structsys_1_1_exception}{Exception}}(\textcolor{stringliteral}{"{}Failed\ to\ write\ EOL"{}});}
+\DoxyCodeLine{00052\ \ \ \ \ \}}
+\DoxyCodeLine{00053\ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{bool}\ read\_line(\mbox{\hyperlink{structsys_1_1_string}{String}}\&\ \_line)}
+\DoxyCodeLine{00056\ \ \ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ buffer[2048]\ =\ \{\ 0\ \};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordflow}{if}(m\_mode\ !=\ 1)}
+\DoxyCodeLine{00060\ \ \ \ \ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ openRead();}
+\DoxyCodeLine{00062\ \ \ \ \ \}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \_line.clear();}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{while}(\textcolor{keyword}{true})}
+\DoxyCodeLine{00067\ \ \ \ \ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ *res\ =\ fgets(buffer,\ \textcolor{keyword}{sizeof}(buffer),\ m\_raw);}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!res)\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \_line\ +=\ res;}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\_line.length()\ <\ 1)\ sys::panic(\textcolor{stringliteral}{"{}Invalid\ read"{}});}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(strip\_endl(\_line))}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ New\ line\ char\ was\ encountered,\ end\ of\ line\ reached}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00078\ \ \ \ \ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{if}(\_line.length()\ >\ 0)}
+\DoxyCodeLine{00081\ \ \ \ \ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \textcolor{comment}{//\ End\ of\ file\ reached,\ data\ remained}}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ strip\_endl(\_line);}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00085\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{comment}{//\ End\ of\ file\ reached,\ no\ data}}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00089\ \ \ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00092\ \ \ \mbox{\hyperlink{structsys_1_1_string}{String}}\ m\_path;}
+\DoxyCodeLine{00093\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{Zero<int>}}\ m\_mode;}
+\DoxyCodeLine{00094\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{Zero<FILE\ *>}}\ m\_raw;}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \mbox{\hyperlink{structsys_1_1_file}{File}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_file}{File}}\&\ \_copy);}
+\DoxyCodeLine{00097\ \ \ \mbox{\hyperlink{structsys_1_1_file}{File}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_file}{File}}\&\ \_other);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \textcolor{keywordtype}{void}\ openRead()}
+\DoxyCodeLine{00100\ \ \ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordflow}{if}(m\_raw)}
+\DoxyCodeLine{00102\ \ \ \ \ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ fclose(m\_raw);}
+\DoxyCodeLine{00104\ \ \ \ \ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ m\_mode\ =\ 0;}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#ifdef\ \_MSC\_VER}}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordflow}{if}(fopen\_s(\&m\_raw,\ m\_path.unsafe\_raw(),\ \textcolor{stringliteral}{"{}rb"{}}))}
+\DoxyCodeLine{00109\ \ \ \ \ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{structsys_1_1_exception}{Exception}}(\textcolor{stringliteral}{"{}Failed\ to\ open\ file\ for\ reading"{}});}
+\DoxyCodeLine{00111\ \ \ \ \ \}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00113\ \ \ \ \ m\_raw\ =\ fopen(m\_path.unsafe\_raw(),\ \textcolor{stringliteral}{"{}rb"{}});}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordflow}{if}(!m\_raw)\ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{structsys_1_1_exception}{Exception}}(\textcolor{stringliteral}{"{}Failed\ to\ open\ file\ for\ reading"{}});}
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ m\_mode\ =\ 1;}
+\DoxyCodeLine{00118\ \ \ \}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \textcolor{keywordtype}{void}\ openWrite()}
+\DoxyCodeLine{00121\ \ \ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordflow}{if}(m\_raw)}
+\DoxyCodeLine{00123\ \ \ \ \ \{}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ fclose(m\_raw);}
+\DoxyCodeLine{00125\ \ \ \ \ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ m\_mode\ =\ 0;}
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#ifdef\ \_MSC\_VER}}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordflow}{if}(fopen\_s(\&m\_raw,\ m\_path.unsafe\_raw(),\ \textcolor{stringliteral}{"{}wb"{}}))}
+\DoxyCodeLine{00130\ \ \ \ \ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{structsys_1_1_exception}{Exception}}(\textcolor{stringliteral}{"{}Failed\ to\ open\ file\ for\ writing"{}});}
+\DoxyCodeLine{00132\ \ \ \ \ \}}
+\DoxyCodeLine{00133\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00134\ \ \ \ \ m\_raw\ =\ fopen(m\_path.unsafe\_raw(),\ \textcolor{stringliteral}{"{}wb"{}});}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordflow}{if}(!m\_raw)\ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{structsys_1_1_exception}{Exception}}(\textcolor{stringliteral}{"{}Failed\ to\ open\ file\ for\ writing"{}});}
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00137\ \ \ \ \ m\_mode\ =\ 2;}
+\DoxyCodeLine{00138\ \ \ \}}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \textcolor{keywordtype}{bool}\ strip\_endl(\mbox{\hyperlink{structsys_1_1_string}{String}}\&\ \_str)}
+\DoxyCodeLine{00141\ \ \ \{}
+\DoxyCodeLine{00142\ \ \ \ \ ssize\_t\ cleanLen\ =\ -\/1;}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{bool}\ found\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordflow}{for}(ssize\_t\ ci\ =\ \_str.length()\ -\/\ 1;\ ci\ >=\ 0;\ -\/-\/ci)}
+\DoxyCodeLine{00146\ \ \ \ \ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ c\ =\ \_str[ci];}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c\ !=\ \textcolor{charliteral}{'\(\backslash\)n'}\ \&\&\ c\ !=\ \textcolor{charliteral}{'\(\backslash\)r'})}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(c\ ==\ \textcolor{charliteral}{'\(\backslash\)n'})}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ found\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ cleanLen\ =\ ci;}
+\DoxyCodeLine{00160\ \ \ \ \ \}}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordflow}{if}(cleanLen\ !=\ -\/1)}
+\DoxyCodeLine{00163\ \ \ \ \ \{}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \_str.resize(cleanLen);}
+\DoxyCodeLine{00165\ \ \ \ \ \}}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordflow}{return}\ found;}
+\DoxyCodeLine{00168\ \ \ \}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \};}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \}}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00175\ }
+
+\end{DoxyCode}

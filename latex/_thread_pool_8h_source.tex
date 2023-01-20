@@ -1,0 +1,233 @@
+\hypertarget{_thread_pool_8h_source}{}\doxysection{Thread\+Pool.\+h}
+\label{_thread_pool_8h_source}\index{src/rend/sys/ThreadPool.h@{src/rend/sys/ThreadPool.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}Zero.h"{}}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}config.h"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}Unique.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ SYS\_DEBUG}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\ \ \#ifdef\ \_WIN32}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\ \ \ \ \#define\ WIN32\_LEAN\_AND\_MEAN}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\ \ \ \ \#define\ NOMINMAX}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\ \ \ \ \#include\ <windows.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\ \ \ \ \#include\ <pthread.h>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\ \ \ \ \#include\ <semaphore.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}Vector.h"{}}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{namespace\ }sys}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00024\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_thread_pool}{ThreadPool}}}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \ \ \mbox{\hyperlink{structsys_1_1_thread_pool}{ThreadPool}}()}
+\DoxyCodeLine{00027\ \ \ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ ideal\ =\ 1;}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#ifndef\ SYS\_DEBUG}}
+\DoxyCodeLine{00031\ \ \ \ \ ideal\ =\ std::thread::hardware\_concurrency();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Starting\ "{}}\ <<\ ideal\ <<\ \textcolor{stringliteral}{"{}\ threads"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ m\_units.resize(ideal);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{typename}\ \mbox{\hyperlink{structsys_1_1_vector_1_1_iterator}{Vector<Unit>::Iterator}}\ it\ =}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ m\_units.begin();\ it\ !=\ m\_units.end();\ ++it)}
+\DoxyCodeLine{00040\ \ \ \ \ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ it-\/>userdata\ =\ \mbox{\hyperlink{structsys_1_1_unique}{Unique<T>::make}}();}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ it-\/>tp\ =\ \textcolor{keyword}{this};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#ifndef\ SYS\_DEBUG}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\ \ \#ifdef\ \_WIN32}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ it-\/>start\ =\ CreateSemaphore(NULL,\ 0,\ 1,\ NULL);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(it-\/>start\ ==\ NULL)}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::exception();}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ it-\/>stop\ =\ CreateSemaphore(NULL,\ 0,\ 1,\ NULL);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(it-\/>stop\ ==\ NULL)}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::exception();}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ it-\/>thread\ =\ CreateThread(NULL,\ 0,\ (LPTHREAD\_START\_ROUTINE)entry,\ (LPVOID)(\textcolor{keywordtype}{void}\ *)\&(*it),\ 0,\ NULL);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(it-\/>thread\ ==\ NULL)}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::exception();}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(sem\_init(\&it-\/>start,\ 0,\ 0)\ ==\ -\/1)}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::exception();}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(sem\_init(\&it-\/>stop,\ 0,\ 0)\ ==\ -\/1)}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::exception();}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(pthread\_create(\&it-\/>thread,\ NULL,\ entry,}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{void}\ *)\&(*it))\ !=\ 0)}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ it-\/>thread\ =\ pthread\_self();}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::exception();}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00085\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ \ \ \}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \mbox{\hyperlink{structsys_1_1_thread_pool}{\string~ThreadPool}}()}
+\DoxyCodeLine{00089\ \ \ \{}
+\DoxyCodeLine{00090\ \ \ \ \ m\_func\ =\ NULL;}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#ifndef\ SYS\_DEBUG}}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{typename}\ \mbox{\hyperlink{structsys_1_1_vector_1_1_iterator}{Vector<Unit>::Iterator}}\ it\ =}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ m\_units.begin();\ it\ !=\ m\_units.end();\ ++it)}
+\DoxyCodeLine{00095\ \ \ \ \ \{}
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\ \ \#ifdef\ \_WIN32}}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ ReleaseSemaphore(it-\/>start,\ 1,\ NULL);}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ WaitForSingleObject(it-\/>thread,\ INFINITE);}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ CloseHandle(it-\/>thread);}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ CloseHandle(it-\/>start);}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ CloseHandle(it-\/>stop);}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ sem\_post(\&it-\/>start);}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ pthread\_join(it-\/>thread,\ NULL);}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ sem\_destroy(\&it-\/>start);}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ sem\_destroy(\&it-\/>stop);}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00108\ \ \ \ \ \}}
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00110\ \ \ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \textcolor{keywordtype}{size\_t}\ size()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00113\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_units.size();}
+\DoxyCodeLine{00115\ \ \ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00118\ \textcolor{comment}{\ \ Ptr<T>\ at(size\_t\ idx)}}
+\DoxyCodeLine{00119\ \textcolor{comment}{\ \ \{}}
+\DoxyCodeLine{00120\ \textcolor{comment}{\ \ \ \ return\ m\_units[idx].userdata;}}
+\DoxyCodeLine{00121\ \textcolor{comment}{\ \ \}}}
+\DoxyCodeLine{00122\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr<T>}}\ at(\textcolor{keywordtype}{size\_t}\ idx)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00125\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_units[idx].userdata;}
+\DoxyCodeLine{00127\ \ \ \}}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \textcolor{keywordtype}{void}\ execute(\textcolor{keywordtype}{void}\ (*\_func)(T\&))}
+\DoxyCodeLine{00130\ \ \ \{}
+\DoxyCodeLine{00131\ \ \ \ \ m\_func\ =\ \_func;}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \textcolor{preprocessor}{\#ifdef\ SYS\_DEBUG}}
+\DoxyCodeLine{00134\ \ \ \ \ \_func(*m\_units[0].userdata);}
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{typename}\ \mbox{\hyperlink{structsys_1_1_vector_1_1_iterator}{Vector<Unit>::Iterator}}\ it\ =}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ m\_units.begin();\ it\ !=\ m\_units.end();\ ++it)}
+\DoxyCodeLine{00138\ \ \ \ \ \{}
+\DoxyCodeLine{00139\ \textcolor{preprocessor}{\ \ \#ifdef\ \_WIN32}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ ReleaseSemaphore(it-\/>start,\ 1,\ NULL);}
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ sem\_post(\&it-\/>start);}
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00144\ \ \ \ \ \}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{typename}\ \mbox{\hyperlink{structsys_1_1_vector_1_1_iterator}{Vector<Unit>::Iterator}}\ it\ =}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ m\_units.begin();\ it\ !=\ m\_units.end();\ ++it)}
+\DoxyCodeLine{00148\ \ \ \ \ \{}
+\DoxyCodeLine{00149\ \textcolor{preprocessor}{\ \ \#ifdef\ \_WIN32}}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ WaitForSingleObject(it-\/>stop,\ INFINITE);}
+\DoxyCodeLine{00151\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ sem\_wait(\&it-\/>stop);}
+\DoxyCodeLine{00153\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00154\ \ \ \ \ \}}
+\DoxyCodeLine{00155\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ m\_func\ =\ NULL;}
+\DoxyCodeLine{00158\ \ \ \}}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00161\ \ \ \textcolor{keyword}{struct\ }Unit}
+\DoxyCodeLine{00162\ \ \ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \mbox{\hyperlink{structsys_1_1_unique}{Unique<T>}}\ userdata;}
+\DoxyCodeLine{00164\ \textcolor{preprocessor}{\#ifndef\ SYS\_DEBUG}}
+\DoxyCodeLine{00165\ \textcolor{preprocessor}{\ \ \#ifdef\ \_WIN32}}
+\DoxyCodeLine{00166\ \ \ \ \ HANDLE\ thread;}
+\DoxyCodeLine{00167\ \ \ \ \ HANDLE\ start;}
+\DoxyCodeLine{00168\ \ \ \ \ HANDLE\ stop;}
+\DoxyCodeLine{00169\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{00170\ \ \ \ \ pthread\_t\ thread;}
+\DoxyCodeLine{00171\ \ \ \ \ sem\_t\ start;}
+\DoxyCodeLine{00172\ \ \ \ \ sem\_t\ stop;}
+\DoxyCodeLine{00173\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00174\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00175\ \ \ \ \ \mbox{\hyperlink{structsys_1_1_thread_pool}{ThreadPool}}\ *tp;}
+\DoxyCodeLine{00176\ \ \ \};}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \mbox{\hyperlink{structsys_1_1_thread_pool}{ThreadPool}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_thread_pool}{ThreadPool}}\&\ \_copy);}
+\DoxyCodeLine{00179\ \ \ \mbox{\hyperlink{structsys_1_1_thread_pool}{ThreadPool}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_thread_pool}{ThreadPool}}\&\ \_other);}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \ \ \mbox{\hyperlink{structsys_1_1_vector}{Vector<Unit>}}\ m\_units;}
+\DoxyCodeLine{00182\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{Zero}}<void\ (*)(T\&)>\ m\_func;}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \textcolor{preprocessor}{\#ifndef\ SYS\_DEBUG}}
+\DoxyCodeLine{00185\ \textcolor{preprocessor}{\ \ \#ifdef\ \_WIN32}}
+\DoxyCodeLine{00186\ \ \ \textcolor{keyword}{static}\ DWORD\ WINAPI\ entry(LPVOID\ ptr)}
+\DoxyCodeLine{00187\ \ \ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00188\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ *entry(\textcolor{keywordtype}{void}\ *ptr)}
+\DoxyCodeLine{00189\ \ \ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00190\ \ \ \{}
+\DoxyCodeLine{00191\ \ \ \ \ Unit\ *tu\ =\ (Unit*)ptr;}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordflow}{while}(\textcolor{keyword}{true})}
+\DoxyCodeLine{00194\ \ \ \ \ \{}
+\DoxyCodeLine{00195\ \textcolor{preprocessor}{\ \ \#ifdef\ \_WIN32}}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ WaitForSingleObject(tu-\/>start,\ INFINITE);}
+\DoxyCodeLine{00197\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ sem\_wait(\&tu-\/>start);}
+\DoxyCodeLine{00199\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!tu-\/>tp-\/>m\_func)}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ Zero<T>\ is\ awkward\ for\ function\ pointers.}}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \textcolor{comment}{//static\_cast<void\ (*)(T\&)>(tu-\/>tp-\/>m\_func)(*tu-\/>userdata);}}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ void\ (*func)(T\&)\ =\ tu-\/>tp-\/>m\_func;}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ func(*tu-\/>userdata);}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \textcolor{preprocessor}{\ \ \#ifdef\ \_WIN32}}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ ReleaseSemaphore(tu-\/>stop,\ 1,\ NULL);}
+\DoxyCodeLine{00215\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ sem\_post(\&tu-\/>stop);}
+\DoxyCodeLine{00217\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00218\ \ \ \ \ \}}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00221\ \ \ \}}
+\DoxyCodeLine{00222\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00224\ \};}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00226\ \}}
+\DoxyCodeLine{00227\ }
+
+\end{DoxyCode}

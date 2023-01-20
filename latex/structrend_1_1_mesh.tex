@@ -1,0 +1,80 @@
+\hypertarget{structrend_1_1_mesh}{}\doxysection{rend\+::Mesh Struct Reference}
+\label{structrend_1_1_mesh}\index{rend::Mesh@{rend::Mesh}}
+Inheritance diagram for rend\+::Mesh\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structrend_1_1_mesh}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structrend_1_1_mesh_a8da24b996fe08888a1b25877b3217f21}\label{structrend_1_1_mesh_a8da24b996fe08888a1b25877b3217f21}} 
+{\bfseries Mesh} (const \mbox{\hyperlink{structsys_1_1_string}{sys\+::\+String}} \&\+\_\+path)
+\item 
+\mbox{\Hypertarget{structrend_1_1_mesh_a7970ad8d967283f7659b14508dc5f35c}\label{structrend_1_1_mesh_a7970ad8d967283f7659b14508dc5f35c}} 
+{\bfseries Mesh} (int \+\_\+type)
+\item 
+\mbox{\Hypertarget{structrend_1_1_mesh_a4967d86b9d2fe75765ebddfdedf557ee}\label{structrend_1_1_mesh_a4967d86b9d2fe75765ebddfdedf557ee}} 
+void {\bfseries add} (const \mbox{\hyperlink{structrend_1_1_face}{Face}} \&\+\_\+face)
+\item 
+\mbox{\Hypertarget{structrend_1_1_mesh_a6f82b30566d8b0199bfec20c82558efa}\label{structrend_1_1_mesh_a6f82b30566d8b0199bfec20c82558efa}} 
+GLuint {\bfseries id} ()
+\item 
+\mbox{\Hypertarget{structrend_1_1_mesh_a19319a5cd7a55cf4da127e4c5825bc9b}\label{structrend_1_1_mesh_a19319a5cd7a55cf4da127e4c5825bc9b}} 
+size\+\_\+t {\bfseries vertices} ()
+\item 
+\mbox{\Hypertarget{structrend_1_1_mesh_a5074db3a931acd4c949f88e97ca459a8}\label{structrend_1_1_mesh_a5074db3a931acd4c949f88e97ca459a8}} 
+void {\bfseries load} (const \mbox{\hyperlink{structsys_1_1_string}{sys\+::\+String}} \&\+\_\+path)
+\item 
+\mbox{\Hypertarget{structrend_1_1_mesh_a0c676f613364c7d8ecc5af9568df541f}\label{structrend_1_1_mesh_a0c676f613364c7d8ecc5af9568df541f}} 
+void {\bfseries load\+Triangle} ()
+\item 
+\mbox{\Hypertarget{structrend_1_1_mesh_a42d941ceba7563692cc91f15981c5637}\label{structrend_1_1_mesh_a42d941ceba7563692cc91f15981c5637}} 
+void {\bfseries load\+Quad} ()
+\item 
+\mbox{\Hypertarget{structrend_1_1_mesh_aa13c30e98d1d5de90904d055297e6c10}\label{structrend_1_1_mesh_aa13c30e98d1d5de90904d055297e6c10}} 
+void {\bfseries load\+Gui\+Quad} ()
+\item 
+\mbox{\Hypertarget{structrend_1_1_mesh_ac49a89e880be357e3af60e52d5ea2d31}\label{structrend_1_1_mesh_ac49a89e880be357e3af60e52d5ea2d31}} 
+void {\bfseries load\+Ndc\+Quad} ()
+\item 
+\mbox{\Hypertarget{structrend_1_1_mesh_a307eb4cbc1a6895b821c94e8b72bcc24}\label{structrend_1_1_mesh_a307eb4cbc1a6895b821c94e8b72bcc24}} 
+bool {\bfseries intersect} (const \mbox{\hyperlink{structrend_1_1_ray}{Ray}} \&\+\_\+ray) const
+\item 
+\mbox{\Hypertarget{structrend_1_1_mesh_a49bf948558a05af27e7abc39f3e05557}\label{structrend_1_1_mesh_a49bf948558a05af27e7abc39f3e05557}} 
+bool {\bfseries intersect} (const \mbox{\hyperlink{structrend_1_1_ray}{Ray}} \&\+\_\+ray, float \&\+\_\+distance) const
+\item 
+\mbox{\Hypertarget{structrend_1_1_mesh_af9d9a9fb4d8d69186d5ff9a3725988a5}\label{structrend_1_1_mesh_af9d9a9fb4d8d69186d5ff9a3725988a5}} 
+\mbox{\hyperlink{structsys_1_1_ptr}{sys\+::\+Ptr}}$<$ \mbox{\hyperlink{structsys_1_1_vector}{sys\+::\+Vector}}$<$ \mbox{\hyperlink{structrend_1_1_face}{Face}} $>$ $>$ {\bfseries faces} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{structsys_1_1_enable_ptr}{sys\+::\+Enable\+Ptr}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structsys_1_1_enable_ptr_a483f091e45484ce2969469e6a21e402c}\label{structsys_1_1_enable_ptr_a483f091e45484ce2969469e6a21e402c}} 
+{\bfseries Enable\+Ptr} (const \mbox{\hyperlink{structsys_1_1_enable_ptr}{Enable\+Ptr}} \&\+\_\+copy)
+\item 
+\mbox{\Hypertarget{structsys_1_1_enable_ptr_a694fbc3bd33631b59a9e0bac16fea429}\label{structsys_1_1_enable_ptr_a694fbc3bd33631b59a9e0bac16fea429}} 
+\mbox{\hyperlink{structsys_1_1_enable_ptr}{Enable\+Ptr}} \& {\bfseries operator=} (const \mbox{\hyperlink{structsys_1_1_enable_ptr}{Enable\+Ptr}} \&\+\_\+other)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structrend_1_1_mesh_a94982b614cd2a59cfa5d921137021cb3}\label{structrend_1_1_mesh_a94982b614cd2a59cfa5d921137021cb3}} 
+static const int {\bfseries TRIANGLE} = 3
+\item 
+\mbox{\Hypertarget{structrend_1_1_mesh_a99e0d90e30a85b050c16504e50d3f813}\label{structrend_1_1_mesh_a99e0d90e30a85b050c16504e50d3f813}} 
+static const int {\bfseries QUAD} = 4
+\item 
+\mbox{\Hypertarget{structrend_1_1_mesh_a447b7a82159be25582887f9fb64648eb}\label{structrend_1_1_mesh_a447b7a82159be25582887f9fb64648eb}} 
+static const int {\bfseries GUI\+\_\+\+QUAD} = 5
+\item 
+\mbox{\Hypertarget{structrend_1_1_mesh_aee4ae4a9503306cd09d074055a0141b0}\label{structrend_1_1_mesh_aee4ae4a9503306cd09d074055a0141b0}} 
+static const int {\bfseries NDC\+\_\+\+QUAD} = 6
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/rend/Mesh.\+h\item 
+src/rend/Mesh.\+cpp\end{DoxyCompactItemize}

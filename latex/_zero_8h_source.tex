@@ -1,0 +1,99 @@
+\hypertarget{_zero_8h_source}{}\doxysection{Zero.\+h}
+\label{_zero_8h_source}\index{src/rend/sys/Zero.h@{src/rend/sys/Zero.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SYS\_ZERO\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SYS\_ZERO\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{keyword}{namespace\ }sys}
+\DoxyCodeLine{00005\ \{}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{comment}{/***************************************************************************}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *\ Zero}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ Provides\ a\ way\ for\ member\ variables\ to\ be\ initialized\ to\ Zero\ implicitly}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ rather\ than\ via\ initializer\ lists.\ Acts\ as\ a\ template\ wrapper\ class\ which}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ forwards\ through\ the\ contained\ internal\ variable\ but\ also\ initializing\ to}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ zero\ in\ its\ constructor.}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ ***************************************************************************/}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00016\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_zero}{Zero}}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{Zero}}();}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{Zero}}(\textcolor{keyword}{const}\ T\&\ \_value);}
+\DoxyCodeLine{00021\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{Zero}}\&\ operator=(\textcolor{keyword}{const}\ T\&\ \_value);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{operator}\ T\&();}
+\DoxyCodeLine{00024\ \ \ \textcolor{keyword}{operator}\ \textcolor{keyword}{const}\ T\&()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ T*\ operator\&();}
+\DoxyCodeLine{00027\ \ \ \textcolor{keyword}{const}\ T*\ operator\&()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ T\ operator-\/>();}
+\DoxyCodeLine{00030\ \ \ \textcolor{keyword}{const}\ T\ operator-\/>()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00033\ \ \ T\ m\_value;}
+\DoxyCodeLine{00034\ \};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00037\ \mbox{\hyperlink{structsys_1_1_zero}{Zero<T>::Zero}}()\ :}
+\DoxyCodeLine{00038\ \ \ m\_value(0)}
+\DoxyCodeLine{00039\ \{\ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00042\ Zero<T>::Zero(\textcolor{keyword}{const}\ T\&\ \_value)\ :}
+\DoxyCodeLine{00043\ \ \ m\_value(\_value)}
+\DoxyCodeLine{00044\ \{\ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00047\ Zero<T>\&\ Zero<T>::operator=(\textcolor{keyword}{const}\ T\&\ \_value)}
+\DoxyCodeLine{00048\ \{}
+\DoxyCodeLine{00049\ \ \ m\_value\ =\ \_value;}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00052\ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00055\ Zero<T>::operator\ T\&()}
+\DoxyCodeLine{00056\ \{}
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordflow}{return}\ m\_value;}
+\DoxyCodeLine{00058\ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00061\ Zero<T>::operator\ \textcolor{keyword}{const}\ T\&()\ \textcolor{keyword}{const}}
+\DoxyCodeLine{00062\ \{}
+\DoxyCodeLine{00063\ \ \ \textcolor{keywordflow}{return}\ m\_value;}
+\DoxyCodeLine{00064\ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00067\ T*\ Zero<T>::operator\&()}
+\DoxyCodeLine{00068\ \{}
+\DoxyCodeLine{00069\ \ \ \textcolor{keywordflow}{return}\ \&m\_value;}
+\DoxyCodeLine{00070\ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00073\ \textcolor{keyword}{const}\ T*\ Zero<T>::operator\&()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00074\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordflow}{return}\ \&m\_value;}
+\DoxyCodeLine{00076\ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00079\ T\ Zero<T>::operator-\/>()}
+\DoxyCodeLine{00080\ \{}
+\DoxyCodeLine{00081\ \ \ \textcolor{keywordflow}{return}\ m\_value;}
+\DoxyCodeLine{00082\ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00085\ \textcolor{keyword}{const}\ T\ Zero<T>::operator-\/>()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00086\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00087\ \ \ \textcolor{keywordflow}{return}\ m\_value;}
+\DoxyCodeLine{00088\ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00093\ }
+
+\end{DoxyCode}

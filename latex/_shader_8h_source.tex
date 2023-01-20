@@ -1,0 +1,49 @@
+\hypertarget{_shader_8h_source}{}\doxysection{Shader.\+h}
+\label{_shader_8h_source}\index{src/rend/Shader.h@{src/rend/Shader.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <GL/glew.h>}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}sys/String.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}sys/Ptr.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}sys/Zero.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }rend}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structrend_1_1_shader}{Shader}}\ :\ \mbox{\hyperlink{structsys_1_1_enable_ptr}{sys::EnablePtr}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ BASIC\ =\ 1;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \mbox{\hyperlink{structrend_1_1_shader}{Shader}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_string}{sys::String}}\&\ \_vertPath,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_string}{sys::String}}\&\ \_fragPath);}
+\DoxyCodeLine{00015\ \ \ \mbox{\hyperlink{structrend_1_1_shader}{Shader}}(\textcolor{keywordtype}{int}\ \_type);}
+\DoxyCodeLine{00016\ \ \ \mbox{\hyperlink{structrend_1_1_shader}{\string~Shader}}();}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ GLuint\ id();}
+\DoxyCodeLine{00019\ \ \ GLint\ projectionLoc();}
+\DoxyCodeLine{00020\ \ \ GLint\ modelLoc();}
+\DoxyCodeLine{00021\ \ \ GLint\ viewLoc();}
+\DoxyCodeLine{00022\ \ \ GLint\ texture0Loc();}
+\DoxyCodeLine{00023\ \ \ GLint\ texture1Loc();}
+\DoxyCodeLine{00024\ \ \ GLint\ colorLoc();}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00027\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{sys::Zero<GLuint>}}\ m\_id;}
+\DoxyCodeLine{00028\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{sys::Zero<GLint>}}\ m\_projectionLoc;}
+\DoxyCodeLine{00029\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{sys::Zero<GLint>}}\ m\_viewLoc;}
+\DoxyCodeLine{00030\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{sys::Zero<GLint>}}\ m\_modelLoc;}
+\DoxyCodeLine{00031\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{sys::Zero<GLint>}}\ m\_texture0Loc;}
+\DoxyCodeLine{00032\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{sys::Zero<GLint>}}\ m\_texture1Loc;}
+\DoxyCodeLine{00033\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{sys::Zero<GLint>}}\ m\_colorLoc;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{structsys_1_1_string}{sys::String}}\ m\_vertSrc;}
+\DoxyCodeLine{00036\ \ \ \mbox{\hyperlink{structsys_1_1_string}{sys::String}}\ m\_fragSrc;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \mbox{\hyperlink{structrend_1_1_shader}{Shader}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structrend_1_1_shader}{Shader}}\&\ \_copy);}
+\DoxyCodeLine{00039\ \ \ \mbox{\hyperlink{structrend_1_1_shader}{Shader}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structrend_1_1_shader}{Shader}}\&\ \_other);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \}}
+
+\end{DoxyCode}

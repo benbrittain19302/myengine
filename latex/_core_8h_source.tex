@@ -1,0 +1,57 @@
+\hypertarget{_core_8h_source}{}\doxysection{Core.\+h}
+\label{_core_8h_source}\index{src/myengine/Core.h@{src/myengine/Core.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <SDL2/SDL.h>}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <AL/al.h>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <AL/alc.h>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ INITIAL\_WIDTH\ 640}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ INITIAL\_HEIGHT\ 480}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }myengine}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{struct\ }Entity;}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{struct\ }Resources;}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmyengine_1_1_core}{Core}}}
+\DoxyCodeLine{00017\ \ \ \ \ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<Core>\ initialize();}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structmyengine_1_1_core}{\string~Core}}();}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ start();}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ stop();}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ std::shared\_ptr<Entity>\ addEntity();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ std::shared\_ptr<Entity>\ getCamera();}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ std::shared\_ptr<Resources>\ getResources();}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ std::weak\_ptr<Core>\ m\_self;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ m\_dummy;}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_running;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ std::list<std::shared\_ptr<Entity>\ >\ m\_entities;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ std::shared\_ptr<Resources>\ m\_resources;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ SDL\_Window*\ m\_window;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ SDL\_GLContext\ m\_context;}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ ALCdevice*\ m\_aDevice;}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ ALCcontext*\ m\_aContext;}
+\DoxyCodeLine{00049\ \ \ \ \ \};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \}}
+
+\end{DoxyCode}

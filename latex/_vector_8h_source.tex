@@ -1,0 +1,593 @@
+\hypertarget{_vector_8h_source}{}\doxysection{Vector.\+h}
+\label{_vector_8h_source}\index{src/rend/sys/Vector.h@{src/rend/sys/Vector.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SYS\_VECTOR\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SYS\_VECTOR\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Ptr.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Zero.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Lock.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <new>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifdef\ \_WIN32}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\ \ \#include\ <BaseTsd.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\ \ \#define\ ssize\_t\ SSIZE\_T}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }sys}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00019\ \textcolor{keyword}{struct\ }Ref;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00022\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_vector}{Vector}}\ :\ \mbox{\hyperlink{structsys_1_1_enable_ptr}{EnablePtr}}}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_vector_1_1_iterator}{Iterator}}}
+\DoxyCodeLine{00025\ \ \ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{structsys_1_1_vector_1_1_iterator}{Iterator}}\&\ operator++();}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator!=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_vector_1_1_iterator}{Iterator}}\&\ \_other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_vector_1_1_iterator}{Iterator}}\&\ \_other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{structsys_1_1_ptr_lock}{PtrLock<T>}}\ operator-\/>()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{structsys_1_1_ref_lock}{RefLock<T>}}\ operator*()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_vector}{Vector}};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{structsys_1_1_zero}{Zero<size\_t>}}\ m\_index;}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr<const\ Vector>}}\ m\_owner;}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{structsys_1_1_zero}{Zero<bool>}}\ m\_end;}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{structsys_1_1_lock}{Lock}}\ m\_lock;}
+\DoxyCodeLine{00040\ \ \ \};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \mbox{\hyperlink{structsys_1_1_vector}{Vector}}();}
+\DoxyCodeLine{00043\ \ \ \mbox{\hyperlink{structsys_1_1_vector}{Vector}}(\textcolor{keywordtype}{size\_t}\ \_size);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \mbox{\hyperlink{structsys_1_1_vector}{Vector}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_vector}{Vector}}\&\ \_copy);}
+\DoxyCodeLine{00046\ \ \ \mbox{\hyperlink{structsys_1_1_vector}{Vector}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_vector}{Vector}}\&\ \_other);}
+\DoxyCodeLine{00047\ \ \ \mbox{\hyperlink{structsys_1_1_vector}{\string~Vector}}();}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#ifdef\ SYS\_DEBUG}}
+\DoxyCodeLine{00050\ \ \ T\&\ operator[](\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_index_lock}{IndexLock}}\&\ \_index);}
+\DoxyCodeLine{00051\ \ \ \textcolor{keyword}{const}\ T\&\ operator[](\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_index_lock}{IndexLock}}\&\ \_index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00053\ \ \ T\&\ operator[](\textcolor{keywordtype}{size\_t}\ \_index);}
+\DoxyCodeLine{00054\ \ \ \textcolor{keyword}{const}\ T\&\ operator[](\textcolor{keywordtype}{size\_t}\ \_index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr<T>}}\ get(\textcolor{keywordtype}{size\_t}\ \_index);}
+\DoxyCodeLine{00058\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr<const\ T>}}\ get(\textcolor{keywordtype}{size\_t}\ \_index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr<T>}}\ push(\textcolor{keyword}{const}\ T\&\ \_value);}
+\DoxyCodeLine{00061\ \ \ \textcolor{keywordtype}{void}\ clear();}
+\DoxyCodeLine{00062\ \ \ \textcolor{keywordtype}{void}\ resize(\textcolor{keywordtype}{size\_t}\ \_size);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \textcolor{keywordtype}{size\_t}\ size()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ T*\ unsafe\_raw()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \mbox{\hyperlink{structsys_1_1_vector_1_1_iterator}{Iterator}}\ begin()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00069\ \ \ \mbox{\hyperlink{structsys_1_1_vector_1_1_iterator}{Iterator}}\ end()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00070\ \ \ \mbox{\hyperlink{structsys_1_1_vector_1_1_iterator}{Iterator}}\ erase(\mbox{\hyperlink{structsys_1_1_vector_1_1_iterator}{Iterator}}\&\ \_it);}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \textcolor{keywordtype}{void}\ sort(\textcolor{keywordtype}{bool}\ (*\_func)(T\&,\ T\&));}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00075\ \ \ \mbox{\hyperlink{structsys_1_1_lock_block}{LockBlock}}\ m\_locallock;}
+\DoxyCodeLine{00076\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{Zero<size\_t>}}\ m\_total;}
+\DoxyCodeLine{00077\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{Zero<T*>}}\ m\_raw;}
+\DoxyCodeLine{00078\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{Zero<size\_t>}}\ m\_size;}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \textcolor{keywordtype}{void}\ check\_lock()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00081\ \ \ \textcolor{keywordtype}{void}\ allocate(\textcolor{keywordtype}{size\_t}\ \_size);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \textcolor{keywordtype}{void}\ quicksort(\textcolor{keywordtype}{int}\ \_low,\ \textcolor{keywordtype}{int}\ \_high,\ \textcolor{keywordtype}{bool}\ (*\_func)(T\&,\ T\&));}
+\DoxyCodeLine{00084\ \ \ \textcolor{keywordtype}{int}\ partition(\textcolor{keywordtype}{int}\ \_low,\ \textcolor{keywordtype}{int}\ \_high,\ \textcolor{keywordtype}{bool}\ (*\_func)(T\&,\ T\&));}
+\DoxyCodeLine{00085\ \ \ \textcolor{keywordtype}{bool}\ compareFunc(T\&\ \_a,\ T\&\ \_b);}
+\DoxyCodeLine{00086\ \ \ \textcolor{keywordtype}{void}\ swap(T\&\ \_a,\ T\&\ \_b);}
+\DoxyCodeLine{00087\ \};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \textcolor{comment}{/*\ Implementation\ */}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#include\ "{}panic.h"{}}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{keyword}{namespace\ }sys}
+\DoxyCodeLine{00096\ \{}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00099\ Vector<T>::Vector()\ :}
+\DoxyCodeLine{00100\ \ \ m\_total(8),}
+\DoxyCodeLine{00101\ \ \ m\_raw(static\_cast<T*>(calloc(m\_total,\ sizeof(T))))}
+\DoxyCodeLine{00102\ \{}
+\DoxyCodeLine{00103\ \ \ \textcolor{keywordflow}{if}(!m\_raw)}
+\DoxyCodeLine{00104\ \ \ \{}
+\DoxyCodeLine{00105\ \ \ \ \ panic(\textcolor{stringliteral}{"{}Failed\ to\ allocate\ initial\ space"{}});}
+\DoxyCodeLine{00106\ \ \ \}}
+\DoxyCodeLine{00107\ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00110\ Vector<T>::Vector(\textcolor{keywordtype}{size\_t}\ \_size)}
+\DoxyCodeLine{00111\ \{}
+\DoxyCodeLine{00112\ \ \ resize(\_size);}
+\DoxyCodeLine{00113\ \}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00116\ Vector<T>::Vector(\textcolor{keyword}{const}\ Vector\&\ \_copy)\ :}
+\DoxyCodeLine{00117\ \ \ m\_total(\_copy.m\_size),}
+\DoxyCodeLine{00118\ \ \ m\_raw(static\_cast<T*>(calloc(m\_total,\ sizeof(T))))}
+\DoxyCodeLine{00119\ \{}
+\DoxyCodeLine{00120\ \ \ \textcolor{keywordflow}{if}(!m\_raw)}
+\DoxyCodeLine{00121\ \ \ \{}
+\DoxyCodeLine{00122\ \ \ \ \ panic(\textcolor{stringliteral}{"{}Failed\ to\ allocate\ initial\ space"{}});}
+\DoxyCodeLine{00123\ \ \ \}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00126\ \ \ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t}\ ei\ =\ 0;\ ei\ <\ \_copy.m\_size;\ ++ei)}
+\DoxyCodeLine{00128\ \ \ \ \ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \textcolor{keyword}{new}(\&m\_raw[ei])\ T(\_copy.m\_raw[ei]);}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ ++m\_size;}
+\DoxyCodeLine{00131\ \ \ \ \ \}}
+\DoxyCodeLine{00132\ \ \ \}}
+\DoxyCodeLine{00133\ \ \ \textcolor{keywordflow}{catch}(...)}
+\DoxyCodeLine{00134\ \ \ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{comment}{/*\ TODO:\ Can\ use\ clear()\ */}}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordflow}{for}(ssize\_t\ ei\ =\ m\_size\ -\/\ 1;\ ei\ >=\ 0;\ -\/-\/ei)}
+\DoxyCodeLine{00137\ \ \ \ \ \{}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ m\_raw[ei].\string~T();}
+\DoxyCodeLine{00139\ \ \ \ \ \}}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ \ \ free(m\_raw);}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordflow}{throw};}
+\DoxyCodeLine{00144\ \ \ \}}
+\DoxyCodeLine{00145\ \}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00148\ Vector<T>\&\ Vector<T>::operator=(\textcolor{keyword}{const}\ Vector\&\ \_other)}
+\DoxyCodeLine{00149\ \{}
+\DoxyCodeLine{00150\ \ \ check\_lock();}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \textcolor{keywordtype}{size\_t}\ total\ =\ \_other.m\_size;}
+\DoxyCodeLine{00153\ \ \ T*\ raw\ =\ \textcolor{keyword}{static\_cast<}T*\textcolor{keyword}{>}(calloc(total,\ \textcolor{keyword}{sizeof}(T)));}
+\DoxyCodeLine{00154\ \ \ \textcolor{keywordtype}{size\_t}\ size\ =\ 0;}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \textcolor{keywordflow}{if}(!raw)}
+\DoxyCodeLine{00157\ \ \ \{}
+\DoxyCodeLine{00158\ \ \ \ \ panic(\textcolor{stringliteral}{"{}Failed\ to\ allocate\ initial\ space"{}});}
+\DoxyCodeLine{00159\ \ \ \}}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00162\ \ \ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t}\ ei\ =\ 0;\ ei\ <\ \_other.m\_size;\ ++ei)}
+\DoxyCodeLine{00164\ \ \ \ \ \{}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \textcolor{keyword}{new}(\&raw[ei])\ T(\_other.m\_raw[ei]);}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ ++size;}
+\DoxyCodeLine{00167\ \ \ \ \ \}}
+\DoxyCodeLine{00168\ \ \ \}}
+\DoxyCodeLine{00169\ \ \ \textcolor{keywordflow}{catch}(...)}
+\DoxyCodeLine{00170\ \ \ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keywordflow}{for}(ssize\_t\ ei\ =\ size\ -\/\ 1;\ ei\ >=\ 0;\ -\/-\/ei)}
+\DoxyCodeLine{00172\ \ \ \ \ \{}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ raw[ei].\string~T();}
+\DoxyCodeLine{00174\ \ \ \ \ \}}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \ \ free(raw);}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keywordflow}{throw};}
+\DoxyCodeLine{00179\ \ \ \}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \ \ clear();}
+\DoxyCodeLine{00182\ \ \ free(m\_raw);}
+\DoxyCodeLine{00183\ \ \ m\_size\ =\ size;}
+\DoxyCodeLine{00184\ \ \ m\_raw\ =\ raw;}
+\DoxyCodeLine{00185\ \ \ m\_total\ =\ total;}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00188\ \}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00191\ Vector<T>::\string~Vector()}
+\DoxyCodeLine{00192\ \{}
+\DoxyCodeLine{00193\ \ \ clear();}
+\DoxyCodeLine{00194\ \ \ free(m\_raw);}
+\DoxyCodeLine{00195\ \}}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \textcolor{preprocessor}{\#ifdef\ SYS\_DEBUG}}
+\DoxyCodeLine{00198\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00199\ T\&\ Vector<T>::operator[](\textcolor{keyword}{const}\ IndexLock\&\ \_index)}
+\DoxyCodeLine{00200\ \{}
+\DoxyCodeLine{00201\ \ \ \_index.lock(\&m\_locallock);}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \textcolor{keywordflow}{if}(\_index\ >=\ m\_size)}
+\DoxyCodeLine{00204\ \ \ \{}
+\DoxyCodeLine{00205\ \ \ \ \ panic(\textcolor{stringliteral}{"{}Index\ out\ of\ bounds"{}});}
+\DoxyCodeLine{00206\ \ \ \}}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \ \ \textcolor{keywordflow}{return}\ m\_raw[\_index];}
+\DoxyCodeLine{00209\ \}}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00211\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00212\ \textcolor{keyword}{const}\ T\&\ Vector<T>::operator[](\textcolor{keyword}{const}\ IndexLock\&\ \_index)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00213\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00214\ \ \ \_index.lock(\&m\_locallock);}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \ \ \textcolor{keywordflow}{if}(\_index\ >=\ m\_size)}
+\DoxyCodeLine{00217\ \ \ \{}
+\DoxyCodeLine{00218\ \ \ \ \ panic(\textcolor{stringliteral}{"{}Index\ out\ of\ bounds"{}});}
+\DoxyCodeLine{00219\ \ \ \}}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ \ \ \textcolor{keywordflow}{return}\ m\_raw[\_index];}
+\DoxyCodeLine{00222\ \}}
+\DoxyCodeLine{00223\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00224\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00225\ T\&\ Vector<T>::operator[](\textcolor{keywordtype}{size\_t}\ \_index)}
+\DoxyCodeLine{00226\ \{}
+\DoxyCodeLine{00227\ \ \ \textcolor{keywordflow}{return}\ m\_raw[\_index];}
+\DoxyCodeLine{00228\ \}}
+\DoxyCodeLine{00229\ \ \ \ \ \ }
+\DoxyCodeLine{00230\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00231\ \textcolor{keyword}{const}\ T\&\ Vector<T>::operator[](\textcolor{keywordtype}{size\_t}\ \_index)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00232\ \textcolor{keyword}{}\{\ }
+\DoxyCodeLine{00233\ \ \ \textcolor{keywordflow}{return}\ m\_raw[\_index];}
+\DoxyCodeLine{00234\ \}}
+\DoxyCodeLine{00235\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00238\ Ptr<T>\ Vector<T>::get(\textcolor{keywordtype}{size\_t}\ \_index)}
+\DoxyCodeLine{00239\ \{}
+\DoxyCodeLine{00240\ \textcolor{preprocessor}{\#ifdef\ SYS\_DEBUG}}
+\DoxyCodeLine{00241\ \ \ \textcolor{keywordflow}{if}(\_index\ >=\ m\_size)}
+\DoxyCodeLine{00242\ \ \ \{}
+\DoxyCodeLine{00243\ \ \ \ \ panic(\textcolor{stringliteral}{"{}Index\ out\ of\ bounds"{}});}
+\DoxyCodeLine{00244\ \ \ \}}
+\DoxyCodeLine{00245\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00247\ \ \ Ptr<T>\ rtn;}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \ \ rtn.m\_ptr\ =\ \&m\_raw[\_index];}
+\DoxyCodeLine{00250\ \ \ rtn.m\_lock.lock(\&m\_locallock);}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00252\ \ \ \textcolor{keywordflow}{return}\ rtn;}
+\DoxyCodeLine{00253\ \}}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00256\ Ptr<const\ T>\ Vector<T>::get(\textcolor{keywordtype}{size\_t}\ \_index)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00257\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00258\ \textcolor{preprocessor}{\#ifdef\ SYS\_DEBUG}}
+\DoxyCodeLine{00259\ \ \ \textcolor{keywordflow}{if}(\_index\ >=\ m\_size)}
+\DoxyCodeLine{00260\ \ \ \{}
+\DoxyCodeLine{00261\ \ \ \ \ panic(\textcolor{stringliteral}{"{}Index\ out\ of\ bounds"{}});}
+\DoxyCodeLine{00262\ \ \ \}}
+\DoxyCodeLine{00263\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00265\ \ \ Ptr<const\ T>\ rtn;}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ \ \ rtn.m\_ptr\ =\ \&m\_raw[\_index];}
+\DoxyCodeLine{00268\ \ \ rtn.m\_lock.lock(\&m\_locallock);}
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00270\ \ \ \textcolor{keywordflow}{return}\ rtn;}
+\DoxyCodeLine{00271\ \}}
+\DoxyCodeLine{00272\ }
+\DoxyCodeLine{00273\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00274\ Ptr<T>\ Vector<T>::push(\textcolor{keyword}{const}\ T\&\ \_value)}
+\DoxyCodeLine{00275\ \{}
+\DoxyCodeLine{00276\ \ \ check\_lock();}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00278\ \ \ \textcolor{keywordtype}{size\_t}\ size\ =\ m\_size;}
+\DoxyCodeLine{00279\ \ \ allocate(size\ +\ 1);}
+\DoxyCodeLine{00280\ \ \ \textcolor{keyword}{new}(\&m\_raw[size])\ T(\_value);}
+\DoxyCodeLine{00281\ \ \ ++m\_size;}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00283\ \ \ Ptr<T>\ rtn;}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00285\ \ \ rtn.m\_ptr\ =\ \&m\_raw[size];}
+\DoxyCodeLine{00286\ \ \ rtn.m\_lock.lock(\&m\_locallock);}
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00288\ \ \ \textcolor{keywordflow}{return}\ rtn;}
+\DoxyCodeLine{00289\ \}}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00291\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00292\ \textcolor{keywordtype}{size\_t}\ Vector<T>::size()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00293\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00294\ \ \ \textcolor{keywordflow}{return}\ m\_size;}
+\DoxyCodeLine{00295\ \}}
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00297\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00298\ \textcolor{keywordtype}{void}\ Vector<T>::clear()}
+\DoxyCodeLine{00299\ \{}
+\DoxyCodeLine{00300\ \ \ check\_lock();}
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00302\ \ \ \textcolor{keywordflow}{for}(ssize\_t\ ei\ =\ m\_size\ -\/\ 1;\ ei\ >=\ 0;\ -\/-\/ei)}
+\DoxyCodeLine{00303\ \ \ \{}
+\DoxyCodeLine{00304\ \ \ \ \ m\_raw[ei].\string~T();}
+\DoxyCodeLine{00305\ \ \ \}}
+\DoxyCodeLine{00306\ }
+\DoxyCodeLine{00307\ \ \ m\_size\ =\ 0;}
+\DoxyCodeLine{00308\ \}}
+\DoxyCodeLine{00309\ }
+\DoxyCodeLine{00310\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00311\ \textcolor{keywordtype}{void}\ Vector<T>::resize(\textcolor{keywordtype}{size\_t}\ \_size)}
+\DoxyCodeLine{00312\ \{}
+\DoxyCodeLine{00313\ \ \ check\_lock();}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00315\ \ \ \textcolor{keywordflow}{if}(\_size\ >\ m\_size)}
+\DoxyCodeLine{00316\ \ \ \{}
+\DoxyCodeLine{00317\ \ \ \ \ allocate(\_size);}
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00319\ \ \ \ \ \textcolor{keywordflow}{while}(m\_size\ !=\ \_size)}
+\DoxyCodeLine{00320\ \ \ \ \ \{}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \textcolor{keyword}{new}(\&m\_raw[m\_size])\ T();}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ ++m\_size;}
+\DoxyCodeLine{00323\ \ \ \ \ \}}
+\DoxyCodeLine{00324\ \ \ \}}
+\DoxyCodeLine{00325\ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}(\_size\ <\ m\_size)}
+\DoxyCodeLine{00326\ \ \ \{}
+\DoxyCodeLine{00327\ \ \ \ \ \textcolor{keywordflow}{while}(m\_size\ !=\ \_size)}
+\DoxyCodeLine{00328\ \ \ \ \ \{}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ m\_raw[m\_size\ -\/\ 1].\string~T();}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ -\/-\/m\_size;}
+\DoxyCodeLine{00331\ \ \ \ \ \}}
+\DoxyCodeLine{00332\ \ \ \}}
+\DoxyCodeLine{00333\ \}}
+\DoxyCodeLine{00334\ }
+\DoxyCodeLine{00335\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00336\ \textcolor{keyword}{typename}\ Vector<T>::Iterator\ Vector<T>::erase(\textcolor{keyword}{typename}\ Vector<T>::Iterator\&\ \_it)}
+\DoxyCodeLine{00337\ \{}
+\DoxyCodeLine{00338\ \ \ \textcolor{keywordflow}{if}(\_it.m\_end)}
+\DoxyCodeLine{00339\ \ \ \{}
+\DoxyCodeLine{00340\ \ \ \ \ sys::panic(\textcolor{stringliteral}{"{}Attempt\ to\ erase\ end\ iterator"{}});}
+\DoxyCodeLine{00341\ \ \ \}}
+\DoxyCodeLine{00342\ }
+\DoxyCodeLine{00343\ \ \ \textcolor{keywordflow}{if}(!m\_size)}
+\DoxyCodeLine{00344\ \ \ \{}
+\DoxyCodeLine{00345\ \ \ \ \ sys::panic(\textcolor{stringliteral}{"{}Attempt\ to\ erase\ from\ zero\ sized\ vector"{}});}
+\DoxyCodeLine{00346\ \ \ \}}
+\DoxyCodeLine{00347\ }
+\DoxyCodeLine{00348\ \ \ \textcolor{keywordtype}{size\_t}\ index\ =\ \_it.m\_index;}
+\DoxyCodeLine{00349\ \ \ \_it\ =\ Vector<T>::Iterator();}
+\DoxyCodeLine{00350\ }
+\DoxyCodeLine{00351\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t}\ i\ =\ index;\ i\ <\ m\_size\ -\/\ 1;\ ++i)}
+\DoxyCodeLine{00352\ \ \ \{}
+\DoxyCodeLine{00353\ \ \ \ \ \textcolor{comment}{//\ TODO:\ Which\ is\ best?}}
+\DoxyCodeLine{00354\ \ \ \ \ \textcolor{comment}{//m\_raw[i]\ =\ m\_raw[i\ +\ 1];}}
+\DoxyCodeLine{00355\ }
+\DoxyCodeLine{00356\ \ \ \ \ m\_raw[i].\string~T();}
+\DoxyCodeLine{00357\ \ \ \ \ \textcolor{keyword}{new}(\&m\_raw[i])\ T(m\_raw[i\ +\ 1]);}
+\DoxyCodeLine{00358\ \ \ \}}
+\DoxyCodeLine{00359\ }
+\DoxyCodeLine{00360\ \ \ resize(m\_size\ -\/\ 1);}
+\DoxyCodeLine{00361\ \ \ Iterator\ rtn(begin());}
+\DoxyCodeLine{00362\ }
+\DoxyCodeLine{00363\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ index;\ ++i)}
+\DoxyCodeLine{00364\ \ \ \{}
+\DoxyCodeLine{00365\ \ \ \ \ ++rtn;}
+\DoxyCodeLine{00366\ \ \ \}}
+\DoxyCodeLine{00367\ }
+\DoxyCodeLine{00368\ \ \ \_it\ =\ end();}
+\DoxyCodeLine{00369\ }
+\DoxyCodeLine{00370\ \ \ \textcolor{keywordflow}{return}\ rtn;}
+\DoxyCodeLine{00371\ \}}
+\DoxyCodeLine{00372\ }
+\DoxyCodeLine{00373\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00374\ \textcolor{keyword}{typename}\ Vector<T>::Iterator\ Vector<T>::begin()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00375\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00376\ \ \ \textcolor{keywordflow}{if}(!m\_size)}
+\DoxyCodeLine{00377\ \ \ \{}
+\DoxyCodeLine{00378\ \ \ \ \ \textcolor{keywordflow}{return}\ end();}
+\DoxyCodeLine{00379\ \ \ \}}
+\DoxyCodeLine{00380\ }
+\DoxyCodeLine{00381\ \ \ Iterator\ rtn;}
+\DoxyCodeLine{00382\ }
+\DoxyCodeLine{00383\ \ \ rtn.m\_index\ =\ 0;}
+\DoxyCodeLine{00384\ \ \ rtn.m\_owner\ =\ \textcolor{keyword}{this};}
+\DoxyCodeLine{00385\ \ \ rtn.m\_lock.lock(\&m\_locallock);}
+\DoxyCodeLine{00386\ }
+\DoxyCodeLine{00387\ \ \ \textcolor{keywordflow}{return}\ rtn;}
+\DoxyCodeLine{00388\ \}}
+\DoxyCodeLine{00389\ }
+\DoxyCodeLine{00390\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00391\ \textcolor{keyword}{typename}\ Vector<T>::Iterator\ Vector<T>::end()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00392\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00393\ \ \ Iterator\ rtn;}
+\DoxyCodeLine{00394\ }
+\DoxyCodeLine{00395\ \ \ \textcolor{comment}{/*\ TODO:\ m\_size\ might\ be\ 0!\ */}}
+\DoxyCodeLine{00396\ \ \ rtn.m\_index\ =\ m\_size\ -\/\ 1;}
+\DoxyCodeLine{00397\ \ \ rtn.m\_owner\ =\ \textcolor{keyword}{this};}
+\DoxyCodeLine{00398\ \ \ rtn.m\_end\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00399\ }
+\DoxyCodeLine{00400\ \ \ \textcolor{keywordflow}{return}\ rtn;}
+\DoxyCodeLine{00401\ \}}
+\DoxyCodeLine{00402\ }
+\DoxyCodeLine{00403\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00404\ \textcolor{keyword}{typename}\ Vector<T>::Iterator\&\ Vector<T>::Iterator::operator++()}
+\DoxyCodeLine{00405\ \{}
+\DoxyCodeLine{00406\ \ \ \textcolor{keywordflow}{if}(m\_index\ >=\ m\_owner-\/>size())}
+\DoxyCodeLine{00407\ \ \ \{}
+\DoxyCodeLine{00408\ \ \ \ \ sys::panic(\textcolor{stringliteral}{"{}Iteration\ would\ go\ past\ end"{}});}
+\DoxyCodeLine{00409\ \ \ \}}
+\DoxyCodeLine{00410\ }
+\DoxyCodeLine{00411\ \ \ \textcolor{keywordflow}{if}(m\_end)}
+\DoxyCodeLine{00412\ \ \ \{}
+\DoxyCodeLine{00413\ \ \ \ \ sys::panic(\textcolor{stringliteral}{"{}Iteration\ past\ end"{}});}
+\DoxyCodeLine{00414\ \ \ \}}
+\DoxyCodeLine{00415\ }
+\DoxyCodeLine{00416\ \ \ ++m\_index;}
+\DoxyCodeLine{00417\ }
+\DoxyCodeLine{00418\ \ \ \textcolor{keywordflow}{if}(m\_index\ >=\ m\_owner-\/>m\_size)}
+\DoxyCodeLine{00419\ \ \ \{}
+\DoxyCodeLine{00420\ \ \ \ \ m\_end\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00421\ \ \ \ \ -\/-\/m\_index;}
+\DoxyCodeLine{00422\ \ \ \}}
+\DoxyCodeLine{00423\ }
+\DoxyCodeLine{00424\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00425\ \}}
+\DoxyCodeLine{00426\ }
+\DoxyCodeLine{00427\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00428\ \textcolor{keywordtype}{bool}\ Vector<T>::Iterator::operator!=(\textcolor{keyword}{const}\ Iterator\&\ \_other)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00429\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00430\ \ \ \textcolor{keywordtype}{bool}\ rtn\ =\ m\_index\ ==\ \_other.m\_index\ \&\&}
+\DoxyCodeLine{00431\ \ \ \ \ m\_end\ ==\ \_other.m\_end\ \&\&}
+\DoxyCodeLine{00432\ \ \ \ \ m\_owner\ ==\ \_other.m\_owner;}
+\DoxyCodeLine{00433\ }
+\DoxyCodeLine{00434\ \ \ \textcolor{keywordflow}{return}\ !rtn;}
+\DoxyCodeLine{00435\ \}}
+\DoxyCodeLine{00436\ }
+\DoxyCodeLine{00437\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00438\ \textcolor{keywordtype}{bool}\ Vector<T>::Iterator::operator==(\textcolor{keyword}{const}\ Iterator\&\ \_other)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00439\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00440\ \ \ \textcolor{keywordtype}{bool}\ rtn\ =\ m\_index\ ==\ \_other.m\_index\ \&\&}
+\DoxyCodeLine{00441\ \ \ \ \ m\_end\ ==\ \_other.m\_end\ \&\&}
+\DoxyCodeLine{00442\ \ \ \ \ m\_owner\ ==\ \_other.m\_owner;}
+\DoxyCodeLine{00443\ }
+\DoxyCodeLine{00444\ \ \ \textcolor{keywordflow}{return}\ rtn;}
+\DoxyCodeLine{00445\ \}}
+\DoxyCodeLine{00446\ }
+\DoxyCodeLine{00447\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00448\ PtrLock<T>\ Vector<T>::Iterator::operator-\/>()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00449\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00450\ \ \ \textcolor{keywordflow}{return}\ PtrLock<T>(\&m\_owner-\/>m\_raw[m\_index],}
+\DoxyCodeLine{00451\ \ \ \ \ \&m\_owner-\/>m\_locallock);}
+\DoxyCodeLine{00452\ \}}
+\DoxyCodeLine{00453\ }
+\DoxyCodeLine{00454\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00455\ RefLock<T>\ Vector<T>::Iterator::operator*()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00456\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00457\ \ \ \textcolor{keywordflow}{return}\ RefLock<T>(\&m\_owner-\/>m\_raw[m\_index],}
+\DoxyCodeLine{00458\ \ \ \ \ \&m\_owner-\/>m\_locallock);}
+\DoxyCodeLine{00459\ \}}
+\DoxyCodeLine{00460\ }
+\DoxyCodeLine{00461\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00462\ \textcolor{keywordtype}{void}\ Vector<T>::check\_lock()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00463\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00464\ \ \ \textcolor{keywordflow}{if}(m\_locallock.count()\ !=\ 0)}
+\DoxyCodeLine{00465\ \ \ \{}
+\DoxyCodeLine{00466\ \ \ \ \ panic(\textcolor{stringliteral}{"{}Invalidating\ locked\ resource"{}});}
+\DoxyCodeLine{00467\ \ \ \}}
+\DoxyCodeLine{00468\ \}}
+\DoxyCodeLine{00469\ }
+\DoxyCodeLine{00470\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00471\ \textcolor{keywordtype}{void}\ Vector<T>::allocate(\textcolor{keywordtype}{size\_t}\ \_size)}
+\DoxyCodeLine{00472\ \{}
+\DoxyCodeLine{00473\ \ \ \textcolor{keywordflow}{if}(m\_total\ >=\ \_size)}
+\DoxyCodeLine{00474\ \ \ \{}
+\DoxyCodeLine{00475\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00476\ \ \ \}}
+\DoxyCodeLine{00477\ }
+\DoxyCodeLine{00478\ \ \ \textcolor{keywordtype}{size\_t}\ ns\ =\ 8;}
+\DoxyCodeLine{00479\ }
+\DoxyCodeLine{00480\ \ \ \textcolor{keywordflow}{while}(ns\ <\ \_size)}
+\DoxyCodeLine{00481\ \ \ \{}
+\DoxyCodeLine{00482\ \ \ \ \ ns\ *=\ 2;}
+\DoxyCodeLine{00483\ \ \ \}}
+\DoxyCodeLine{00484\ }
+\DoxyCodeLine{00485\ \ \ \textcolor{keywordtype}{size\_t}\ total\ =\ ns;}
+\DoxyCodeLine{00486\ \ \ T*\ raw\ =\ \textcolor{keyword}{static\_cast<}T*\textcolor{keyword}{>}(calloc(total,\ \textcolor{keyword}{sizeof}(T)));}
+\DoxyCodeLine{00487\ \ \ \textcolor{keywordtype}{size\_t}\ size\ =\ 0;}
+\DoxyCodeLine{00488\ }
+\DoxyCodeLine{00489\ \ \ \textcolor{keywordflow}{if}(!raw)}
+\DoxyCodeLine{00490\ \ \ \{}
+\DoxyCodeLine{00491\ \ \ \ \ panic(\textcolor{stringliteral}{"{}Failed\ to\ allocate\ initial\ space"{}});}
+\DoxyCodeLine{00492\ \ \ \}}
+\DoxyCodeLine{00493\ }
+\DoxyCodeLine{00494\ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00495\ \ \ \{}
+\DoxyCodeLine{00496\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t}\ ei\ =\ 0;\ ei\ <\ m\_size;\ ++ei)}
+\DoxyCodeLine{00497\ \ \ \ \ \{}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \textcolor{keyword}{new}(\&raw[ei])\ T(m\_raw[ei]);}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ ++size;}
+\DoxyCodeLine{00500\ \ \ \ \ \}}
+\DoxyCodeLine{00501\ \ \ \}}
+\DoxyCodeLine{00502\ \ \ \textcolor{keywordflow}{catch}(...)}
+\DoxyCodeLine{00503\ \ \ \{}
+\DoxyCodeLine{00504\ \ \ \ \ \textcolor{keywordflow}{for}(ssize\_t\ ei\ =\ size\ -\/\ 1;\ ei\ >=\ 0;\ -\/-\/ei)}
+\DoxyCodeLine{00505\ \ \ \ \ \{}
+\DoxyCodeLine{00506\ \ \ \ \ \ \ raw[ei].\string~T();}
+\DoxyCodeLine{00507\ \ \ \ \ \}}
+\DoxyCodeLine{00508\ }
+\DoxyCodeLine{00509\ \ \ \ \ free(raw);}
+\DoxyCodeLine{00510\ }
+\DoxyCodeLine{00511\ \ \ \ \ \textcolor{keywordflow}{throw};}
+\DoxyCodeLine{00512\ \ \ \}}
+\DoxyCodeLine{00513\ }
+\DoxyCodeLine{00514\ \ \ clear();}
+\DoxyCodeLine{00515\ \ \ free(m\_raw);}
+\DoxyCodeLine{00516\ \ \ m\_size\ =\ size;}
+\DoxyCodeLine{00517\ \ \ m\_raw\ =\ raw;}
+\DoxyCodeLine{00518\ \ \ m\_total\ =\ total;}
+\DoxyCodeLine{00519\ \}}
+\DoxyCodeLine{00520\ }
+\DoxyCodeLine{00521\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00522\ \textcolor{keywordtype}{void}\ Vector<T>::sort(\textcolor{keywordtype}{bool}\ (*\_func)(T\&,\ T\&))}
+\DoxyCodeLine{00523\ \{}
+\DoxyCodeLine{00524\ \ \ quicksort(0,\ size()\ -\/\ 1,\ \_func);}
+\DoxyCodeLine{00525\ \}}
+\DoxyCodeLine{00526\ }
+\DoxyCodeLine{00527\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00528\ \textcolor{keywordtype}{void}\ Vector<T>::swap(T\&\ \_a,\ T\&\ \_b)}
+\DoxyCodeLine{00529\ \{}
+\DoxyCodeLine{00530\ \ \ T\ t\ =\ \_a;}
+\DoxyCodeLine{00531\ \ \ \_a\ =\ \_b;}
+\DoxyCodeLine{00532\ \ \ \_b\ =\ t;}
+\DoxyCodeLine{00533\ \}}
+\DoxyCodeLine{00534\ }
+\DoxyCodeLine{00535\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00536\ \textcolor{keywordtype}{bool}\ Vector<T>::compareFunc(T\&\ \_a,\ T\&\ \_b)}
+\DoxyCodeLine{00537\ \{}
+\DoxyCodeLine{00538\ \ \ \textcolor{keywordflow}{if}(\_a\ >\ \_b)}
+\DoxyCodeLine{00539\ \ \ \{}
+\DoxyCodeLine{00540\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00541\ \ \ \}}
+\DoxyCodeLine{00542\ }
+\DoxyCodeLine{00543\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00544\ \}}
+\DoxyCodeLine{00545\ }
+\DoxyCodeLine{00546\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00547\ \textcolor{keywordtype}{int}\ Vector<T>::partition(\textcolor{keywordtype}{int}\ \_low,\ \textcolor{keywordtype}{int}\ \_high,\ \textcolor{keywordtype}{bool}\ (*\_func)(T\&,\ T\&))}
+\DoxyCodeLine{00548\ \{}
+\DoxyCodeLine{00549\ \ \ \textcolor{keywordtype}{int}\ i\ =\ \_low\ -\/\ 1;}
+\DoxyCodeLine{00550\ \ \ Vector<T>\&\ self\ =\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00551\ }
+\DoxyCodeLine{00552\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ j\ =\ \_low;\ j\ <=\ \_high\ -\/\ 1;\ ++j)}
+\DoxyCodeLine{00553\ \ \ \{}
+\DoxyCodeLine{00554\ \ \ \ \ \textcolor{keywordflow}{if}(\_func(self[j],\ self[\_high]))}
+\DoxyCodeLine{00555\ \ \ \ \ \{}
+\DoxyCodeLine{00556\ \ \ \ \ \ \ ++i;}
+\DoxyCodeLine{00557\ \ \ \ \ \ \ swap(self[i],\ self[j]);}
+\DoxyCodeLine{00558\ \ \ \ \ \}}
+\DoxyCodeLine{00559\ \ \ \}}
+\DoxyCodeLine{00560\ }
+\DoxyCodeLine{00561\ \ \ swap(self[i\ +\ 1],\ self[\_high]);}
+\DoxyCodeLine{00562\ }
+\DoxyCodeLine{00563\ \ \ \textcolor{keywordflow}{return}\ i\ +\ 1;}
+\DoxyCodeLine{00564\ \}}
+\DoxyCodeLine{00565\ }
+\DoxyCodeLine{00566\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00567\ T*\ Vector<T>::unsafe\_raw()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00568\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00569\ \ \ \textcolor{keywordflow}{return}\ \&m\_raw[0];}
+\DoxyCodeLine{00570\ \}}
+\DoxyCodeLine{00571\ }
+\DoxyCodeLine{00572\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00573\ \textcolor{keywordtype}{void}\ Vector<T>::quicksort(\textcolor{keywordtype}{int}\ \_low,\ \textcolor{keywordtype}{int}\ \_high,\ \textcolor{keywordtype}{bool}\ (*\_func)(T\&,\ T\&))}
+\DoxyCodeLine{00574\ \{}
+\DoxyCodeLine{00575\ \ \ \textcolor{keywordflow}{if}(\_low\ <\ \_high)}
+\DoxyCodeLine{00576\ \ \ \{}
+\DoxyCodeLine{00577\ \ \ \ \ \textcolor{keywordtype}{int}\ pivot\ =\ partition(\_low,\ \_high,\ \_func);}
+\DoxyCodeLine{00578\ }
+\DoxyCodeLine{00579\ \ \ \ \ quicksort(\_low,\ pivot\ -\/\ 1,\ \_func);}
+\DoxyCodeLine{00580\ \ \ \ \ quicksort(pivot\ +\ 1,\ \_high,\ \_func);}
+\DoxyCodeLine{00581\ \ \ \}}
+\DoxyCodeLine{00582\ \}}
+\DoxyCodeLine{00583\ }
+\DoxyCodeLine{00584\ \}}
+\DoxyCodeLine{00585\ }
+\DoxyCodeLine{00586\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00587\ }
+
+\end{DoxyCode}

@@ -1,0 +1,206 @@
+\hypertarget{_weak_8h_source}{}\doxysection{Weak.\+h}
+\label{_weak_8h_source}\index{src/rend/sys/Weak.h@{src/rend/sys/Weak.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}Zero.h"{}}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}Exception.h"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}Lock.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}config.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }sys}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00010\ \textcolor{keyword}{struct\ }Weak;}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00013\ \textcolor{keyword}{struct\ }Ptr;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{struct\ }Rc}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ Zero<int>\ strong;}
+\DoxyCodeLine{00018\ \ \ Zero<int>\ weak;}
+\DoxyCodeLine{00019\ \ \ LockBlock\ lock;}
+\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_enable_weak}{EnableWeak}}}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{structsys_1_1_enable_weak}{EnableWeak}}()\ :}
+\DoxyCodeLine{00025\ \ \ \ \ m\_rc(\textcolor{keyword}{new}\ \mbox{\hyperlink{structsys_1_1_rc}{Rc}}())}
+\DoxyCodeLine{00026\ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordflow}{if}(!m\_rc)}
+\DoxyCodeLine{00028\ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{structsys_1_1_exception}{Exception}}(\textcolor{stringliteral}{"{}Failed\ to\ allocate\ reference\ count"{}});}
+\DoxyCodeLine{00030\ \ \ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ ++m\_rc-\/>strong;}
+\DoxyCodeLine{00033\ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{structsys_1_1_enable_weak}{EnableWeak}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_enable_weak}{EnableWeak}}\&\ \_copy)\ :}
+\DoxyCodeLine{00036\ \ \ \ \ m\_rc(\textcolor{keyword}{new}\ \mbox{\hyperlink{structsys_1_1_rc}{Rc}}())}
+\DoxyCodeLine{00037\ \ \ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{if}(!m\_rc)}
+\DoxyCodeLine{00039\ \ \ \ \ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{structsys_1_1_exception}{Exception}}(\textcolor{stringliteral}{"{}Failed\ to\ allocate\ reference\ count"{}});}
+\DoxyCodeLine{00041\ \ \ \ \ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ ++m\_rc-\/>strong;}
+\DoxyCodeLine{00044\ \ \ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \mbox{\hyperlink{structsys_1_1_enable_weak}{EnableWeak}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_enable_weak}{EnableWeak}}\&\ \_other)}
+\DoxyCodeLine{00047\ \ \ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00049\ \ \ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \mbox{\hyperlink{structsys_1_1_enable_weak}{\string~EnableWeak}}()}
+\DoxyCodeLine{00052\ \ \ \{}
+\DoxyCodeLine{00053\ \ \ \ \ -\/-\/m\_rc-\/>strong;}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordflow}{if}(!m\_rc-\/>weak)}
+\DoxyCodeLine{00056\ \ \ \ \ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \textcolor{keyword}{delete}\ m\_rc;}
+\DoxyCodeLine{00058\ \ \ \ \ \}}
+\DoxyCodeLine{00059\ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00062\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00063\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_weak}{Weak}};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{Zero<Rc*>}}\ m\_rc;}
+\DoxyCodeLine{00066\ \};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00069\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_weak}{Weak}}}
+\DoxyCodeLine{00070\ \{}
+\DoxyCodeLine{00071\ \ \ \mbox{\hyperlink{structsys_1_1_weak}{Weak}}();}
+\DoxyCodeLine{00072\ \ \ \mbox{\hyperlink{structsys_1_1_weak}{Weak}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_weak}{Weak}}\&\ \_copy);}
+\DoxyCodeLine{00073\ \ \ \mbox{\hyperlink{structsys_1_1_weak}{Weak}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_weak}{Weak}}\&\ \_other);}
+\DoxyCodeLine{00074\ \ \ \mbox{\hyperlink{structsys_1_1_weak}{\string~Weak}}();}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \mbox{\hyperlink{structsys_1_1_weak}{Weak}}(T*\ \_ptr);}
+\DoxyCodeLine{00077\ \ \ \mbox{\hyperlink{structsys_1_1_weak}{Weak}}(\mbox{\hyperlink{structsys_1_1_ptr}{Ptr<T>}}\ \_ptr);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#ifdef\ SYS\_DEBUG}}
+\DoxyCodeLine{00080\ \ \ \mbox{\hyperlink{structsys_1_1_ptr_lock}{PtrLock<T>}}\ operator-\/>()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00082\ \ \ T*\ operator-\/>()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00086\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00087\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_ptr}{Ptr}};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{Zero<T*>}}\ m\_ptr;}
+\DoxyCodeLine{00090\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{Zero<Rc*>}}\ m\_rc;}
+\DoxyCodeLine{00091\ \};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{comment}{/*\ Implementation\ */}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#include\ "{}Ptr.h"{}}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{keyword}{namespace\ }sys}
+\DoxyCodeLine{00100\ \{}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00103\ Weak<T>::Weak()}
+\DoxyCodeLine{00104\ \{\ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00107\ Weak<T>::Weak(\textcolor{keyword}{const}\ Weak\&\ \_copy)\ :}
+\DoxyCodeLine{00108\ \ \ m\_ptr(\_copy.m\_ptr),}
+\DoxyCodeLine{00109\ \ \ m\_rc(\_copy.m\_rc)}
+\DoxyCodeLine{00110\ \{}
+\DoxyCodeLine{00111\ \ \ \textcolor{keywordflow}{if}(m\_rc)}
+\DoxyCodeLine{00112\ \ \ \{}
+\DoxyCodeLine{00113\ \ \ \ \ ++m\_rc-\/>weak;}
+\DoxyCodeLine{00114\ \ \ \}}
+\DoxyCodeLine{00115\ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00118\ Weak<T>\&\ Weak<T>::operator=(\textcolor{keyword}{const}\ Weak\&\ \_other)}
+\DoxyCodeLine{00119\ \{}
+\DoxyCodeLine{00120\ \ \ Weak\ tmp(*\textcolor{keyword}{this});}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \textcolor{keywordflow}{if}(m\_rc)}
+\DoxyCodeLine{00123\ \ \ \{}
+\DoxyCodeLine{00124\ \ \ \ \ -\/-\/m\_rc-\/>weak;}
+\DoxyCodeLine{00125\ \ \ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ m\_ptr\ =\ \_other.m\_ptr;}
+\DoxyCodeLine{00128\ \ \ m\_rc\ =\ \_other.m\_rc;}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \textcolor{keywordflow}{if}(m\_rc)}
+\DoxyCodeLine{00131\ \ \ \{}
+\DoxyCodeLine{00132\ \ \ \ \ ++m\_rc-\/>weak;}
+\DoxyCodeLine{00133\ \ \ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00136\ \}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00139\ Weak<T>::\string~Weak()}
+\DoxyCodeLine{00140\ \{}
+\DoxyCodeLine{00141\ \ \ \textcolor{keywordflow}{if}(m\_rc)}
+\DoxyCodeLine{00142\ \ \ \{}
+\DoxyCodeLine{00143\ \ \ \ \ -\/-\/m\_rc-\/>weak;}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordflow}{if}(!m\_rc-\/>strong\ \&\&\ !m\_rc-\/>weak)}
+\DoxyCodeLine{00146\ \ \ \ \ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \textcolor{keyword}{delete}\ m\_rc;}
+\DoxyCodeLine{00148\ \ \ \ \ \}}
+\DoxyCodeLine{00149\ \ \ \}}
+\DoxyCodeLine{00150\ \}}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00153\ Weak<T>::Weak(T*\ \_ptr)\ :}
+\DoxyCodeLine{00154\ \ \ m\_ptr(\_ptr)}
+\DoxyCodeLine{00155\ \{}
+\DoxyCodeLine{00156\ \ \ \textcolor{keywordflow}{if}(m\_ptr)}
+\DoxyCodeLine{00157\ \ \ \{}
+\DoxyCodeLine{00158\ \ \ \ \ m\_rc\ =\ m\_ptr-\/>m\_rc;}
+\DoxyCodeLine{00159\ \ \ \ \ ++m\_rc-\/>weak;}
+\DoxyCodeLine{00160\ \ \ \}}
+\DoxyCodeLine{00161\ \}}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00164\ Weak<T>::Weak(Ptr<T>\ \_ptr)\ :}
+\DoxyCodeLine{00165\ \ \ m\_ptr(\_ptr.unsafe\_raw())}
+\DoxyCodeLine{00166\ \{}
+\DoxyCodeLine{00167\ \ \ \textcolor{keywordflow}{if}(m\_ptr)}
+\DoxyCodeLine{00168\ \ \ \{}
+\DoxyCodeLine{00169\ \ \ \ \ m\_rc\ =\ m\_ptr-\/>m\_rc;}
+\DoxyCodeLine{00170\ \ \ \ \ ++m\_rc-\/>weak;}
+\DoxyCodeLine{00171\ \ \ \}}
+\DoxyCodeLine{00172\ \}}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \textcolor{preprocessor}{\#ifdef\ SYS\_DEBUG}}
+\DoxyCodeLine{00175\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00176\ PtrLock<T>\ Weak<T>::operator-\/>()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00177\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00178\ \ \ \textcolor{keywordflow}{if}(!m\_ptr\ ||\ !m\_rc\ ||\ !m\_rc-\/>strong)}
+\DoxyCodeLine{00179\ \ \ \{}
+\DoxyCodeLine{00180\ \ \ \ \ sys::panic(\textcolor{stringliteral}{"{}Attempt\ to\ dereference\ NULL\ pointer"{}});}
+\DoxyCodeLine{00181\ \ \ \}}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \ \ \textcolor{keywordflow}{return}\ PtrLock<T>(m\_ptr,\ m\_rc-\/>lock);}
+\DoxyCodeLine{00184\ \}}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00187\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00188\ T*\ Weak<T>::operator-\/>()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00189\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00190\ \ \ \textcolor{keywordflow}{if}(!m\_ptr\ ||\ !m\_rc\ ||\ !m\_rc-\/>strong)}
+\DoxyCodeLine{00191\ \ \ \{}
+\DoxyCodeLine{00192\ \ \ \ \ sys::panic(\textcolor{stringliteral}{"{}Attempt\ to\ dereference\ NULL\ pointer"{}});}
+\DoxyCodeLine{00193\ \ \ \}}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \ \ \textcolor{keywordflow}{return}\ m\_ptr;}
+\DoxyCodeLine{00196\ \}}
+\DoxyCodeLine{00197\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \}}
+\DoxyCodeLine{00200\ }
+
+\end{DoxyCode}

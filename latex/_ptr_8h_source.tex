@@ -1,0 +1,380 @@
+\hypertarget{_ptr_8h_source}{}\doxysection{Ptr.\+h}
+\label{_ptr_8h_source}\index{src/rend/sys/Ptr.h@{src/rend/sys/Ptr.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SYS\_PTR\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SYS\_PTR\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Zero.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Lock.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}config.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }sys}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00012\ \textcolor{keyword}{struct\ }Ptr;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00015\ \textcolor{keyword}{struct\ }Unique;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00018\ \textcolor{keyword}{struct\ }List;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00021\ \textcolor{keyword}{struct\ }Vector;}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00024\ \textcolor{keyword}{struct\ }Weak;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_enable_ptr}{EnablePtr}}}
+\DoxyCodeLine{00027\ \{}
+\DoxyCodeLine{00028\ \ \ \mbox{\hyperlink{structsys_1_1_enable_ptr}{EnablePtr}}()}
+\DoxyCodeLine{00029\ \ \ \{\ \}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \mbox{\hyperlink{structsys_1_1_enable_ptr}{EnablePtr}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_enable_ptr}{EnablePtr}}\&\ \_copy)}
+\DoxyCodeLine{00032\ \ \ \{\ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \mbox{\hyperlink{structsys_1_1_enable_ptr}{EnablePtr}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_enable_ptr}{EnablePtr}}\&\ \_other)}
+\DoxyCodeLine{00035\ \ \ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00037\ \ \ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00040\ \textcolor{comment}{\ \ \string~EnablePtr()}}
+\DoxyCodeLine{00041\ \textcolor{comment}{\ \ \{}}
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ \ \ if(m\_lock.count())}}
+\DoxyCodeLine{00043\ \textcolor{comment}{\ \ \ \ \{}}
+\DoxyCodeLine{00044\ \textcolor{comment}{\ \ \ \ \ \ panic("{}Invalid\ lock\ [TODO:\ Remove\ me]"{});}}
+\DoxyCodeLine{00045\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ \}}}
+\DoxyCodeLine{00047\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00050\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00051\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_ptr}{Ptr}};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00054\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_list}{List}};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00057\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_vector}{Vector}};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \mbox{\hyperlink{structsys_1_1_lock_block}{LockBlock}}\ m\_lock;}
+\DoxyCodeLine{00060\ \};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00063\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_ptr}{Ptr}}}
+\DoxyCodeLine{00064\ \{}
+\DoxyCodeLine{00065\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr}}();}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>\ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr<U>}}\&\ \_other);}
+\DoxyCodeLine{00068\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>\ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr<U>}}\&\ \_other);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr}}(T*\ \_t);}
+\DoxyCodeLine{00071\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr}}\&\ operator=(T*\ \_other);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \textcolor{comment}{//Ptr(const\ PtrLock<T>\&\ \_lock);}}
+\DoxyCodeLine{00074\ \ \ \textcolor{comment}{//Ptr\&\ operator=(const\ PtrLock<T>\&\ \_lock);}}
+\DoxyCodeLine{00075\ \ \ \textcolor{comment}{//template\ <typename\ U>\ Ptr(const\ PtrLock<U>\&\ \_other);}}
+\DoxyCodeLine{00076\ \ \ \textcolor{comment}{//template\ <typename\ U>\ Ptr\&\ operator=(const\ PtrLock<U>\&\ \_other);}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \textcolor{comment}{//Ptr(const\ Unique<T>\&\ \_unique);}}
+\DoxyCodeLine{00079\ \ \ \textcolor{comment}{//Ptr\&\ operator=(const\ Unique<T>\&\ \_unique);}}
+\DoxyCodeLine{00080\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>\ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_unique}{Unique<U>}}\&\ \_unique);}
+\DoxyCodeLine{00081\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>\ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_unique}{Unique<U>}}\&\ \_unique);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>\ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_weak}{Weak<U>}}\&\ \_other);}
+\DoxyCodeLine{00084\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>\ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_weak}{Weak<U>}}\&\ \_other);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#ifdef\ SYS\_DEBUG}}
+\DoxyCodeLine{00087\ \ \ \mbox{\hyperlink{structsys_1_1_ref_lock}{RefLock<T>}}\ operator*()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00088\ \ \ \mbox{\hyperlink{structsys_1_1_ptr_lock}{PtrLock<T>}}\ operator-\/>()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00090\ \ \ T\&\ operator*()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00091\ \ \ T*\ operator-\/>()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \textcolor{comment}{//bool\ operator==(const\ Ptr\&\ \_other)\ const;}}
+\DoxyCodeLine{00095\ \ \ \textcolor{comment}{//bool\ operator!=(const\ Ptr\&\ \_other)\ const;}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \textcolor{keywordtype}{bool}\ operator==(T*\ \_other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00098\ \ \ \textcolor{keywordtype}{bool}\ operator!=(T*\ \_other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>\ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr<U>}}\&\ \_other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00101\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>\ \textcolor{keywordtype}{bool}\ operator!=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr<U>}}\&\ \_other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ T*\ unsafe\_raw()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00104\ \ \ \textcolor{keywordtype}{void}\ reset();}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>\ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr<U>}}\ cast()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00109\ \ \ \textcolor{comment}{//\ TODO:\ Rename\ this}}
+\DoxyCodeLine{00110\ \ \ \textcolor{keyword}{typedef}\ void\ (\mbox{\hyperlink{structsys_1_1_ptr}{Ptr}}::*BoolType)()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00111\ \ \ \textcolor{keywordtype}{void}\ this\_type\_does\_not\_support\_comparisons()\textcolor{keyword}{\ const\ }\{\}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00114\ \ \ \textcolor{keyword}{operator}\ BoolType()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00117\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00118\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_list}{List}};}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00121\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_vector}{Vector}};}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00124\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_ptr}{Ptr}};}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00127\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_ref_lock}{RefLock}};}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{Zero<T*>}}\ m\_ptr;}
+\DoxyCodeLine{00130\ \ \ \mbox{\hyperlink{structsys_1_1_lock}{Lock}}\ m\_lock;}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \};}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \textcolor{comment}{/*\ Implementation\ */}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#include\ "{}Unique.h"{}}}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \textcolor{keyword}{namespace\ }sys}
+\DoxyCodeLine{00141\ \{}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00144\ Ptr<T>::Ptr()}
+\DoxyCodeLine{00145\ \{\ \}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00148\ Ptr<T>::Ptr(T*\ \_t)\ :}
+\DoxyCodeLine{00149\ \ \ m\_ptr(\_t),}
+\DoxyCodeLine{00150\ \ \ m\_lock(\_t\ ?\ \&\_t-\/>m\_lock\ :\ NULL)}
+\DoxyCodeLine{00151\ \{\ \}}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00154\ Ptr<T>\&\ Ptr<T>::operator=(T*\ \_other)}
+\DoxyCodeLine{00155\ \{}
+\DoxyCodeLine{00156\ \ \ \textcolor{keyword}{const}\ LockBlock*\ olb\ =\ \_other\ ?\ \&\_other-\/>m\_lock\ :\ NULL;}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \textcolor{keywordflow}{if}(m\_ptr\ !=\ \_other\ ||}
+\DoxyCodeLine{00159\ \ \ \ \ m\_lock.block()\ !=\ olb)}
+\DoxyCodeLine{00160\ \ \ \{}
+\DoxyCodeLine{00161\ \ \ \ \ m\_ptr\ =\ \_other;}
+\DoxyCodeLine{00162\ \ \ \ \ m\_lock.lock(olb);}
+\DoxyCodeLine{00163\ \ \ \}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00166\ \}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00169\ \textcolor{comment}{template\ <typename\ T>}}
+\DoxyCodeLine{00170\ \textcolor{comment}{Ptr<T>::Ptr(const\ Unique<T>\&\ \_unique)\ :}}
+\DoxyCodeLine{00171\ \textcolor{comment}{\ \ m\_ptr(\_unique.m\_ptr),}}
+\DoxyCodeLine{00172\ \textcolor{comment}{\ \ m\_lock(\_unique.m\_lock)}}
+\DoxyCodeLine{00173\ \textcolor{comment}{\{\ \}}}
+\DoxyCodeLine{00174\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00177\ \textcolor{comment}{template\ <typename\ T>}}
+\DoxyCodeLine{00178\ \textcolor{comment}{Ptr<T>\&\ Ptr<T>::operator=(const\ Unique<T>\&\ \_unique)}}
+\DoxyCodeLine{00179\ \textcolor{comment}{\{}}
+\DoxyCodeLine{00180\ \textcolor{comment}{\ \ m\_ptr\ =\ \_unique.m\_ptr;}}
+\DoxyCodeLine{00181\ \textcolor{comment}{\ \ m\_lock.lock(\_unique.m\_lock);}}
+\DoxyCodeLine{00182\ \textcolor{comment}{}}
+\DoxyCodeLine{00183\ \textcolor{comment}{\ \ return\ *this;}}
+\DoxyCodeLine{00184\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00185\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00188\ \textcolor{comment}{template\ <typename\ T>}}
+\DoxyCodeLine{00189\ \textcolor{comment}{Ptr<T>::Ptr(const\ PtrLock<T>\&\ \_lock)\ :}}
+\DoxyCodeLine{00190\ \textcolor{comment}{\ \ m\_ptr(\_lock.m\_ptr),}}
+\DoxyCodeLine{00191\ \textcolor{comment}{\ \ m\_lock(\_lock.m\_lock)}}
+\DoxyCodeLine{00192\ \textcolor{comment}{\{\ \}}}
+\DoxyCodeLine{00193\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \textcolor{comment}{//\ TODO:\ Shall\ we\ make\ non-\/template\ version?\ Is\ synthesised\ version\ safe?}}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00198\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00199\ Ptr<T>::Ptr(\textcolor{keyword}{const}\ Ptr<U>\&\ \_other)\ :}
+\DoxyCodeLine{00200\ \ \ m\_ptr(\_other.m\_ptr),}
+\DoxyCodeLine{00201\ \ \ m\_lock(\_other.m\_lock)}
+\DoxyCodeLine{00202\ \{\ \}}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00205\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00206\ Ptr<T>\&\ Ptr<T>::operator=(\textcolor{keyword}{const}\ Ptr<U>\&\ \_other)}
+\DoxyCodeLine{00207\ \{}
+\DoxyCodeLine{00208\ \ \ \textcolor{keywordflow}{if}(m\_ptr\ !=\ \_other.m\_ptr\ ||}
+\DoxyCodeLine{00209\ \ \ \ \ m\_lock.block()\ !=\ \_other.m\_lock.block())}
+\DoxyCodeLine{00210\ \ \ \{}
+\DoxyCodeLine{00211\ \ \ \ \ m\_ptr\ =\ \_other.m\_ptr;}
+\DoxyCodeLine{00212\ \ \ \ \ m\_lock\ =\ \_other.m\_lock;}
+\DoxyCodeLine{00213\ \ \ \}}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00216\ \}}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00218\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00219\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00220\ Ptr<T>::Ptr(\textcolor{keyword}{const}\ Unique<U>\&\ \_unique)\ :}
+\DoxyCodeLine{00221\ \ \ m\_ptr(\_unique.m\_ptr),}
+\DoxyCodeLine{00222\ \ \ m\_lock(\_unique.m\_lock)}
+\DoxyCodeLine{00223\ \{\ \}}
+\DoxyCodeLine{00224\ \ }
+\DoxyCodeLine{00225\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00226\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00227\ Ptr<T>\&\ Ptr<T>::operator=(\textcolor{keyword}{const}\ Unique<U>\&\ \_unique)}
+\DoxyCodeLine{00228\ \{}
+\DoxyCodeLine{00229\ \ \ m\_ptr\ =\ \_unique.m\_ptr;}
+\DoxyCodeLine{00230\ \ \ m\_lock.lock(\_unique.m\_lock);}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00233\ \}}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00235\ \textcolor{comment}{//\ TODO:\ Do\ we\ need\ to\ check\ m\_rc\ if\ m\_ptr\ is\ valid?}}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00238\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00239\ Ptr<T>::Ptr(\textcolor{keyword}{const}\ Weak<U>\&\ \_other)\ :}
+\DoxyCodeLine{00240\ \ \ m\_ptr((\_other.m\_rc\ \&\&\ \_other.m\_rc-\/>strong)\ ?\ \_other.m\_ptr\ :\ NULL),}
+\DoxyCodeLine{00241\ \ \ m\_lock(\_other.m\_rc\ ?\ \&\_other.m\_rc-\/>lock\ :\ NULL)}
+\DoxyCodeLine{00242\ \{\ \}}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00244\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00245\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00246\ Ptr<T>\&\ Ptr<T>::operator=(\textcolor{keyword}{const}\ Weak<U>\&\ \_weak)}
+\DoxyCodeLine{00247\ \{}
+\DoxyCodeLine{00248\ \ \ m\_ptr\ =\ (\_weak.m\_rc\ \&\&\ \_weak.m\_rc-\/>strong)\ ?\ \_weak.m\_ptr\ :\ NULL;}
+\DoxyCodeLine{00249\ \ \ m\_lock.lock(\_weak.m\_rc\ ?\ \_weak.m\_rc-\/>lock\ :\ NULL);}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00252\ \}}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00254\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00255\ \textcolor{comment}{template\ <typename\ T>}}
+\DoxyCodeLine{00256\ \textcolor{comment}{Ptr<T>\&\ Ptr<T>::operator=(const\ PtrLock<T>\&\ \_lock)}}
+\DoxyCodeLine{00257\ \textcolor{comment}{\{}}
+\DoxyCodeLine{00258\ \textcolor{comment}{\ \ m\_ptr\ =\ \_lock.m\_ptr;}}
+\DoxyCodeLine{00259\ \textcolor{comment}{\ \ m\_lock\ =\ \_lock.m\_lock;}}
+\DoxyCodeLine{00260\ \textcolor{comment}{}}
+\DoxyCodeLine{00261\ \textcolor{comment}{\ \ return\ *this;}}
+\DoxyCodeLine{00262\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00263\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00265\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00266\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00267\ \textcolor{keywordtype}{bool}\ Ptr<T>::operator==(\textcolor{keyword}{const}\ Ptr<U>\&\ \_other)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00268\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00269\ \ \ \textcolor{keywordflow}{return}\ m\_ptr\ ==\ \_other.m\_ptr;}
+\DoxyCodeLine{00270\ \}}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00272\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00273\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00274\ \textcolor{keywordtype}{bool}\ Ptr<T>::operator!=(\textcolor{keyword}{const}\ Ptr<U>\&\ \_other)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00275\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00276\ \ \ \textcolor{keywordflow}{return}\ m\_ptr\ !=\ \_other.m\_ptr;}
+\DoxyCodeLine{00277\ \}}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00279\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00280\ \textcolor{keywordtype}{bool}\ Ptr<T>::operator==(T*\ \_other)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00281\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00282\ \ \ \textcolor{keywordflow}{return}\ m\_ptr\ ==\ \_other;}
+\DoxyCodeLine{00283\ \}}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00285\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00286\ \textcolor{keywordtype}{bool}\ Ptr<T>::operator!=(T*\ \_other)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00287\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00288\ \ \ \textcolor{keywordflow}{return}\ m\_ptr\ !=\ \_other;}
+\DoxyCodeLine{00289\ \}}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00291\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00292\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00293\ Ptr<U>\ Ptr<T>::cast()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00294\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00295\ \ \ \textcolor{comment}{//\ TODO:\ Clean}}
+\DoxyCodeLine{00296\ \ \ Ptr<U>\ rtn;}
+\DoxyCodeLine{00297\ \ \ rtn.m\_ptr\ =\ \textcolor{keyword}{dynamic\_cast<}U*\textcolor{keyword}{>}(\textcolor{keyword}{static\_cast<}T*\textcolor{keyword}{>}(m\_ptr));}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \ \ \textcolor{keywordflow}{if}(rtn.m\_ptr)}
+\DoxyCodeLine{00300\ \ \ \{}
+\DoxyCodeLine{00301\ \ \ \ \ rtn.m\_lock\ =\ m\_lock;}
+\DoxyCodeLine{00302\ \ \ \}}
+\DoxyCodeLine{00303\ }
+\DoxyCodeLine{00304\ \ \ \textcolor{keywordflow}{return}\ rtn;}
+\DoxyCodeLine{00305\ \}}
+\DoxyCodeLine{00306\ }
+\DoxyCodeLine{00307\ \textcolor{preprocessor}{\#ifdef\ SYS\_DEBUG}}
+\DoxyCodeLine{00308\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00309\ RefLock<T>\ Ptr<T>::operator*()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00310\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00311\ \ \ \textcolor{keywordflow}{return}\ RefLock<T>(m\_ptr,\ m\_lock.block());}
+\DoxyCodeLine{00312\ \}}
+\DoxyCodeLine{00313\ }
+\DoxyCodeLine{00314\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00315\ PtrLock<T>\ Ptr<T>::operator-\/>()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00316\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00317\ \ \ \textcolor{keywordflow}{return}\ PtrLock<T>(m\_ptr,\ m\_lock.block());}
+\DoxyCodeLine{00318\ \}}
+\DoxyCodeLine{00319\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00320\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00321\ T\&\ Ptr<T>::operator*()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00322\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00323\ \ \ \textcolor{keywordflow}{return}\ *m\_ptr;}
+\DoxyCodeLine{00324\ \}}
+\DoxyCodeLine{00325\ }
+\DoxyCodeLine{00326\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00327\ T*\ Ptr<T>::operator-\/>()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00328\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00329\ \ \ \textcolor{keywordflow}{return}\ m\_ptr;}
+\DoxyCodeLine{00330\ \}}
+\DoxyCodeLine{00331\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00332\ }
+\DoxyCodeLine{00333\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00334\ \textcolor{comment}{template\ <typename\ T>}}
+\DoxyCodeLine{00335\ \textcolor{comment}{bool\ Ptr<T>::operator==(const\ Ptr\&\ \_other)\ const}}
+\DoxyCodeLine{00336\ \textcolor{comment}{\{}}
+\DoxyCodeLine{00337\ \textcolor{comment}{\ \ return\ m\_ptr\ ==\ \_other.m\_ptr;}}
+\DoxyCodeLine{00338\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00339\ \textcolor{comment}{}}
+\DoxyCodeLine{00340\ \textcolor{comment}{template\ <typename\ T>}}
+\DoxyCodeLine{00341\ \textcolor{comment}{bool\ Ptr<T>::operator!=(const\ Ptr\&\ \_other)\ const}}
+\DoxyCodeLine{00342\ \textcolor{comment}{\{}}
+\DoxyCodeLine{00343\ \textcolor{comment}{\ \ return\ m\_ptr\ !=\ \_other.m\_ptr;}}
+\DoxyCodeLine{00344\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00345\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00347\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00348\ T*\ Ptr<T>::unsafe\_raw()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00349\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00350\ \ \ \textcolor{keywordflow}{return}\ m\_ptr;}
+\DoxyCodeLine{00351\ \}}
+\DoxyCodeLine{00352\ }
+\DoxyCodeLine{00353\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00354\ \textcolor{keywordtype}{void}\ Ptr<T>::reset()}
+\DoxyCodeLine{00355\ \{}
+\DoxyCodeLine{00356\ \ \ m\_lock.lock(NULL);}
+\DoxyCodeLine{00357\ \ \ m\_ptr\ =\ NULL;}
+\DoxyCodeLine{00358\ \}}
+\DoxyCodeLine{00359\ }
+\DoxyCodeLine{00360\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00361\ Ptr<T>::operator\ BoolType()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00362\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00363\ \ \ \textcolor{keywordflow}{if}(m\_ptr)}
+\DoxyCodeLine{00364\ \ \ \{}
+\DoxyCodeLine{00365\ \ \ \ \ \textcolor{keywordflow}{return}\ \&Ptr::this\_type\_does\_not\_support\_comparisons;}
+\DoxyCodeLine{00366\ \ \ \}}
+\DoxyCodeLine{00367\ }
+\DoxyCodeLine{00368\ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00369\ \}}
+\DoxyCodeLine{00370\ }
+\DoxyCodeLine{00371\ \}}
+\DoxyCodeLine{00372\ }
+\DoxyCodeLine{00373\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00374\ }
+
+\end{DoxyCode}

@@ -1,0 +1,287 @@
+\hypertarget{_list_8h_source}{}\doxysection{List.\+h}
+\label{_list_8h_source}\index{src/rend/sys/List.h@{src/rend/sys/List.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SYS\_LIST\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SYS\_LIST\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Ptr.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}panic.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }sys}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00011\ \textcolor{keyword}{struct\ }Ptr;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00014\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_list}{List}}\ :\ \mbox{\hyperlink{structsys_1_1_enable_ptr}{EnablePtr}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00017\ \ \ \textcolor{keyword}{struct\ }Node\ :\ \mbox{\hyperlink{structsys_1_1_enable_ptr}{EnablePtr}}}
+\DoxyCodeLine{00018\ \ \ \{}
+\DoxyCodeLine{00019\ \ \ \ \ Node();}
+\DoxyCodeLine{00020\ \ \ \ \ Node(\textcolor{keyword}{const}\ T\&\ \_value);}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ T\ m\_value;}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr<Node>}}\ m\_next;}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr<Node>}}\ m\_prev;}
+\DoxyCodeLine{00025\ \ \ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_list_1_1_iterator}{Iterator}}}
+\DoxyCodeLine{00029\ \ \ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{structsys_1_1_list_1_1_iterator}{Iterator}}\&\ operator++();}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator!=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_list_1_1_iterator}{Iterator}}\&\ \_other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_list_1_1_iterator}{Iterator}}\&\ \_other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{structsys_1_1_ptr_lock}{PtrLock<T>}}\ operator-\/>()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{structsys_1_1_ref_lock}{RefLock<T>}}\ operator*()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{//operator\ Ptr<T>()\ const;}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_list}{List}};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr<Node>}}\ m\_node;}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{structsys_1_1_zero}{Zero<bool>}}\ m\_end;}
+\DoxyCodeLine{00044\ \ \ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \mbox{\hyperlink{structsys_1_1_list}{List}}();}
+\DoxyCodeLine{00047\ \ \ \mbox{\hyperlink{structsys_1_1_list}{List}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_list}{List}}\&\ \_copy);}
+\DoxyCodeLine{00048\ \ \ \mbox{\hyperlink{structsys_1_1_list}{\string~List}}();}
+\DoxyCodeLine{00049\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr<T>}}\ push(\textcolor{keyword}{const}\ T\&\ \_value);}
+\DoxyCodeLine{00050\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr<T>}}\ emplace();}
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordtype}{void}\ clear();}
+\DoxyCodeLine{00052\ \ \ \mbox{\hyperlink{structsys_1_1_list_1_1_iterator}{Iterator}}\ begin()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00053\ \ \ \mbox{\hyperlink{structsys_1_1_list_1_1_iterator}{Iterator}}\ end()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00054\ \ \ \mbox{\hyperlink{structsys_1_1_list_1_1_iterator}{Iterator}}\ erase(\mbox{\hyperlink{structsys_1_1_list_1_1_iterator}{Iterator}}\&\ \_it);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00057\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr<Node>}}\ m\_first;}
+\DoxyCodeLine{00058\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr<Node>}}\ m\_last;}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \textcolor{comment}{//\ TODO:\ List\ assignment\ should\ be\ possible}}
+\DoxyCodeLine{00061\ \ \ \mbox{\hyperlink{structsys_1_1_list}{List}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_list}{List}}\&\ \_other);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00066\ \mbox{\hyperlink{structsys_1_1_list}{List<T>::Node::Node}}()}
+\DoxyCodeLine{00067\ \{\ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00070\ List<T>::Node::Node(\textcolor{keyword}{const}\ T\&\ \_value)\ :}
+\DoxyCodeLine{00071\ \ \ m\_value(\_value)}
+\DoxyCodeLine{00072\ \{\ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#define\ REF\_LIST\_ATTACH\ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\ \ if(m\_last)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\ \ \ \ node-\/>m\_prev\ =\ m\_last;\ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\ \ \ \ m\_last-\/>m\_next\ =\ node;\ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\ \ \ \ m\_last\ =\ node;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\ \ else\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\ \ \ \ m\_first\ =\ node;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\ \ \ \ m\_last\ =\ node;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\ \ Ptr<T>\ rtn;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\ \ rtn.m\_ptr\ =\ \&node-\/>m\_value;\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\ \ rtn.m\_lock.lock(\&node-\/>m\_lock);\ \(\backslash\)}}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\ \ return\ rtn;}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00094\ Ptr<T>\ List<T>::push(\textcolor{keyword}{const}\ T\&\ \_value)}
+\DoxyCodeLine{00095\ \{}
+\DoxyCodeLine{00096\ \ \ Ptr<Node>\ node\ =\ \textcolor{keyword}{new}\ Node(\_value);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ REF\_LIST\_ATTACH}
+\DoxyCodeLine{00099\ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00102\ Ptr<T>\ List<T>::emplace()}
+\DoxyCodeLine{00103\ \{}
+\DoxyCodeLine{00104\ \ \ Ptr<Node>\ node\ =\ \textcolor{keyword}{new}\ Node();}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ REF\_LIST\_ATTACH}
+\DoxyCodeLine{00107\ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00110\ List<T>::List()}
+\DoxyCodeLine{00111\ \{\ \}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00114\ List<T>::List(\textcolor{keyword}{const}\ List\&\ \_copy)}
+\DoxyCodeLine{00115\ \{}
+\DoxyCodeLine{00116\ \ \ \textcolor{keywordflow}{for}(\textcolor{keyword}{typename}\ List::Iterator\ it\ =\ \_copy.begin();\ it\ !=\ \_copy.end();\ ++it)}
+\DoxyCodeLine{00117\ \ \ \{}
+\DoxyCodeLine{00118\ \ \ \ \ push(*it);}
+\DoxyCodeLine{00119\ \ \ \}}
+\DoxyCodeLine{00120\ \}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00123\ List<T>::\string~List()}
+\DoxyCodeLine{00124\ \{}
+\DoxyCodeLine{00125\ \ \ clear();}
+\DoxyCodeLine{00126\ \}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00129\ \textcolor{keywordtype}{void}\ List<T>::clear()}
+\DoxyCodeLine{00130\ \{}
+\DoxyCodeLine{00131\ \ \ Ptr<Node>\ curr\ =\ m\_first;}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ m\_first\ =\ NULL;}
+\DoxyCodeLine{00134\ \ \ m\_last\ =\ NULL;}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \textcolor{keywordflow}{while}(curr)}
+\DoxyCodeLine{00137\ \ \ \{}
+\DoxyCodeLine{00138\ \ \ \ \ Ptr<Node>\ next\ =\ curr-\/>m\_next;}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordflow}{if}(next)}
+\DoxyCodeLine{00141\ \ \ \ \ \{}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ next-\/>m\_prev\ =\ NULL;}
+\DoxyCodeLine{00143\ \ \ \ \ \}}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ Node*\ raw\ =\ curr.unsafe\_raw();}
+\DoxyCodeLine{00146\ \ \ \ \ curr\ =\ next;}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keyword}{delete}\ raw;}
+\DoxyCodeLine{00148\ \ \ \}}
+\DoxyCodeLine{00149\ \}}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00152\ \textcolor{comment}{template\ <typename\ T>}}
+\DoxyCodeLine{00153\ \textcolor{comment}{List<T>::Iterator::operator\ Ptr<T>()\ const}}
+\DoxyCodeLine{00154\ \textcolor{comment}{\{}}
+\DoxyCodeLine{00155\ \textcolor{comment}{\ \ if(m\_end)}}
+\DoxyCodeLine{00156\ \textcolor{comment}{\ \ \{}}
+\DoxyCodeLine{00157\ \textcolor{comment}{\ \ \ \ sys::panic("{}Dereferencing\ end\ node"{});}}
+\DoxyCodeLine{00158\ \textcolor{comment}{\ \ \}}}
+\DoxyCodeLine{00159\ \textcolor{comment}{}}
+\DoxyCodeLine{00160\ \textcolor{comment}{\ \ Ptr<T>\ rtn;}}
+\DoxyCodeLine{00161\ \textcolor{comment}{\ \ rtn.m\_ptr\ =\ \&m\_node-\/>m\_value;}}
+\DoxyCodeLine{00162\ \textcolor{comment}{\ \ rtn.m\_lock.lock(\&m\_node-\/>m\_lock);}}
+\DoxyCodeLine{00163\ \textcolor{comment}{}}
+\DoxyCodeLine{00164\ \textcolor{comment}{\ \ return\ rtn;}}
+\DoxyCodeLine{00165\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00166\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00169\ \textcolor{keyword}{typename}\ List<T>::Iterator\&\ List<T>::Iterator::operator++()}
+\DoxyCodeLine{00170\ \{}
+\DoxyCodeLine{00171\ \ \ \textcolor{keywordflow}{if}(m\_end)}
+\DoxyCodeLine{00172\ \ \ \{}
+\DoxyCodeLine{00173\ \ \ \ \ sys::panic(\textcolor{stringliteral}{"{}Iteration\ past\ end"{}});}
+\DoxyCodeLine{00174\ \ \ \}}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ Ptr<Node>\ next\ =\ m\_node-\/>m\_next;}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \textcolor{keywordflow}{if}(!next)}
+\DoxyCodeLine{00179\ \ \ \{}
+\DoxyCodeLine{00180\ \ \ \ \ m\_end\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00181\ \ \ \ \ m\_node\ =\ NULL;}
+\DoxyCodeLine{00182\ \ \ \}}
+\DoxyCodeLine{00183\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00184\ \ \ \{}
+\DoxyCodeLine{00185\ \ \ \ \ m\_node\ =\ next;}
+\DoxyCodeLine{00186\ \ \ \}}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00189\ \}}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00192\ \textcolor{keywordtype}{bool}\ List<T>::Iterator::operator!=(\textcolor{keyword}{const}\ Iterator\&\ \_other)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00193\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00194\ \ \ \textcolor{keywordtype}{bool}\ rtn\ =\ m\_node\ ==\ \_other.m\_node\ \&\&\ m\_end\ ==\ \_other.m\_end;}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \ \ \textcolor{keywordflow}{return}\ !rtn;}
+\DoxyCodeLine{00197\ \}}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00200\ \textcolor{keywordtype}{bool}\ List<T>::Iterator::operator==(\textcolor{keyword}{const}\ Iterator\&\ \_other)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00201\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00202\ \ \ \textcolor{keywordtype}{bool}\ rtn\ =\ m\_node\ ==\ \_other.m\_node\ \&\&\ m\_end\ ==\ \_other.m\_end;}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \ \ \textcolor{keywordflow}{return}\ rtn;}
+\DoxyCodeLine{00205\ \}}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00208\ PtrLock<T>\ List<T>::Iterator::operator-\/>()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00209\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00210\ \ \ \textcolor{keywordflow}{return}\ PtrLock<T>(\&m\_node-\/>m\_value,\ \&m\_node-\/>m\_lock);}
+\DoxyCodeLine{00211\ \}}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00214\ RefLock<T>\ List<T>::Iterator::operator*()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00215\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00216\ \ \ \textcolor{keywordflow}{return}\ RefLock<T>(\&m\_node-\/>m\_value,\ \&m\_node-\/>m\_lock);}
+\DoxyCodeLine{00217\ \}}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00219\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00220\ \textcolor{keyword}{typename}\ List<T>::Iterator\ List<T>::begin()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00221\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00222\ \ \ \textcolor{keywordflow}{if}(!m\_first)}
+\DoxyCodeLine{00223\ \ \ \{}
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordflow}{return}\ end();}
+\DoxyCodeLine{00225\ \ \ \}}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00227\ \ \ Iterator\ rtn;}
+\DoxyCodeLine{00228\ \ \ rtn.m\_node\ =\ m\_first;}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00230\ \ \ \textcolor{keywordflow}{return}\ rtn;}
+\DoxyCodeLine{00231\ \}}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00234\ \textcolor{keyword}{typename}\ List<T>::Iterator\ List<T>::end()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00235\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00236\ \ \ Iterator\ rtn;}
+\DoxyCodeLine{00237\ \ \ \textcolor{comment}{//rtn.m\_node\ =\ m\_last;}}
+\DoxyCodeLine{00238\ \ \ rtn.m\_end\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00240\ \ \ \textcolor{keywordflow}{return}\ rtn;}
+\DoxyCodeLine{00241\ \}}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00244\ \textcolor{keyword}{typename}\ List<T>::Iterator\ List<T>::erase(Iterator\&\ \_it)}
+\DoxyCodeLine{00245\ \{}
+\DoxyCodeLine{00246\ \ \ Node*\ node\ =\ \_it.m\_node.unsafe\_raw();}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \ \ \textcolor{keywordflow}{if}(node-\/>m\_prev\ \&\&\ node-\/>m\_next)}
+\DoxyCodeLine{00249\ \ \ \{}
+\DoxyCodeLine{00250\ \ \ \ \ node-\/>m\_prev-\/>m\_next\ =\ node-\/>m\_next;}
+\DoxyCodeLine{00251\ \ \ \ \ node-\/>m\_next-\/>m\_prev\ =\ node-\/>m\_prev;}
+\DoxyCodeLine{00252\ \ \ \}}
+\DoxyCodeLine{00253\ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}(node-\/>m\_prev)}
+\DoxyCodeLine{00254\ \ \ \{}
+\DoxyCodeLine{00255\ \ \ \ \ node-\/>m\_prev-\/>m\_next\ =\ NULL;}
+\DoxyCodeLine{00256\ \ \ \}}
+\DoxyCodeLine{00257\ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}(node-\/>m\_next)}
+\DoxyCodeLine{00258\ \ \ \{}
+\DoxyCodeLine{00259\ \ \ \ \ node-\/>m\_next-\/>m\_prev\ =\ NULL;}
+\DoxyCodeLine{00260\ \ \ \}}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ \ \ \textcolor{keywordflow}{if}(!node-\/>m\_prev)}
+\DoxyCodeLine{00263\ \ \ \{}
+\DoxyCodeLine{00264\ \ \ \ \ m\_first\ =\ node-\/>m\_next;}
+\DoxyCodeLine{00265\ \ \ \}}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ \ \ \textcolor{keywordflow}{if}(!node-\/>m\_next)}
+\DoxyCodeLine{00268\ \ \ \{}
+\DoxyCodeLine{00269\ \ \ \ \ m\_last\ =\ node-\/>m\_prev;}
+\DoxyCodeLine{00270\ \ \ \}}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00272\ \ \ ++\_it;}
+\DoxyCodeLine{00273\ \ \ \textcolor{keyword}{delete}\ node;}
+\DoxyCodeLine{00274\ }
+\DoxyCodeLine{00275\ \ \ \textcolor{keywordflow}{return}\ \_it;}
+\DoxyCodeLine{00276\ \}}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00278\ \}}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00280\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00281\ }
+
+\end{DoxyCode}

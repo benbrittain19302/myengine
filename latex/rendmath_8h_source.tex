@@ -1,0 +1,39 @@
+\hypertarget{rendmath_8h_source}{}\doxysection{rendmath.\+h}
+\label{rendmath_8h_source}\index{src/rend/rendmath.h@{src/rend/rendmath.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ REND\_MATH\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ REND\_MATH\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ GLM\_FORCE\_CTOR\_INIT}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{glm_8hpp}{glm/glm.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ext_8hpp}{glm/ext.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{gtx_2quaternion_8hpp}{glm/gtx/quaternion.hpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{intersect_8hpp}{glm/gtx/intersect.hpp}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }rend}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespaceglm}{glm}};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structrend_1_1_ray}{Ray}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \mbox{\hyperlink{structglm_1_1vec}{vec3}}\ origin;}
+\DoxyCodeLine{00018\ \ \ \mbox{\hyperlink{structglm_1_1vec}{vec3}}\ direction;}
+\DoxyCodeLine{00019\ \};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structrend_1_1_triangle}{Triangle}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \mbox{\hyperlink{structglm_1_1vec}{vec3}}\ a;}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{structglm_1_1vec}{vec3}}\ b;}
+\DoxyCodeLine{00025\ \ \ \mbox{\hyperlink{structglm_1_1vec}{vec3}}\ c;}
+\DoxyCodeLine{00026\ \};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \mbox{\hyperlink{structglm_1_1mat}{mat4}}\ rotate\_xyz(\textcolor{keyword}{const}\ \mbox{\hyperlink{structglm_1_1mat}{mat4}}\&\ \_m,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structglm_1_1vec}{vec3}}\&\ \_angle);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00033\ }
+
+\end{DoxyCode}

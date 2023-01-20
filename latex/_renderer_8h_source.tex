@@ -1,0 +1,83 @@
+\hypertarget{_renderer_8h_source}{}\doxysection{Renderer.\+h}
+\label{_renderer_8h_source}\index{src/rend/Renderer.h@{src/rend/Renderer.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ REND\_RENDERER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ REND\_RENDERER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}rendmath.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}sys/Zero.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}sys/Ptr.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }rend}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{struct\ }Shader;}
+\DoxyCodeLine{00013\ \textcolor{keyword}{struct\ }Mesh;}
+\DoxyCodeLine{00014\ \textcolor{keyword}{struct\ }Texture;}
+\DoxyCodeLine{00015\ \textcolor{keyword}{struct\ }RenderTexture;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structrend_1_1_renderer}{Renderer}}\ :\ \mbox{\hyperlink{structsys_1_1_enable_ptr}{sys::EnablePtr}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \mbox{\hyperlink{structrend_1_1_renderer}{Renderer}}(\textcolor{keywordtype}{int}\ \_width,\ \textcolor{keywordtype}{int}\ \_height);}
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{structrend_1_1_renderer}{Renderer}}(\mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<RenderTexture>}}\ \_renderTexture);}
+\DoxyCodeLine{00021\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{structrend_1_1_renderer}{\string~Renderer}}();}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ render();}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Shader>}}\ shader();}
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{void}\ shader(\mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Shader>}}\ \_shader);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Mesh>}}\ mesh();}
+\DoxyCodeLine{00029\ \ \ \textcolor{keywordtype}{void}\ mesh(\mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Mesh>}}\ \_mesh);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordtype}{void}\ texture(\mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Texture>}}\ \_texture);}
+\DoxyCodeLine{00032\ \ \ \textcolor{keywordtype}{void}\ texture1(\mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Texture>}}\ \_texture);}
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{void}\ color(\textcolor{keyword}{const}\ \mbox{\hyperlink{structglm_1_1vec}{vec3}}\&\ \_color);}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{void}\ color(\textcolor{keyword}{const}\ \mbox{\hyperlink{structglm_1_1vec}{vec4}}\&\ \_color);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \mbox{\hyperlink{structglm_1_1mat}{mat4}}\ projection();}
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{void}\ projection(\textcolor{keyword}{const}\ \mbox{\hyperlink{structglm_1_1mat}{mat4}}\&\ \_projection);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \mbox{\hyperlink{structglm_1_1mat}{mat4}}\ model();}
+\DoxyCodeLine{00040\ \ \ \textcolor{keywordtype}{void}\ model(\textcolor{keyword}{const}\ \mbox{\hyperlink{structglm_1_1mat}{mat4}}\&\ \_model);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \mbox{\hyperlink{structglm_1_1mat}{mat4}}\ view();}
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordtype}{void}\ view(\textcolor{keyword}{const}\ \mbox{\hyperlink{structglm_1_1mat}{mat4}}\&\ \_view);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{void}\ backfaceCull(\textcolor{keywordtype}{bool}\ \_backfaceCull);}
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{void}\ depthTest(\textcolor{keywordtype}{bool}\ \_depthTest);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \textcolor{keywordtype}{void}\ clearColor(\textcolor{keyword}{const}\ \mbox{\hyperlink{structglm_1_1vec}{vec3}}\&\ \_clearColor);}
+\DoxyCodeLine{00049\ \ \ \textcolor{keywordtype}{void}\ clear(\textcolor{keywordtype}{bool}\ \_color\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordtype}{void}\ blend(\textcolor{keywordtype}{bool}\ \_blend);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \mbox{\hyperlink{structrend_1_1_ray}{Ray}}\ raycast(\textcolor{keywordtype}{int}\ \_x,\ \textcolor{keywordtype}{int}\ \_y);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00056\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<RenderTexture>}}\ m\_renderTexture;}
+\DoxyCodeLine{00057\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Shader>}}\ m\_shader;}
+\DoxyCodeLine{00058\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Mesh>}}\ m\_mesh;}
+\DoxyCodeLine{00059\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Texture>}}\ m\_texture;}
+\DoxyCodeLine{00060\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Texture>}}\ m\_texture1;}
+\DoxyCodeLine{00061\ \ \ \mbox{\hyperlink{structglm_1_1mat}{mat4}}\ m\_projection;}
+\DoxyCodeLine{00062\ \ \ \mbox{\hyperlink{structglm_1_1mat}{mat4}}\ m\_view;}
+\DoxyCodeLine{00063\ \ \ \mbox{\hyperlink{structglm_1_1mat}{mat4}}\ m\_model;}
+\DoxyCodeLine{00064\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{sys::Zero<bool>}}\ m\_depthTest;}
+\DoxyCodeLine{00065\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{sys::Zero<bool>}}\ m\_backfaceCull;}
+\DoxyCodeLine{00066\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{sys::Zero<bool>}}\ m\_blend;}
+\DoxyCodeLine{00067\ \ \ \mbox{\hyperlink{structglm_1_1vec}{vec4}}\ m\_clearColor;}
+\DoxyCodeLine{00068\ \ \ \mbox{\hyperlink{structglm_1_1vec}{vec4}}\ m\_color;}
+\DoxyCodeLine{00069\ \ \ \mbox{\hyperlink{structglm_1_1vec}{ivec2}}\ m\_windowSize;}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ initialize();}
+\DoxyCodeLine{00072\ \};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00077\ }
+
+\end{DoxyCode}

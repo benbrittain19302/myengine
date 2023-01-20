@@ -5,21 +5,24 @@
 
 namespace myengine
 {
-	struct Entity;
+	struct Entity; ///< Forward declare for Entity
 
+	/**
+	* Struct defining a base Component
+	*/
 	struct Component
 	{
-		virtual void onTick();
-		virtual void onDisplay();
+		virtual void onTick(); ///< Base definition for onTick function
+		virtual void onDisplay(); ///< Base definition for onDisplay function
 
-		std::shared_ptr<Entity> getEntity();
+		std::shared_ptr<Entity> getEntity(); ///< Returns a component's Entity
 	private:
-		friend struct Entity;
+		friend struct Entity; ///< Entity is a friend struct to Component
 
-		std::weak_ptr<Entity> m_entity;
+		std::weak_ptr<Entity> m_entity; ///< Reference to a component's Entity
 
-		void tick();
-		void display();
+		void tick(); ///< Base Tick function
+		void display(); ///< Base Display function
 	};
 }
 

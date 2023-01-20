@@ -1,0 +1,57 @@
+\hypertarget{rend_2_model_8h_source}{}\doxysection{Model.\+h}
+\label{rend_2_model_8h_source}\index{src/rend/Model.h@{src/rend/Model.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}Mesh.h"{}}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}Texture.h"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}rendmath.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}sys/Ptr.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}sys/List.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}sys/String.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}sys/Vector.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}sys/Zero.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{struct\ }Texture;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }rend}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structrend_1_1_material_group}{MaterialGroup}}\ :\ \mbox{\hyperlink{structsys_1_1_enable_ptr}{sys::EnablePtr}}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \mbox{\hyperlink{structrend_1_1_mesh}{Mesh}}\ mesh;}
+\DoxyCodeLine{00019\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Texture>}}\ texture;}
+\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structrend_1_1_part}{Part}}\ :\ \mbox{\hyperlink{structsys_1_1_enable_ptr}{sys::EnablePtr}}}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{structsys_1_1_string}{sys::String}}\ name;}
+\DoxyCodeLine{00025\ \ \ \mbox{\hyperlink{structsys_1_1_list}{sys::List<MaterialGroup>}}\ mgs;}
+\DoxyCodeLine{00026\ \ \ \mbox{\hyperlink{structglm_1_1vec}{vec3}}\ offset;}
+\DoxyCodeLine{00027\ \ \ \mbox{\hyperlink{structglm_1_1vec}{vec4}}\ color;}
+\DoxyCodeLine{00028\ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structrend_1_1_model}{Model}}\ :\ \mbox{\hyperlink{structsys_1_1_enable_ptr}{sys::EnablePtr}}}
+\DoxyCodeLine{00031\ \{}
+\DoxyCodeLine{00032\ \ \ \mbox{\hyperlink{structrend_1_1_model}{Model}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_string}{sys::String}}\&\ \_path);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \mbox{\hyperlink{structsys_1_1_list_1_1_iterator}{sys::List<Part>::Iterator}}\ partsBegin();}
+\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{structsys_1_1_list_1_1_iterator}{sys::List<Part>::Iterator}}\ partsEnd();}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{bool}\ intersect(\textcolor{keyword}{const}\ \mbox{\hyperlink{structrend_1_1_ray}{Ray}}\&\ \_ray)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Part>}}\ intersect(\textcolor{keyword}{const}\ \mbox{\hyperlink{structrend_1_1_ray}{Ray}}\&\ \_ray,\ \textcolor{keywordtype}{float}\&\ \_distance)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordtype}{void}\ color(\mbox{\hyperlink{structglm_1_1vec}{vec4}}\ \_color);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00042\ \ \ \mbox{\hyperlink{structsys_1_1_list}{sys::List<Texture>}}\ m\_textures;}
+\DoxyCodeLine{00043\ \ \ \mbox{\hyperlink{structsys_1_1_list}{sys::List<Part>}}\ m\_parts;}
+\DoxyCodeLine{00044\ \ \ \mbox{\hyperlink{structsys_1_1_vector}{sys::Vector<Face>}}\ m\_faces;}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{void}\ load(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_string}{sys::String}}\&\ \_path);}
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordtype}{void}\ center\_parts();}
+\DoxyCodeLine{00048\ \};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \}}
+\DoxyCodeLine{00051\ }
+
+\end{DoxyCode}

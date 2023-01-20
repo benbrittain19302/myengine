@@ -10,15 +10,23 @@
 
 namespace myengine
 {
-
+	/**
+	* Initialization of Game engine Core
+	*/
 	std::shared_ptr<Core> Core::initialize()
 	{
-		//Core core = new Core();
+		///< Equivalent of "Core core = new Core();" to create Core 
 		std::shared_ptr<Core> rtn = std::make_shared<Core>();
 
+		/**
+		* Set reference to self and intialise engine state member variable
+		*/
 		rtn->m_self = rtn;
 		rtn->m_running = false;
 
+		/**
+		* Intialisation of SDL, OpenGL and OpenAL for Game engine
+		*/
 		if (SDL_Init(SDL_INIT_VIDEO) < 0)
 		{
 			throw std::runtime_error("failed to init sdl");
@@ -60,13 +68,16 @@ namespace myengine
 			throw std::runtime_error("Failed to make context current");
 		}
 
-		alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f); //update this to camera posittion when thats implemented
+		alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f); ///< Default audio listener position at Origin, gets updated frame by frame to Camera Entity's position
 
-		rtn->m_resources = std::make_shared<Resources>();
+		rtn->m_resources = std::make_shared<Resources>(); ///< Initialize list of resources
 
-		return rtn;
+		return rtn; ///< Return Core
 	}
 
+	/**
+	* Core destructor, Memory cleanup
+	*/
 	Core::~Core()
 	{
 		alcMakeContextCurrent(NULL);
@@ -77,77 +88,116 @@ namespace myengine
 		SDL_Quit();
 	}
 
+	/**
+	* Start Game engine and run main Game loop
+	*/
 	void Core::start()
 	{
-		m_running = true;
-		SDL_Event event = {0};
+		m_running = true; ///< Game is running
+		SDL_Event event = {0}; ///< Initialize null SDL Events list
 
-		while (m_running)
+		/**
+		* Default Camera creation to ensure a camera is present
+		*/
+		std::shared_ptr<Entity> cam = addEntity();
+		cam->addComponent<Camera>();
+
+		while (m_running) ///< Whilst Game is running
 		{
-			while (SDL_PollEvent(&event))
+			while (SDL_PollEvent(&event)) ///< Poll Events List
 			{
+				/**
+				* If User has exited program, Game is not running
+				*/
 				if (event.type == SDL_QUIT)
 				{
-					m_running = false;
+					m_running = false; 
 				}
 			}
+
+			/**
+			* For each Entity, update Entity
+			*/
 			for (std::list<std::shared_ptr<Entity> >::iterator itr = m_entities.begin(); itr != m_entities.end(); itr++)
 			{
 				(*itr)->tick();
 			}
 
+			/**
+			* Define Renderer for screen and clear the screen
+			*/
 			rend::Renderer r(INITIAL_WIDTH, INITIAL_HEIGHT);
 			r.clear();
 
+			/**
+			* For each Entity, display Entity
+			*/
 			for (std::list<std::shared_ptr<Entity> >::iterator itr = m_entities.begin(); itr != m_entities.end(); itr++)
 			{
 				(*itr)->display();
 			}
 
-			SDL_GL_SwapWindow(m_window);
+			SDL_GL_SwapWindow(m_window); ///< Set Correct window display
 		}
 	}
 
+	/**
+	* Stop/Kill Game engine
+	*/
 	void Core::stop()
 	{
 		m_running = false;
 	}
 
+	/**
+	* Add an Entity to Entity list
+	*/
 	std::shared_ptr<Entity> Core::addEntity()
 	{
-		std::shared_ptr<Entity> rtn = std::make_shared<Entity>();
+		std::shared_ptr<Entity> rtn = std::make_shared<Entity>(); ///< Create new Entity instance
 
-		rtn->m_core = m_self;
-		rtn->m_self = rtn;
+		rtn->m_core = m_self; ///< Set reference to core
+		rtn->m_self = rtn; ///< Set reference to self Entity
 
-		rtn->m_transform = rtn->addComponent<Transform>();
+		rtn->m_transform = rtn->addComponent<Transform>(); ///< Add Transform component to Entity
 
-		m_entities.push_back(rtn);
+		m_entities.push_back(rtn); ///< Add Entity to entity list
 
-		return rtn;
+		return rtn; ///< Return Entity reference
 	}
 
+	/**
+	* Get reference to Camera Entity from the Entity list
+	*/
 	std::shared_ptr<Entity> Core::getCamera()
 	{
-		std::shared_ptr<Entity> rtn = std::make_shared<Entity>();
-		//Go through every Entity
+		std::shared_ptr<Entity> rtn = std::make_shared<Entity>(); ///< Create new instance of an entity
+
+		/**
+		* Go through each Entity
+		*/
 		for (std::list<std::shared_ptr<Entity> >::iterator itr = m_entities.begin(); itr != m_entities.end(); itr++)
 		{
 
-			//Go through each component in entity
+			/** 
+			* Go through each component in entity
+			*/
 			for (std::vector<std::shared_ptr<Component> >::iterator iter = (*itr)->m_components.begin(); iter != (*itr)->m_components.end(); iter++)
 			{
-				std::shared_ptr<Component> c = (*iter);
+				std::shared_ptr<Component> c = (*iter); ///< Create Component equal to type iter
 
-				std::shared_ptr<Camera> t = std::dynamic_pointer_cast<Camera>(c);
+				std::shared_ptr<Camera> t = std::dynamic_pointer_cast<Camera>(c); ///< Attempt to dynamic cast iter Component to type Camera
 
+				/**
+				* If dynamic cast is successful, make rtn Entity equal to itr and return
+				*/
 				if (t)
 				{
 					rtn = (*itr);
+					return rtn;
 				}
 			}
 		}
-		return rtn;
 	}
 
 	std::shared_ptr<Resources> Core::getResources()

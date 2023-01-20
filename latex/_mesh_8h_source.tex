@@ -1,0 +1,85 @@
+\hypertarget{_mesh_8h_source}{}\doxysection{Mesh.\+h}
+\label{_mesh_8h_source}\index{src/rend/Mesh.h@{src/rend/Mesh.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ REND\_MESH\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ REND\_MESH\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}rendmath.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <GL/glew.h>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}sys/List.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}sys/Zero.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}sys/Vector.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}sys/String.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }rend}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{struct\ }Buffer;}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structrend_1_1_vertex}{Vertex}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{structglm_1_1vec}{vec3}}\ position;}
+\DoxyCodeLine{00021\ \ \ \mbox{\hyperlink{structglm_1_1vec}{vec2}}\ texcoord;}
+\DoxyCodeLine{00022\ \ \ \mbox{\hyperlink{structglm_1_1vec}{vec3}}\ normal;}
+\DoxyCodeLine{00023\ \};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structrend_1_1_face}{Face}}}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \ \ \mbox{\hyperlink{structrend_1_1_vertex}{Vertex}}\ a;}
+\DoxyCodeLine{00028\ \ \ \mbox{\hyperlink{structrend_1_1_vertex}{Vertex}}\ b;}
+\DoxyCodeLine{00029\ \ \ \mbox{\hyperlink{structrend_1_1_vertex}{Vertex}}\ c;}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordtype}{bool}\ hasTexCoords()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00032\ \ \ \textcolor{keywordtype}{bool}\ hasNormals()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00033\ \ \ \mbox{\hyperlink{structglm_1_1vec}{vec3}}\ calculateNormal()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00034\ \};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structrend_1_1_mesh}{Mesh}}\ :\ \mbox{\hyperlink{structsys_1_1_enable_ptr}{sys::EnablePtr}}}
+\DoxyCodeLine{00037\ \{}
+\DoxyCodeLine{00038\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ TRIANGLE\ =\ 3;}
+\DoxyCodeLine{00039\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ QUAD\ =\ 4;}
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ GUI\_QUAD\ =\ 5;}
+\DoxyCodeLine{00041\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ NDC\_QUAD\ =\ 6;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \mbox{\hyperlink{structrend_1_1_mesh}{Mesh}}();}
+\DoxyCodeLine{00044\ \ \ \mbox{\hyperlink{structrend_1_1_mesh}{Mesh}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_string}{sys::String}}\&\ \_path);}
+\DoxyCodeLine{00045\ \ \ \mbox{\hyperlink{structrend_1_1_mesh}{Mesh}}(\textcolor{keywordtype}{int}\ \_type);}
+\DoxyCodeLine{00046\ \ \ \mbox{\hyperlink{structrend_1_1_mesh}{\string~Mesh}}();}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \textcolor{keywordtype}{void}\ add(\textcolor{keyword}{const}\ \mbox{\hyperlink{structrend_1_1_face}{Face}}\&\ \_face);}
+\DoxyCodeLine{00049\ \ \ GLuint\ id();}
+\DoxyCodeLine{00050\ \ \ \textcolor{keywordtype}{size\_t}\ vertices();}
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordtype}{void}\ load(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_string}{sys::String}}\&\ \_path);}
+\DoxyCodeLine{00052\ \ \ \textcolor{keywordtype}{void}\ loadTriangle();}
+\DoxyCodeLine{00053\ \ \ \textcolor{keywordtype}{void}\ loadQuad();}
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{void}\ loadGuiQuad();}
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{void}\ loadNdcQuad();}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordtype}{bool}\ intersect(\textcolor{keyword}{const}\ \mbox{\hyperlink{structrend_1_1_ray}{Ray}}\&\ \_ray)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00058\ \ \ \textcolor{keywordtype}{bool}\ intersect(\textcolor{keyword}{const}\ \mbox{\hyperlink{structrend_1_1_ray}{Ray}}\&\ \_ray,\ \textcolor{keywordtype}{float}\&\ \_distance)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00059\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<sys::Vector<Face>}}\ >\ faces();}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00062\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{sys::Zero<bool>}}\ m\_dirty;}
+\DoxyCodeLine{00063\ \ \ \mbox{\hyperlink{structsys_1_1_list}{sys::List<Buffer>}}\ m\_buffers;}
+\DoxyCodeLine{00064\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{sys::Zero<GLuint>}}\ m\_id;}
+\DoxyCodeLine{00065\ \ \ \mbox{\hyperlink{structsys_1_1_vector}{sys::Vector<Triangle>}}\ m\_triangles;}
+\DoxyCodeLine{00066\ \ \ \mbox{\hyperlink{structsys_1_1_vector}{sys::Vector<Face>}}\ m\_faces;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Buffer>}}\ m\_positions;}
+\DoxyCodeLine{00069\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Buffer>}}\ m\_texcoords;}
+\DoxyCodeLine{00070\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Buffer>}}\ m\_normals;}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \mbox{\hyperlink{structrend_1_1_mesh}{Mesh}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structrend_1_1_mesh}{Mesh}}\&\ \_copy);}
+\DoxyCodeLine{00073\ \ \ \mbox{\hyperlink{structrend_1_1_mesh}{Mesh}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structrend_1_1_mesh}{Mesh}}\&\ \_other);}
+\DoxyCodeLine{00074\ \};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00079\ }
+
+\end{DoxyCode}

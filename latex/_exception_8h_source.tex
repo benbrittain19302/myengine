@@ -1,0 +1,46 @@
+\hypertarget{_exception_8h_source}{}\doxysection{Exception.\+h}
+\label{_exception_8h_source}\index{src/rend/sys/Exception.h@{src/rend/sys/Exception.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SYS\_EXCEPTION\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SYS\_EXCEPTION\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}String.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Ptr.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}panic.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }sys}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_exception}{Exception}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \ \ \textcolor{comment}{//Exception()\ \{\ \}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \mbox{\hyperlink{structsys_1_1_exception}{Exception}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_string}{String}}\&\ \_message)\ :}
+\DoxyCodeLine{00016\ \ \ \ \ m\_message(\_message)}
+\DoxyCodeLine{00017\ \ \ \{}
+\DoxyCodeLine{00018\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%s\(\backslash\)n"{}},\ \_message.unsafe\_raw());}
+\DoxyCodeLine{00019\ \ \ \}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{structsys_1_1_exception}{\string~Exception}}()\ \{\ \}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{Ptr<const\ String>}}\ what()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00024\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordflow}{return}\ \&m\_message;}
+\DoxyCodeLine{00026\ \ \ \}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \textcolor{keywordtype}{void}\ panic()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00029\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{00030\ \ \ \ \ sys::panic(m\_message.unsafe\_raw());}
+\DoxyCodeLine{00031\ \ \ \}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00034\ \ \ \mbox{\hyperlink{structsys_1_1_string}{String}}\ m\_message;}
+\DoxyCodeLine{00035\ \};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00040\ }
+
+\end{DoxyCode}

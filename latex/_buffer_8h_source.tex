@@ -1,0 +1,50 @@
+\hypertarget{_buffer_8h_source}{}\doxysection{Buffer.\+h}
+\label{_buffer_8h_source}\index{src/rend/Buffer.h@{src/rend/Buffer.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}rendmath.h"{}}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <GL/glew.h>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}sys/Ptr.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}sys/Zero.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}sys/Vector.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }rend}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{struct\ }Mesh;}
+\DoxyCodeLine{00013\ \textcolor{keyword}{struct\ }Buffer;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structrend_1_1_buffer}{Buffer}}\ :\ \mbox{\hyperlink{structsys_1_1_enable_ptr}{sys::EnablePtr}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \mbox{\hyperlink{structrend_1_1_buffer}{Buffer}}();}
+\DoxyCodeLine{00018\ \ \ \mbox{\hyperlink{structrend_1_1_buffer}{\string~Buffer}}();}
+\DoxyCodeLine{00019\ \ \ \mbox{\hyperlink{structrend_1_1_buffer}{Buffer}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structrend_1_1_buffer}{Buffer}}\&\ \_copy);}
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{structrend_1_1_buffer}{Buffer}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structrend_1_1_buffer}{Buffer}}\&\ \_other);}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \textcolor{keywordtype}{void}\ add(\textcolor{keywordtype}{float}\ \_value);}
+\DoxyCodeLine{00023\ \ \ \textcolor{keywordtype}{void}\ add(\textcolor{keyword}{const}\ \mbox{\hyperlink{structglm_1_1vec}{vec2}}\&\ \_value);}
+\DoxyCodeLine{00024\ \ \ \textcolor{keywordtype}{void}\ add(\textcolor{keyword}{const}\ \mbox{\hyperlink{structglm_1_1vec}{vec3}}\&\ \_value);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{int}\ components()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00027\ \ \ \textcolor{keywordtype}{size\_t}\ size()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00028\ \ \ \textcolor{keywordtype}{void}\ clear();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structrend_1_1_mesh}{Mesh}};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{sys::Zero<GLuint>}}\ m\_id;}
+\DoxyCodeLine{00034\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{sys::Zero<bool>}}\ m\_dirty;}
+\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{sys::Zero<size\_t>}}\ m\_components;}
+\DoxyCodeLine{00036\ \ \ \mbox{\hyperlink{structsys_1_1_vector}{sys::Vector<float>}}\ m\_data;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ GLuint\ id();}
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordtype}{bool}\ dirty()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \}}
+\DoxyCodeLine{00044\ }
+
+\end{DoxyCode}

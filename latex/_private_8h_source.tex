@@ -1,0 +1,135 @@
+\hypertarget{_private_8h_source}{}\doxysection{Private.\+h}
+\label{_private_8h_source}\index{src/rend/sys/Private.h@{src/rend/sys/Private.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SYS\_PRIVATE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SYS\_PRIVATE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{keyword}{namespace\ }sys}
+\DoxyCodeLine{00005\ \{}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00008\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_rc_ptr}{RcPtr}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ do\_delete(\textcolor{keywordtype}{void}*\ \_ptr)}
+\DoxyCodeLine{00011\ \ \ \{}
+\DoxyCodeLine{00012\ \ \ \ \ T*\ t\ =\ (T*)\_ptr;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{delete}\ t;}
+\DoxyCodeLine{00014\ \ \ \}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ T*\ ptr;}
+\DoxyCodeLine{00017\ \ \ void\ (*deleter)(\textcolor{keywordtype}{void}*\ \_ptr);}
+\DoxyCodeLine{00018\ \};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_rc}{Rc}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ \textcolor{keywordtype}{int}*\ m\_rc;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{structsys_1_1_rc}{Rc}}()\ :}
+\DoxyCodeLine{00025\ \ \ \ \ m\_rc(\textcolor{keyword}{new}\ \textcolor{keywordtype}{int}(1))}
+\DoxyCodeLine{00026\ \ \ \{\ \}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \mbox{\hyperlink{structsys_1_1_rc}{\string~Rc}}()}
+\DoxyCodeLine{00029\ \ \ \{}
+\DoxyCodeLine{00030\ \ \ \ \ -\/-\/*m\_rc;}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{if}(!*m\_rc)}
+\DoxyCodeLine{00033\ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \textcolor{keyword}{delete}\ m\_rc;}
+\DoxyCodeLine{00035\ \ \ \ \ \}}
+\DoxyCodeLine{00036\ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \mbox{\hyperlink{structsys_1_1_rc}{Rc}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_rc}{Rc}}\&\ \_copy)\ :}
+\DoxyCodeLine{00039\ \ \ \ \ m\_rc(\_copy.m\_rc)}
+\DoxyCodeLine{00040\ \ \ \{}
+\DoxyCodeLine{00041\ \ \ \ \ ++*m\_rc;}
+\DoxyCodeLine{00042\ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \mbox{\hyperlink{structsys_1_1_rc}{Rc}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_rc}{Rc}}\&\ \_other)}
+\DoxyCodeLine{00045\ \ \ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{structsys_1_1_rc}{Rc}}\ tmp(*\textcolor{keyword}{this});}
+\DoxyCodeLine{00047\ \ \ \ \ -\/-\/*m\_rc;}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ m\_rc\ =\ \_other.m\_rc;}
+\DoxyCodeLine{00050\ \ \ \ \ ++*m\_rc;}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00053\ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{int}\ count()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00056\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordflow}{return}\ *m\_rc;}
+\DoxyCodeLine{00058\ \ \ \}}
+\DoxyCodeLine{00059\ \};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00062\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_enable_private}{EnablePrivate}}}
+\DoxyCodeLine{00063\ \{}
+\DoxyCodeLine{00064\ \ \ \mbox{\hyperlink{structsys_1_1_enable_private}{EnablePrivate}}()\ :}
+\DoxyCodeLine{00065\ \ \ \ \ m\_rc(),}
+\DoxyCodeLine{00066\ \ \ \ \ m\_ptr(\textcolor{keyword}{new}\ \mbox{\hyperlink{structsys_1_1_rc_ptr}{RcPtr<T>}}())}
+\DoxyCodeLine{00067\ \ \ \{\ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \mbox{\hyperlink{structsys_1_1_enable_private}{\string~EnablePrivate}}()}
+\DoxyCodeLine{00070\ \ \ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{if}(m\_rc.count()\ ==\ 1)}
+\DoxyCodeLine{00072\ \ \ \ \ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(m\_ptr-\/>deleter)}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ m\_ptr-\/>deleter(m\_ptr-\/>ptr);}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \textcolor{keyword}{delete}\ m\_ptr;}
+\DoxyCodeLine{00079\ \ \ \ \ \}}
+\DoxyCodeLine{00080\ \ \ \}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \mbox{\hyperlink{structsys_1_1_enable_private}{EnablePrivate}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_enable_private}{EnablePrivate}}\&\ \_copy)\ :}
+\DoxyCodeLine{00083\ \ \ \ \ m\_rc(\_copy.m\_rc),}
+\DoxyCodeLine{00084\ \ \ \ \ m\_ptr(\_copy.m\_ptr)}
+\DoxyCodeLine{00085\ \ \ \{\ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \mbox{\hyperlink{structsys_1_1_enable_private}{EnablePrivate}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_enable_private}{EnablePrivate}}\&\ \_other)}
+\DoxyCodeLine{00088\ \ \ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{structsys_1_1_enable_private}{EnablePrivate}}\ tmp(*\textcolor{keyword}{this});}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ m\_rc\ =\ \_other.m\_rc;}
+\DoxyCodeLine{00092\ \ \ \ \ m\_ptr\ =\ \_other.m\_ptr;}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00095\ \ \ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00098\ \ \ \mbox{\hyperlink{structsys_1_1_rc}{Rc}}\ m\_rc;}
+\DoxyCodeLine{00099\ \ \ \mbox{\hyperlink{structsys_1_1_rc_ptr}{RcPtr<T>}}*\ m\_ptr;}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ T*\ self()}
+\DoxyCodeLine{00102\ \ \ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordflow}{if}(!m\_ptr-\/>ptr)}
+\DoxyCodeLine{00104\ \ \ \ \ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ m\_ptr-\/>ptr\ =\ \textcolor{keyword}{new}\ T();}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ m\_ptr-\/>deleter\ =\ \mbox{\hyperlink{structsys_1_1_rc_ptr}{RcPtr<T>::do\_delete}};}
+\DoxyCodeLine{00107\ \ \ \ \ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_ptr-\/>ptr;}
+\DoxyCodeLine{00110\ \ \ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ T*\ operator-\/>()}
+\DoxyCodeLine{00113\ \ \ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordflow}{return}\ self();}
+\DoxyCodeLine{00115\ \ \ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ T\&\ operator*()}
+\DoxyCodeLine{00118\ \ \ \{}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordflow}{return}\ *self();}
+\DoxyCodeLine{00120\ \ \ \}}
+\DoxyCodeLine{00121\ \};}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \textcolor{preprocessor}{\#define\ EnablePrivate\ EnablePrivate<struct\ Private>}}
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\#define\ self\ self()}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00129\ }
+
+\end{DoxyCode}

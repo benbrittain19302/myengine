@@ -1,0 +1,67 @@
+\hypertarget{_entity_8h_source}{}\doxysection{Entity.\+h}
+\label{_entity_8h_source}\index{src/myengine/Entity.h@{src/myengine/Entity.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }myengine}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{struct\ }Core;}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{struct\ }Component;}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{struct\ }Transform;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{struct\ }SoundSource;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmyengine_1_1_entity}{Entity}}}
+\DoxyCodeLine{00016\ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ std::shared\_ptr<T>\ \mbox{\hyperlink{structmyengine_1_1_entity_a514e500995795a71aeea15f447856b9e}{addComponent}}()}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<T>\ rtn\ =\ std::make\_shared<T>();\ }
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ rtn-\/>m\_entity\ =\ m\_self;\ }
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ m\_components.push\_back(rtn);\ }
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ rtn;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ CT>}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ std::shared\_ptr<CT>\ \mbox{\hyperlink{structmyengine_1_1_entity_a9acf603ab75c52c5b2ac01db4800b5cb}{getComponent}}()}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (std::vector<std::shared\_ptr<Component>\ >::iterator\ itr\ =\ m\_components.begin();\ itr\ !=\ m\_components.end();\ itr++)}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<Component>\ c\ =\ (*itr);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<CT>\ t\ =\ std::dynamic\_pointer\_cast<CT>(c);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (t)}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ t;}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ std::shared\_ptr<Core>\ \mbox{\hyperlink{structmyengine_1_1_entity_a1d39705dcf1bb5022b03d52f7622da31}{getCore}}();}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ std::shared\_ptr<Transform>\ \mbox{\hyperlink{structmyengine_1_1_entity_a931cb57377c5b43b8d4e02b32892a5dc}{getTransform}}();}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmyengine_1_1_core}{Core}};\ }
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ std::weak\_ptr<Core>\ m\_core;\ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ std::weak\_ptr<Entity>\ m\_self;\ }
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ std::vector<std::shared\_ptr<Component>\ >\ m\_components;\ }
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ std::weak\_ptr<Transform>\ m\_transform;\ }
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_alive;}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ tick();\ }
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ display();\ }
+\DoxyCodeLine{00079\ \ \ \ \ \};}
+\DoxyCodeLine{00080\ \}}
+
+\end{DoxyCode}

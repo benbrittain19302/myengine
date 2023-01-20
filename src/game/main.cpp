@@ -31,15 +31,14 @@ int main(int argc, char *argv[])
 	std::shared_ptr<Entity> e = core->addEntity();
 	e->addComponent<Player>();
 	e->addComponent<TriangleRenderer>();
+
 	std::shared_ptr<SoundSource> ss = e->addComponent<SoundSource>();
 	//e->getComponent<SoundSource>()->load("../src/assests/sounds/bingchilling.ogg");
 	std::shared_ptr<Sound> sound = core->getResources()->load<Sound>("../src/assests/sounds/bingchilling.ogg");
 	ss->setSound(sound);
 
 	e->getTransform()->setPosition(rend::vec3(0, 0, -5));
-
-	std::shared_ptr<Entity> Cam = core->addEntity();
-	Cam->addComponent<Camera>();
+	e->getTransform()->setScale(rend::vec3(0.5f, 0.5f, 0.5f));
 
 	core->start();
 

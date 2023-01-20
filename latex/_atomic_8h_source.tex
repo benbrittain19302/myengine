@@ -1,0 +1,89 @@
+\hypertarget{_atomic_8h_source}{}\doxysection{Atomic.\+h}
+\label{_atomic_8h_source}\index{src/rend/sys/Atomic.h@{src/rend/sys/Atomic.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SYS\_ATOMIC\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SYS\_ATOMIC\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Zero.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}panic.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <pthread.h>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }sys}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00013\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsys_1_1_atomic}{Atomic}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \mbox{\hyperlink{structsys_1_1_atomic}{Atomic}}();}
+\DoxyCodeLine{00016\ \ \ \mbox{\hyperlink{structsys_1_1_atomic}{\string~Atomic}}();}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \textcolor{keyword}{operator}\ T()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{structsys_1_1_atomic}{Atomic}}\&\ operator++();}
+\DoxyCodeLine{00021\ \ \ \mbox{\hyperlink{structsys_1_1_atomic}{Atomic}}\&\ operator-\/-\/();}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{Zero<T>}}\ m\_value;}
+\DoxyCodeLine{00025\ \ \ \textcolor{keyword}{mutable}\ pthread\_mutex\_t\ m\_lock;}
+\DoxyCodeLine{00026\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{Zero<bool>}}\ m\_active;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \mbox{\hyperlink{structsys_1_1_atomic}{Atomic}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_atomic}{Atomic}}\&\ \_copy);}
+\DoxyCodeLine{00029\ \ \ \mbox{\hyperlink{structsys_1_1_atomic}{Atomic}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsys_1_1_atomic}{Atomic}}\&\ \_other);}
+\DoxyCodeLine{00030\ \};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00033\ \mbox{\hyperlink{structsys_1_1_atomic}{Atomic<T>::Atomic}}()}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \ \ \textcolor{keywordflow}{if}(pthread\_mutex\_init(\&m\_lock,\ NULL))}
+\DoxyCodeLine{00036\ \ \ \{}
+\DoxyCodeLine{00037\ \ \ \ \ panic(\textcolor{stringliteral}{"{}Failed\ to\ initialize\ mutex"{}});}
+\DoxyCodeLine{00038\ \ \ \}}
+\DoxyCodeLine{00039\ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00042\ Atomic<T>::\string~Atomic()}
+\DoxyCodeLine{00043\ \{}
+\DoxyCodeLine{00044\ \ \ \textcolor{keywordflow}{if}(pthread\_mutex\_destroy(\&m\_lock))}
+\DoxyCodeLine{00045\ \ \ \{}
+\DoxyCodeLine{00046\ \ \ \ \ panic(\textcolor{stringliteral}{"{}Failed\ to\ destroy\ mutex"{}});}
+\DoxyCodeLine{00047\ \ \ \}}
+\DoxyCodeLine{00048\ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00051\ Atomic<T>::operator\ T()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00052\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00053\ \ \ \textcolor{keywordflow}{if}(m\_active)\ pthread\_mutex\_lock(\&m\_lock);}
+\DoxyCodeLine{00054\ \ \ T\ rtn\ =\ m\_value;}
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordflow}{if}(m\_active)\ pthread\_mutex\_unlock(\&m\_lock);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordflow}{return}\ rtn;}
+\DoxyCodeLine{00058\ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00061\ Atomic<T>\&\ Atomic<T>::operator++()}
+\DoxyCodeLine{00062\ \{}
+\DoxyCodeLine{00063\ \ \ \textcolor{keywordflow}{if}(m\_active)\ pthread\_mutex\_lock(\&m\_lock);}
+\DoxyCodeLine{00064\ \ \ ++m\_value;}
+\DoxyCodeLine{00065\ \ \ \textcolor{keywordflow}{if}(m\_active)\ pthread\_mutex\_unlock(\&m\_lock);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00068\ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00071\ Atomic<T>\&\ Atomic<T>::operator-\/-\/()}
+\DoxyCodeLine{00072\ \{}
+\DoxyCodeLine{00073\ \ \ \textcolor{keywordflow}{if}(m\_active)\ pthread\_mutex\_lock(\&m\_lock);}
+\DoxyCodeLine{00074\ \ \ -\/-\/m\_value;}
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordflow}{if}(m\_active)\ pthread\_mutex\_unlock(\&m\_lock);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00078\ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00083\ }
+
+\end{DoxyCode}

@@ -1,0 +1,64 @@
+\hypertarget{structmyengine_1_1_entity}{}\doxysection{myengine\+::Entity Struct Reference}
+\label{structmyengine_1_1_entity}\index{myengine::Entity@{myengine::Entity}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::shared\+\_\+ptr$<$ T $>$ \mbox{\hyperlink{structmyengine_1_1_entity_a514e500995795a71aeea15f447856b9e}{add\+Component}} ()
+\item 
+{\footnotesize template$<$typename CT $>$ }\\std\+::shared\+\_\+ptr$<$ CT $>$ \mbox{\hyperlink{structmyengine_1_1_entity_a9acf603ab75c52c5b2ac01db4800b5cb}{get\+Component}} ()
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structmyengine_1_1_core}{Core}} $>$ \mbox{\hyperlink{structmyengine_1_1_entity_a1d39705dcf1bb5022b03d52f7622da31}{get\+Core}} ()
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structmyengine_1_1_transform}{Transform}} $>$ \mbox{\hyperlink{structmyengine_1_1_entity_a931cb57377c5b43b8d4e02b32892a5dc}{get\+Transform}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structmyengine_1_1_entity_acd0789873af2006e142a579250891ce8}\label{structmyengine_1_1_entity_acd0789873af2006e142a579250891ce8}} 
+struct {\bfseries Core}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structmyengine_1_1_core}{Core}} is friend struct to \mbox{\hyperlink{structmyengine_1_1_entity}{Entity}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structmyengine_1_1_entity_a514e500995795a71aeea15f447856b9e}\label{structmyengine_1_1_entity_a514e500995795a71aeea15f447856b9e}} 
+\index{myengine::Entity@{myengine::Entity}!addComponent@{addComponent}}
+\index{addComponent@{addComponent}!myengine::Entity@{myengine::Entity}}
+\doxysubsubsection{\texorpdfstring{addComponent()}{addComponent()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::shared\+\_\+ptr$<$ T $>$ myengine\+::\+Entity\+::add\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Add \mbox{\hyperlink{structmyengine_1_1_component}{Component}} to \mbox{\hyperlink{structmyengine_1_1_entity}{Entity}} of template type T \texorpdfstring{$<$}{<} Create a \mbox{\hyperlink{structmyengine_1_1_component}{Component}} of type T
+
+\texorpdfstring{$<$}{<} Ensure \mbox{\hyperlink{structmyengine_1_1_component}{Component}} has a reference to it\textquotesingle{}s \mbox{\hyperlink{structmyengine_1_1_entity}{Entity}}
+
+\texorpdfstring{$<$}{<} Add \mbox{\hyperlink{structmyengine_1_1_component}{Component}} to \mbox{\hyperlink{structmyengine_1_1_entity}{Entity}} List\mbox{\Hypertarget{structmyengine_1_1_entity_a9acf603ab75c52c5b2ac01db4800b5cb}\label{structmyengine_1_1_entity_a9acf603ab75c52c5b2ac01db4800b5cb}} 
+\index{myengine::Entity@{myengine::Entity}!getComponent@{getComponent}}
+\index{getComponent@{getComponent}!myengine::Entity@{myengine::Entity}}
+\doxysubsubsection{\texorpdfstring{getComponent()}{getComponent()}}
+{\footnotesize\ttfamily template$<$typename CT $>$ \\
+std\+::shared\+\_\+ptr$<$ CT $>$ myengine\+::\+Entity\+::get\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Find \mbox{\hyperlink{structmyengine_1_1_component}{Component}} of template type CT \texorpdfstring{$<$}{<} Go through each component
+
+\texorpdfstring{$<$}{<} Create Copy of \mbox{\hyperlink{structmyengine_1_1_component}{Component}} itr
+
+\texorpdfstring{$<$}{<} Try to dynamic cast the \mbox{\hyperlink{structmyengine_1_1_component}{Component}} to a CT
+
+\texorpdfstring{$<$}{<} If it succeeds, return component\mbox{\Hypertarget{structmyengine_1_1_entity_a1d39705dcf1bb5022b03d52f7622da31}\label{structmyengine_1_1_entity_a1d39705dcf1bb5022b03d52f7622da31}} 
+\index{myengine::Entity@{myengine::Entity}!getCore@{getCore}}
+\index{getCore@{getCore}!myengine::Entity@{myengine::Entity}}
+\doxysubsubsection{\texorpdfstring{getCore()}{getCore()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structmyengine_1_1_core}{Core}} $>$ myengine\+::\+Entity\+::get\+Core (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Return reference to \mbox{\hyperlink{structmyengine_1_1_core}{Core}} \mbox{\Hypertarget{structmyengine_1_1_entity_a931cb57377c5b43b8d4e02b32892a5dc}\label{structmyengine_1_1_entity_a931cb57377c5b43b8d4e02b32892a5dc}} 
+\index{myengine::Entity@{myengine::Entity}!getTransform@{getTransform}}
+\index{getTransform@{getTransform}!myengine::Entity@{myengine::Entity}}
+\doxysubsubsection{\texorpdfstring{getTransform()}{getTransform()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structmyengine_1_1_transform}{Transform}} $>$ myengine\+::\+Entity\+::get\+Transform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Shortcut return transform 
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/myengine/Entity.\+h\item 
+src/myengine/Entity.\+cpp\end{DoxyCompactItemize}

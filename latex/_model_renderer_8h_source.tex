@@ -1,0 +1,41 @@
+\hypertarget{_model_renderer_8h_source}{}\doxysection{Model\+Renderer.\+h}
+\label{_model_renderer_8h_source}\index{src/rend/ModelRenderer.h@{src/rend/ModelRenderer.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}rendmath.h"{}}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}Renderer.h"{}}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}sys/Ptr.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }rend}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{struct\ }RenderTexture;}
+\DoxyCodeLine{00010\ \textcolor{keyword}{struct\ }Model;}
+\DoxyCodeLine{00011\ \textcolor{keyword}{struct\ }Animation;}
+\DoxyCodeLine{00012\ \textcolor{keyword}{struct\ }Ray;}
+\DoxyCodeLine{00013\ \textcolor{keyword}{struct\ }Part;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structrend_1_1_model_renderer}{ModelRenderer}}\ :\ \mbox{\hyperlink{structrend_1_1_renderer}{Renderer}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \mbox{\hyperlink{structrend_1_1_model_renderer}{ModelRenderer}}(\textcolor{keywordtype}{int}\ \_width,\ \textcolor{keywordtype}{int}\ \_height);}
+\DoxyCodeLine{00018\ \ \ \mbox{\hyperlink{structrend_1_1_model_renderer}{ModelRenderer}}(\mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<RenderTexture>}}\ \_renderTexture);}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \textcolor{keywordtype}{void}\ model(\mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Model>}}\ \_model);}
+\DoxyCodeLine{00021\ \ \ \textcolor{keywordtype}{void}\ animation(\mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Animation>}}\ \_animation);}
+\DoxyCodeLine{00022\ \ \ \textcolor{keywordtype}{void}\ frame(\textcolor{keywordtype}{float}\ \_frame);}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Part>}}\ intersect(\textcolor{keyword}{const}\ \mbox{\hyperlink{structrend_1_1_ray}{Ray}}\&\ \_ray,\ \textcolor{keywordtype}{float}\&\ \_distance)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{void}\ render();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00029\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Model>}}\ m\_modelPtr;}
+\DoxyCodeLine{00030\ \ \ \mbox{\hyperlink{structsys_1_1_ptr}{sys::Ptr<Animation>}}\ m\_animation;}
+\DoxyCodeLine{00031\ \ \ \mbox{\hyperlink{structsys_1_1_zero}{sys::Zero<float>}}\ m\_frame;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \}}
+
+\end{DoxyCode}

@@ -6,9 +6,9 @@ namespace myengine
 {
 
 	TriangleRenderer::TriangleRenderer() :
-		m_mesh(rend::Mesh::TRIANGLE),
-		m_shader(rend::Shader::BASIC),
-		m_texture("../src/assests/textures/MUDKIP.png")
+		m_mesh("../src/assests/models/curuthers.obj"),
+		m_shader("",),
+		m_texture("../src/assests/textures/Whiskers_diffuse.png")
 	{}
 
 	void TriangleRenderer::onDisplay()
