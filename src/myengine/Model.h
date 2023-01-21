@@ -4,6 +4,7 @@ namespace myengine
 {
 	struct Model : Resource
 	{
+	private:
 
 	};
 }

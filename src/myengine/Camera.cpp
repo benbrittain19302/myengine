@@ -6,9 +6,9 @@ namespace myengine
 {
 	Camera::Camera()
 	{
-		//m_transform = getEntity()->getTransform();
+		//m_transform = getEntity()->getTransform(); SHARED POINTER ISSUE
 
-		//m_transform->setPosition(rend::vec3(0, 5, 0));
+		//m_transform->setPosition(rend::vec3(0, 5, 0)); SHARED POINTER ISSUE
 
 		rend::vec3 initTarget = rend::vec3(-100, 0, 0);
 
@@ -20,7 +20,7 @@ namespace myengine
 		m_up = rend::vec3(0, 1, 0);
 
 		m_proj = rend::perspective(rend::radians(45.0f), 1.0f, 0.1f, 100.0f);
-		//m_view = rend::lookAt(m_transform->getPosition(), initTarget, m_up);
+		//m_view = rend::lookAt(m_transform->getPosition(), initTarget, m_up); SHARED POINTER ISSUE
 	}
 
 	rend::mat4 Camera::getView()

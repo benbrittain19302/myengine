@@ -13,7 +13,7 @@ namespace myengine
 		//m_shadowShader(), ///< Shadow Shader initialisation here
 		m_texture("../src/assests/models/textures/Whiskers_diffuse.png")
 	{
-		//m_camera = getEntity()->getCore()->getCamera();
+		//m_camera = getEntity()->getCore()->getCamera(); SHARED POINTER ISSUE
 	}
 
 	void TriangleRenderer::onDisplay()
@@ -26,8 +26,8 @@ namespace myengine
 
 		r.projection(rend::perspective(rend::radians(45.0f), 1.0f, 0.1f, 100.0f));
 		r.model(getEntity()->getTransform()->getModel());
-		//r.projection(m_camera->getComponent<Camera>()->getProj());
-		//r.view(m_camera->getComponent<Camera>()->getView());
+		//r.projection(m_camera->getComponent<Camera>()->getProj()); SHARED POINTER ISSUE
+		//r.view(m_camera->getComponent<Camera>()->getView()); SHARED POINTER ISSUE
 
 		r.backfaceCull(true);
 		r.depthTest(true);

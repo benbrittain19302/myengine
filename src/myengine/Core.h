@@ -37,6 +37,8 @@ namespace myengine
 
 		std::weak_ptr<Core> m_self; ///< Reference to self
 
+		std::shared_ptr<Entity> m_camera; ///< Reference to Camera Entity
+
 		int m_dummy;
 
 		bool m_running; ///< Is Game running bool

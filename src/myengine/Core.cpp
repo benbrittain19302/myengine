@@ -78,8 +78,8 @@ namespace myengine
 		/**
 		* Default Camera creation to ensure a camera is present
 		*/
-		std::shared_ptr<Entity> cam = rtn->addEntity();
-		cam->addComponent<Camera>();
+		rtn->m_camera = rtn->addEntity();
+		rtn->m_camera->addComponent<Camera>();
 
 		return rtn; ///< Return Core
 	}
@@ -168,33 +168,34 @@ namespace myengine
 	*/
 	std::shared_ptr<Entity> Core::getCamera()
 	{
-		std::shared_ptr<Entity> rtn = std::make_shared<Entity>(); ///< Create new instance of an entity
-
+		//std::shared_ptr<Entity> rtn = m_entities.; ///< Create new instance of an entity
+		
 		/**
 		* Go through each Entity
 		*/
-		for (std::list<std::shared_ptr<Entity> >::iterator itr = m_entities.begin(); itr != m_entities.end(); itr++)
-		{
+		//for (std::list<std::shared_ptr<Entity> >::iterator itr = m_entities.begin(); itr != m_entities.end(); itr++)
+		//{
 
 			/** 
 			* Go through each component in entity
 			*/
-			for (std::vector<std::shared_ptr<Component> >::iterator iter = (*itr)->m_components.begin(); iter != (*itr)->m_components.end(); iter++)
-			{
-				std::shared_ptr<Component> c = (*iter); ///< Create Component equal to type iter
+			//for (std::vector<std::shared_ptr<Component> >::iterator iter = (*itr)->m_components.begin(); iter != (*itr)->m_components.end(); iter++)
+			//{
+				//std::shared_ptr<Component> c = (*iter); ///< Create Component equal to type iter
 
-				std::shared_ptr<Camera> t = std::dynamic_pointer_cast<Camera>(c); ///< Attempt to dynamic cast iter Component to type Camera
+				//std::shared_ptr<Camera> t = std::dynamic_pointer_cast<Camera>(c); ///< Attempt to dynamic cast iter Component to type Camera
 
 				/**
 				* If dynamic cast is successful, make rtn Entity equal to itr and return
 				*/
-				if (t)
-				{
-					rtn = (*itr);
-					return rtn;
-				}
-			}
-		}
+				//if (t)
+				//{
+					//rtn = (*itr);
+					//return rtn;
+				//}
+			//}
+		//}
+		return m_camera;
 	}
 
 	std::shared_ptr<Resources> Core::getResources()
