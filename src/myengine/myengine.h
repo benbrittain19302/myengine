@@ -13,5 +13,6 @@
 #include "Texture.h"
 #include "Sound.h"
 #include "Model.h"
+#include "Input.h"
 
 #endif // !MY_ENGINE_MYENGINE_H

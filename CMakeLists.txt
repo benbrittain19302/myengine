@@ -64,6 +64,9 @@ add_library(myengine
 	src/myengine/Model.h
 	src/myengine/Model.cpp
 
+	src/myengine/Input.h
+	src/myengine/Input.cpp
+
 	src/myengine/stb_vorbis.c
 )
 

@@ -11,7 +11,8 @@
 namespace myengine
 {
 	struct Entity; ///< Forward declare for Entity
-	struct Resources; ///< Forward declare for Entity
+	struct Resources; ///< Forward declare for Resources
+	class Input; ///< Forward declare for Input
 
 	/**
 	* Definition for Core struct of game engine
@@ -32,11 +33,17 @@ namespace myengine
 		std::shared_ptr<Resources> getResources(); ///< Get reference to list of resources
 
 	private:
+		std::shared_ptr<Input> m_input;
+
 		std::weak_ptr<Core> m_self; ///< Reference to self
 
 		int m_dummy;
 
 		bool m_running; ///< Is Game running bool
+
+		unsigned int lastTime; ///< The last frames time
+		unsigned int currentTime; ///< The current frames time
+		float deltaTime; ///< The delta between the last frame and current frame times
 
 		std::list<std::shared_ptr<Entity> > m_entities; ///< List of Entities
 

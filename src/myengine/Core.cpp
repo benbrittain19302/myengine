@@ -3,6 +3,7 @@
 #include "Transform.h"
 #include "Camera.h"
 #include "Resources.h"
+#include "Input.h"
 
 #include <rend/rend.h>
 
@@ -70,7 +71,15 @@ namespace myengine
 
 		alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f); ///< Default audio listener position at Origin, gets updated frame by frame to Camera Entity's position
 
+		rtn->m_input = std::make_shared<Input>(); ///< Initialize input management
+
 		rtn->m_resources = std::make_shared<Resources>(); ///< Initialize list of resources
+
+		/**
+		* Default Camera creation to ensure a camera is present
+		*/
+		std::shared_ptr<Entity> cam = rtn->addEntity();
+		cam->addComponent<Camera>();
 
 		return rtn; ///< Return Core
 	}
@@ -94,25 +103,13 @@ namespace myengine
 	void Core::start()
 	{
 		m_running = true; ///< Game is running
-		SDL_Event event = {0}; ///< Initialize null SDL Events list
-
-		/**
-		* Default Camera creation to ensure a camera is present
-		*/
-		std::shared_ptr<Entity> cam = addEntity();
-		cam->addComponent<Camera>();
 
 		while (m_running) ///< Whilst Game is running
 		{
-			while (SDL_PollEvent(&event)) ///< Poll Events List
+			m_input->update();
+			if (m_input->Quit)
 			{
-				/**
-				* If User has exited program, Game is not running
-				*/
-				if (event.type == SDL_QUIT)
-				{
-					m_running = false; 
-				}
+				m_running = false;
 			}
 
 			/**

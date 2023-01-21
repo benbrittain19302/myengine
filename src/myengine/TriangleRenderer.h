@@ -19,6 +19,8 @@ namespace myengine
 		//std::shared_ptr<Model> m_model ///< Switch to Resource Management Model  
 		//std::shared_ptr<Texture> m_texture; ///< Switch to Resource Management Texture
 
+		std::shared_ptr<Entity> m_camera;
+
 		void onDisplay();
 	};
 

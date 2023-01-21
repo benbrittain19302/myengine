@@ -1,6 +1,8 @@
 #include "TriangleRenderer.h"
 #include "Entity.h"
 #include "Transform.h"
+#include "Core.h"
+#include "Camera.h"
 
 namespace myengine
 {
@@ -10,7 +12,9 @@ namespace myengine
 		m_shader("../src/assests/shaders/basic.vert", "../src/assests/shaders/basic.frag"),
 		//m_shadowShader(), ///< Shadow Shader initialisation here
 		m_texture("../src/assests/models/textures/Whiskers_diffuse.png")
-	{}
+	{
+		//m_camera = getEntity()->getCore()->getCamera();
+	}
 
 	void TriangleRenderer::onDisplay()
 	{
@@ -22,6 +26,8 @@ namespace myengine
 
 		r.projection(rend::perspective(rend::radians(45.0f), 1.0f, 0.1f, 100.0f));
 		r.model(getEntity()->getTransform()->getModel());
+		//r.projection(m_camera->getComponent<Camera>()->getProj());
+		//r.view(m_camera->getComponent<Camera>()->getView());
 
 		r.backfaceCull(true);
 		r.depthTest(true);
