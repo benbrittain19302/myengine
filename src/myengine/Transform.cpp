@@ -36,4 +36,19 @@ namespace myengine
 	{
 		m_scale = _scale;
 	}
+
+	rend::vec3 Transform::getPosition() 
+	{
+		return m_position;
+	}
+
+	rend::vec3 Transform::getRotation() 
+	{
+		return m_rotation; 
+	}
+
+	rend::vec3 Transform::getScale()
+	{ 
+		return m_scale; 
+	}
 }
