@@ -20,21 +20,16 @@ namespace myengine
 		alDeleteSources(1, &m_sourceId);
 	}
 
-	/*void SoundSource::play()
+	void SoundSource::play()
 	{
-		if (m_loaded)
-		{
-			alSourcePlay(m_sourceId);
-		}
-	}*/
+		alSourcePlay(m_sourceId);		
+	}
 
 	void SoundSource::setSound(std::shared_ptr<Sound> _sound)
 	{
 		m_sound = _sound;
 
 		alSourcei(m_sourceId, AL_BUFFER, m_sound->m_bufferId);
-
-		alSourcePlay(m_sourceId);
 	}
 
 

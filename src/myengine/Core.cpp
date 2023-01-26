@@ -75,12 +75,6 @@ namespace myengine
 
 		rtn->m_resources = std::make_shared<Resources>(); ///< Initialize list of resources
 
-		/**
-		* Default Camera creation to ensure a camera is present
-		*/
-		rtn->m_camera = rtn->addEntity();
-		rtn->m_camera->addComponent<Camera>();
-
 		return rtn; ///< Return Core
 	}
 
@@ -201,5 +195,10 @@ namespace myengine
 	std::shared_ptr<Resources> Core::getResources()
 	{
 		return m_resources;
+	}
+
+	std::shared_ptr<Input> Core::getInput()
+	{
+		return m_input;
 	}
 }

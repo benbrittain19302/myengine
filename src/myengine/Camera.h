@@ -15,12 +15,9 @@ namespace myengine
 		rend::mat4 getView();
 		rend::mat4 getProj();
 
+		void onInit();
+
 	private:
-		std::shared_ptr<Transform> m_transform;
-
-		rend::mat4 m_view;
-		rend::mat4 m_proj;
-
 		rend::vec3 m_up;
 
 		float m_speed;
@@ -28,7 +25,5 @@ namespace myengine
 		float m_mouseSpeed;
 
 		rend::vec2 m_oldMousePos;
-
-		rend::vec3 getPos();
 	};
 }

@@ -1,6 +1,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include <stdexcept>
 
 namespace myengine
 {
@@ -23,6 +24,8 @@ namespace myengine
 			std::shared_ptr<T> rtn = std::make_shared<T>(); ///< Create a Component of type T
 
 			rtn->m_entity = m_self; ///< Ensure Component has a reference to it's Entity
+
+			rtn->onInit();
 
 			m_components.push_back(rtn); ///< Add Component to Entity List
 
@@ -50,6 +53,8 @@ namespace myengine
 					return t;
 				}
 			}
+
+			throw std::runtime_error("Failed to find component");
 		}
 		/**
 		* Return reference to Core

@@ -14,6 +14,7 @@ namespace myengine
 	{
 		virtual void onTick(); ///< Base definition for onTick function
 		virtual void onDisplay(); ///< Base definition for onDisplay function
+		virtual void onInit();
 
 		std::shared_ptr<Entity> getEntity(); ///< Returns a component's Entity
 	private:

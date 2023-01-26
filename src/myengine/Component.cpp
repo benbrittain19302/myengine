@@ -5,6 +5,7 @@ namespace myengine
 {
 	void Component::onTick() { } ///< Empty base onTick function
 	void Component::onDisplay() { } ///< Empty base onDisplay function
+	void Component::onInit() { } ///< Empty base onInit function
 
 	void Component::tick()
 	{

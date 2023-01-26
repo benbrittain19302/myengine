@@ -12,6 +12,7 @@ namespace myengine
 {
 	struct Entity; ///< Forward declare for Entity
 	struct Resources; ///< Forward declare for Resources
+	struct Camera;
 	class Input; ///< Forward declare for Input
 
 	/**
@@ -32,8 +33,14 @@ namespace myengine
 
 		std::shared_ptr<Resources> getResources(); ///< Get reference to list of resources
 
+		std::shared_ptr<Input> getInput(); ///< Get reference to input
+
 	private:
-		std::shared_ptr<Input> m_input;
+		friend struct Camera;
+
+		std::list<std::shared_ptr<Entity> > m_entities; ///< List of Entities
+
+		std::shared_ptr<Input> m_input; ///< Reference to Input
 
 		std::weak_ptr<Core> m_self; ///< Reference to self
 
@@ -46,8 +53,6 @@ namespace myengine
 		unsigned int lastTime; ///< The last frames time
 		unsigned int currentTime; ///< The current frames time
 		float deltaTime; ///< The delta between the last frame and current frame times
-
-		std::list<std::shared_ptr<Entity> > m_entities; ///< List of Entities
 
 		std::shared_ptr<Resources> m_resources; ///< Reference to resources list
 

@@ -8,7 +8,7 @@ namespace myengine
 	*/
 	Input::Input()
 	{
-		Quit = showMouse = cmd_s = cmd_a = cmd_w = cmd_d = keyDown = cmd_mouseleft = cmd_mouseleftUp = cmd_mouseright = cmd_mouserightUp = once = cmd_z = cmd_x = cmd_c = false;
+		Quit = showMouse = cmd_s = cmd_a = cmd_w = cmd_d = keyDown = cmd_mouseleft = cmd_mouseleftUp = cmd_mouseright = cmd_mouserightUp = once = cmd_z = cmd_x = cmd_c = cmd_space = cmd_shift = false;
 	}
 
 	std::vector<int> Input::keys;
@@ -64,34 +64,37 @@ namespace myengine
 				{
 					//mouseDelta.y = 10;
 					cmd_w = true;
-					std::cout << "Down Mouse Button & w ! \n";
 				}
 				else if (eventQueue.key.keysym.sym == SDLK_DOWN || eventQueue.key.keysym.sym == SDLK_s)
 				{
 					//mouseDelta.y = -10;
 					cmd_s = true;
-					std::cout << "Down Mouse Button & s ! \n";
 				}
 				else if (eventQueue.key.keysym.sym == SDLK_RIGHT || eventQueue.key.keysym.sym == SDLK_d)
 				{
 					//mouseDelta.x = 10;
 					cmd_d = true;
-					std::cout << "Right Mouse Button & d ! \n";
 				}
 				else if (eventQueue.key.keysym.sym == SDLK_LEFT || eventQueue.key.keysym.sym == SDLK_a)
 				{
 					//mouseDelta.x = -10;
 					cmd_a = true;
-					std::cout << "Left Mouse Button & a  ! \n";
 				}
 				else if (eventQueue.key.keysym.sym == SDLK_x)
 				{
 					cmd_x = true;
-					std::cout << "Left Mouse Button & x  ! \n";
 				}
 				else if (eventQueue.key.keysym.sym == SDLK_ESCAPE)
 				{
 					showMouse = !showMouse;
+				}
+				else if (eventQueue.key.keysym.sym == SDLK_SPACE)
+				{
+					cmd_space = true;
+				}
+				else if (eventQueue.key.keysym.sym == SDLK_LSHIFT || eventQueue.key.keysym.sym == SDLK_RSHIFT)
+				{
+					cmd_shift = true;
 				}
 
 
@@ -112,6 +115,14 @@ namespace myengine
 					//mouseDelta.x = 0;
 					cmd_a = false;
 					cmd_d = false;
+				}
+				else if (eventQueue.key.keysym.sym == SDLK_SPACE)
+				{
+					cmd_space = false;
+				}
+				else if (eventQueue.key.keysym.sym == SDLK_LSHIFT || eventQueue.key.keysym.sym == SDLK_RSHIFT)
+				{
+					cmd_shift = false;
 				}
 			}
 

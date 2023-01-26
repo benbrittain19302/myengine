@@ -12,7 +12,7 @@ namespace myengine
 		SoundSource();
 		~SoundSource();
 
-		//void play();
+		void play();
 
 		void setSound(std::shared_ptr<Sound> _sound);
 
