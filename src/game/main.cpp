@@ -24,8 +24,9 @@ private:
 	float m_angle;
 };
 
-struct PlayerController : Component
+struct CamController : Component
 {
+
 	void onTick()
 	{
 		if (m_input->cmd_w)
@@ -64,6 +65,16 @@ struct PlayerController : Component
 	void onInit()
 	{
 		m_input = getEntity()->getCore()->getInput();
+
+		rend::vec3 startPos = rend::vec3(0, 2, 0);
+		rend::vec3 startRot = rend::vec3(-10, 0, 0);
+
+		getEntity()->getTransform()->setPosition(startPos);
+		getEntity()->getTransform()->setRotation(startRot);
+
+		m_posX = startPos.x;
+		m_posY = startPos.y;
+		m_posZ = startPos.z;
 	}
 
 private:
@@ -96,9 +107,9 @@ int main(int argc, char *argv[])
 	/**
 	* Default Camera creation to ensure a camera is present
 	*/
-	std::shared_ptr<Entity> playerE = core->addEntity();
-	playerE->addComponent<Camera>();
-	playerE->addComponent<PlayerController>();
+	std::shared_ptr<Entity> camE = core->addEntity();
+	camE->addComponent<Camera>();
+	camE->addComponent<CamController>();
 
 	core->start();
 
