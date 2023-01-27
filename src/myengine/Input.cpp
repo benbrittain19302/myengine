@@ -8,7 +8,7 @@ namespace myengine
 	*/
 	Input::Input()
 	{
-		Quit = showMouse = cmd_s = cmd_a = cmd_w = cmd_d = keyDown = cmd_mouseleft = cmd_mouseleftUp = cmd_mouseright = cmd_mouserightUp = once = cmd_z = cmd_x = cmd_c = cmd_space = cmd_shift = false;
+		Quit = showMouse = cmd_s = cmd_a = cmd_w = cmd_d = keyDown = cmd_mouseleft = cmd_mouseleftUp = cmd_mouseright = cmd_mouserightUp = once = cmd_z = cmd_x = cmd_c = cmd_space = cmd_lshift = cmd_rshift = false;
 	}
 
 	std::vector<int> Input::keys;
@@ -92,9 +92,13 @@ namespace myengine
 				{
 					cmd_space = true;
 				}
-				else if (eventQueue.key.keysym.sym == SDLK_LSHIFT || eventQueue.key.keysym.sym == SDLK_RSHIFT)
+				else if (eventQueue.key.keysym.sym == SDLK_LSHIFT)
 				{
-					cmd_shift = true;
+					cmd_lshift = true;
+				}
+				else if (eventQueue.key.keysym.sym == SDLK_RSHIFT)
+				{
+					cmd_rshift = true;
 				}
 
 
@@ -120,9 +124,13 @@ namespace myengine
 				{
 					cmd_space = false;
 				}
-				else if (eventQueue.key.keysym.sym == SDLK_LSHIFT || eventQueue.key.keysym.sym == SDLK_RSHIFT)
+				else if (eventQueue.key.keysym.sym == SDLK_LSHIFT)
 				{
-					cmd_shift = false;
+					cmd_lshift = false;
+				}
+				else if (eventQueue.key.keysym.sym == SDLK_RSHIFT)
+				{
+					cmd_rshift = false;
 				}
 			}
 

@@ -3,6 +3,7 @@
 #include <AL/alc.h>
 
 #include <memory>
+#include <vector>
 #include <list>
 
 #define INITIAL_WIDTH 640
@@ -34,6 +35,31 @@ namespace myengine
 		std::shared_ptr<Resources> getResources(); ///< Get reference to list of resources
 
 		std::shared_ptr<Input> getInput(); ///< Get reference to input
+
+		/**
+		* Find all Components of type T
+		*/
+		template <typename T>
+		void find(std::vector<std::shared_ptr<T> >& _out)
+		{
+			///< Go through each Entity in Core.
+			for (std::list<std::shared_ptr<Entity> >::iterator itr = m_entities.begin(); itr != m_entities.end(); itr++)
+			{
+				std::shared_ptr<Entity> e = (*itr);
+				///< Go through each Component in Entity.
+				for (std::vector<std::shared_ptr<Component> >::iterator iter = e->m_components.begin(); iter != e->m_components.end(); iter++)
+				{
+					std::shared_ptr<Component> c = (*iter);
+					///< Try to dynamic cast the Component to a T.
+					std::shared_ptr<T> t = std::dynamic_pointer_cast<T>(c);
+					///< If succeeds then add it to the output array.
+					if (t)
+					{
+						_out.push_back(t);
+					}
+				}
+			}
+		}
 
 	private:
 		friend struct Camera;

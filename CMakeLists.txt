@@ -67,6 +67,12 @@ add_library(myengine
 	src/myengine/Input.h
 	src/myengine/Input.cpp
 
+	src/myengine/BoxCollider.h
+	src/myengine/BoxCollider.cpp
+
+	src/myengine/RigidBody.h
+	src/myengine/RigidBody.cpp
+
 	src/myengine/stb_vorbis.c
 )
 

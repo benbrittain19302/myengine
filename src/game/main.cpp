@@ -8,7 +8,7 @@ struct Enemy : Component
 {
 	void onTick()
 	{
-		std::cout << "Ticking" << std::endl;
+		//std::cout << "Ticking" << std::endl;
 		m_angle += 0.25f;
 
 		getEntity()->getTransform()->setRotation(rend::vec3(0, m_angle, 0));
@@ -16,7 +16,7 @@ struct Enemy : Component
 
 	void onDisplay()
 	{
-		std::cout << "Displaying" << std::endl;
+		//std::cout << "Displaying" << std::endl;
 	}
 
 private:
@@ -29,37 +29,37 @@ struct CamController : Component
 
 	void onTick()
 	{
+		rend::vec3 newPos = getEntity()->getTransform()->getPosition();
 		if (m_input->cmd_w)
 		{
-			m_posZ -= 0.25f;
+			newPos.z -= 0.25f;
 		}
 		if (m_input->cmd_s)
 		{
-			m_posZ += 0.25f;
+			newPos.z += 0.25f;
 		}
 		if (m_input->cmd_a)
 		{
-			m_posX -= 0.25f;
+			newPos.x -= 0.25f;
 		}
 		if (m_input->cmd_d)
 		{
-			m_posX += 0.25f;
+			newPos.x += 0.25f;
 		}
 		if (m_input->cmd_space)
 		{
-			m_posY += 0.25f;
+			newPos.y += 0.25f;
 		}
-		if (m_input->cmd_shift)
+		if (m_input->cmd_lshift)
 		{
-			m_posY -= 0.25f;
+			newPos.y -= 0.25f;
 		}
-
-		getEntity()->getComponent<Transform>()->setPosition(rend::vec3(m_posX, m_posY, m_posZ));
+		getEntity()->getTransform()->setPosition(newPos);
 	}
 
 	void onDisplay()
 	{
-		std::cout << "Displaying" << std::endl;
+		//std::cout << "Displaying" << std::endl;
 	}
 
 	void onInit()
@@ -71,18 +71,10 @@ struct CamController : Component
 
 		getEntity()->getTransform()->setPosition(startPos);
 		getEntity()->getTransform()->setRotation(startRot);
-
-		m_posX = startPos.x;
-		m_posY = startPos.y;
-		m_posZ = startPos.z;
 	}
 
 private:
 	std::shared_ptr<Input> m_input;
-
-	float m_posZ;
-	float m_posY;
-	float m_posX;
 };
 
 int main(int argc, char *argv[])
@@ -104,12 +96,18 @@ int main(int argc, char *argv[])
 	e->getTransform()->setPosition(rend::vec3(0, 0, -5));
 	e->getTransform()->setScale(rend::vec3(0.5f, 0.5f, 0.5f));
 
+	std::shared_ptr<BoxCollider> bc = e->addComponent<BoxCollider>();
+	bc->setSize(rend::vec3(1, 3, 1));
+
 	/**
 	* Default Camera creation to ensure a camera is present
 	*/
 	std::shared_ptr<Entity> camE = core->addEntity();
 	camE->addComponent<Camera>();
 	camE->addComponent<CamController>();
+
+	std::shared_ptr<BoxCollider> bc2 = camE->addComponent<BoxCollider>();
+	camE->addComponent<Rigidbody>();
 
 	core->start();
 

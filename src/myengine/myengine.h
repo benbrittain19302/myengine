@@ -14,5 +14,7 @@
 #include "Sound.h"
 #include "Model.h"
 #include "Input.h"
+#include "BoxCollider.h"
+#include "RigidBody.h"
 
 #endif // !MY_ENGINE_MYENGINE_H
