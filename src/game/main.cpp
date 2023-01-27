@@ -8,16 +8,19 @@ struct Player : Component
 {
 	void onTick(float deltaTs)
 	{
+		m_angleUpdate = false;
 		//std::cout << "Ticking" << std::endl;
 		rend::vec3 newPos = m_transform->getPosition();
 
 		if (m_input->cmd_q)
 		{
 			m_angle += 40.0f * deltaTs;
+			m_angleUpdate = true;
 		}
 		if (m_input->cmd_e)
 		{
 			m_angle -= 40.0f * deltaTs;
+			m_angleUpdate = true;
 		}
 		if (m_angle > 360 || m_angle < -360)
 		{
@@ -77,8 +80,15 @@ struct Player : Component
 		return m_angle - 180.f;
 	}
 
+	bool getAngleUpdate()
+	{
+		return m_angleUpdate;
+	}
+
 private:
 	std::shared_ptr<Input> m_input;
+
+	bool m_angleUpdate;
 
 	std::shared_ptr<Transform> m_transform;
 
@@ -90,8 +100,48 @@ struct CamController : Component
 
 	void onTick(float deltaTs)
 	{
-		//getEntity()->getTransform()->setPosition(m_player->getEntity()->getTransform()->getPosition() + posOffset);
-		//getEntity()->getTransform()->setRotation(rend::vec3(-20, m_player->getAngle(), 0));
+		float x = (m_posOffset.x * rend::cos(rend::radians(m_player->getAngle()))) + (m_posOffset.z * rend::sin(rend::radians(m_player->getAngle())));
+		float y = m_posOffset.y;
+		float z = (-m_posOffset.x * rend::sin(rend::radians(m_player->getAngle()))) + (m_posOffset.z * rend::cos(rend::radians(m_player->getAngle())));
+
+		rend::vec3 newOffset = rend::vec3(x, y, z);
+
+		getEntity()->getTransform()->setPosition(m_player->getEntity()->getTransform()->getPosition() + newOffset);
+		getEntity()->getTransform()->setRotation(rend::vec3(-20, m_player->getAngle(), 0));
+
+		/*
+		bool angleUpdate = m_player->getAngleUpdate();
+		if (angleUpdate)
+		{
+			rend::translate()
+			rend::vec3 camPos = getEntity()->getTransform()->getPosition() - m_posOffset;
+			float x = (camPos.x * rend::cos(rend::radians(m_player->getAngle()))) + (camPos.z * rend::sin(rend::radians(m_player->getAngle())));
+			float y = camPos.y;
+			float z = (-camPos.x * rend::sin(rend::radians(m_player->getAngle()))) + (camPos.z * rend::cos(rend::radians(m_player->getAngle())));
+			rend::vec3 newPos = rend::vec3(x, y, z) + m_posOffset;
+			getEntity()->getTransform()->setPosition(newPos);
+		}*/
+		//translate camera to player
+		//rotate camera
+		//translate camera back
+
+		///rend::mat4 transform(1);
+		
+
+		/*
+		rend::mat4 transform = rend::rotate(getEntity()->getTransform()->getModel(), rend::radians(m_player->getAngle()), rend::vec3(0,1,0));
+		
+
+		if (m_player->getAngle() > 10)
+		{
+			int asdipo = 0;
+		}
+		rend::vec4 tempPos = transform * rend::vec4(getEntity()->getTransform()->getPosition(), 1);
+		rend::vec3 newPos = rend::vec3(tempPos.x, tempPos.y, tempPos.z);
+		getEntity()->getTransform()->setPosition(newPos);
+		
+		getEntity()->getTransform()->setRotation(rend::vec3(-20, m_player->getAngle(), 0));
+		*/
 	}
 
 	void onDisplay()
@@ -108,7 +158,7 @@ struct CamController : Component
 	{
 		std::shared_ptr<Transform> myPos = getEntity()->getTransform();
 		m_player = _player;
-		posOffset = myPos->getPosition() - m_player->getEntity()->getTransform()->getPosition();
+		m_posOffset = myPos->getPosition() - m_player->getEntity()->getTransform()->getPosition();
 	}
 
 private:
@@ -116,7 +166,7 @@ private:
 
 	std::shared_ptr<Player> m_player;
 
-	rend::vec3 posOffset;
+	rend::vec3 m_posOffset;
 };
 
 int main(int argc, char *argv[])
@@ -136,7 +186,7 @@ int main(int argc, char *argv[])
 	//ss->play();
 	//ss->setLoop(true);
 
-	e->getTransform()->setPosition(rend::vec3(0, 0, -5));
+	e->getTransform()->setPosition(rend::vec3(1, 0, -4));
 	e->getTransform()->setScale(rend::vec3(0.5f, 0.5f, 0.5f));
 
 	std::shared_ptr<BoxCollider> bc = e->addComponent<BoxCollider>();
@@ -148,7 +198,7 @@ int main(int argc, char *argv[])
 	*/
 	std::shared_ptr<Entity> camE = core->addEntity();
 	camE->addComponent<Camera>(); 
-	camE->getTransform()->setPosition(rend::vec3(0, 3, 0));
+	camE->getTransform()->setPosition(rend::vec3(1, 3, 1));
 
 	std::shared_ptr<CamController> camCon = camE->addComponent<CamController>();
 	camCon->setPlayer(e->getComponent<Player>());
