@@ -9,12 +9,15 @@
 
 namespace myengine
 {
-	void Rigidbody::onTick()
+	void Rigidbody::onTick(float deltaTs)
 	{
 		std::vector<std::shared_ptr<BoxCollider> > colliders;
 		std::shared_ptr<Core> core = getEntity()->getCore();
 
 		core->find<BoxCollider>(colliders);
+
+		rend::vec3 gravity = rend::vec3(0, -0.1f, 0);
+		getEntity()->getTransform()->setPosition(getEntity()->getTransform()->getPosition() + gravity);
 
 		for (std::vector<std::shared_ptr<BoxCollider> >::iterator itr = colliders.begin(); itr != colliders.end(); itr++)
 		{
@@ -23,9 +26,6 @@ namespace myengine
 			{
 				if (getEntity()->getComponent<BoxCollider>()->colliding((*itr)))
 				{
-					std::cout << "COLLIDE" << m_colCount << std::endl;
-					m_colCount++;
-
 					rend::vec3 otherPos = other->getTransform()->getPosition();
 					rend::vec3 otherSize = (*itr)->getSize();
 

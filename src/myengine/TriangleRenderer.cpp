@@ -36,7 +36,7 @@ namespace myengine
 
 		std::shared_ptr<Entity> camera = getEntity()->getCore()->getCamera();
 
-		r.projection(rend::perspective(rend::radians(45.0f), 1.0f, 0.1f, 100.0f));
+		//r.projection(rend::perspective(rend::radians(45.0f), 1.0f, 0.1f, 100.0f));
 		r.model(getEntity()->getTransform()->getModel());
 		r.projection(camera->getComponent<Camera>()->getProj()); 
 		r.view(camera->getComponent<Camera>()->getView()); 

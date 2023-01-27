@@ -18,6 +18,8 @@ namespace myengine
 		rend::vec3 getPosition();
 		rend::vec3 getRotation();
 		rend::vec3 getScale();
+		rend::vec3 getDirection();
+		rend::vec3 getLeft();
 
 	private:
 		rend::vec3 m_position;

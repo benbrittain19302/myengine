@@ -12,7 +12,7 @@ namespace myengine
 	*/
 	struct Component
 	{
-		virtual void onTick(); ///< Base definition for onTick function
+		virtual void onTick(float deltaTs); ///< Base definition for onTick function
 		virtual void onDisplay(); ///< Base definition for onDisplay function
 		virtual void onInit();
 
@@ -22,7 +22,7 @@ namespace myengine
 
 		std::weak_ptr<Entity> m_entity; ///< Reference to a component's Entity
 
-		void tick(); ///< Base Tick function
+		void tick(float deltaTs); ///< Base Tick function
 		void display(); ///< Base Display function
 	};
 }

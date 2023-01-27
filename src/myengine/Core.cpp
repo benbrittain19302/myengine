@@ -96,6 +96,8 @@ namespace myengine
 	*/
 	void Core::start()
 	{
+		unsigned int lastTime = SDL_GetTicks();
+
 		m_running = true; ///< Game is running
 
 		while (m_running) ///< Whilst Game is running
@@ -106,12 +108,16 @@ namespace myengine
 				m_running = false;
 			}
 
+			unsigned int current = SDL_GetTicks();
+			float deltaTs = (float)(current - lastTime) / 1000.f;
+			lastTime = current;
+
 			/**
 			* For each Entity, update Entity
 			*/
 			for (std::list<std::shared_ptr<Entity> >::iterator itr = m_entities.begin(); itr != m_entities.end(); itr++)
 			{
-				(*itr)->tick();
+				(*itr)->tick(deltaTs);
 			}
 
 			/**
@@ -129,6 +135,12 @@ namespace myengine
 			}
 
 			SDL_GL_SwapWindow(m_window); ///< Set Correct window display
+
+			///< FPS limiter 
+			if (deltaTs < (1.0f / 60.0f))	
+			{
+				SDL_Delay((unsigned int)(((1.0f / 60.0f) - deltaTs) * 1000.0f));
+			}
 		}
 	}
 

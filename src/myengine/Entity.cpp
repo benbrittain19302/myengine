@@ -6,11 +6,11 @@
 
 namespace myengine
 {
-	void Entity::tick()
+	void Entity::tick(float deltaTs)
 	{
 		for (std::vector<std::shared_ptr<Component> >::iterator itr = m_components.begin(); itr != m_components.end(); itr++)
 		{
-			(*itr)->tick();
+			(*itr)->tick(deltaTs);
 		}
 	}
 

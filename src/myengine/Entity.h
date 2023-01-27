@@ -78,7 +78,7 @@ namespace myengine
 
 		bool m_alive;
 
-		void tick(); ///< Update Entity
+		void tick(float deltaTs); ///< Update Entity
 
 		void display(); ///< Display Entity
 	};

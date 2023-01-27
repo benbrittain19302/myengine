@@ -8,7 +8,7 @@ namespace myengine
 	*/
 	Input::Input()
 	{
-		Quit = showMouse = cmd_s = cmd_a = cmd_w = cmd_d = keyDown = cmd_mouseleft = cmd_mouseleftUp = cmd_mouseright = cmd_mouserightUp = once = cmd_z = cmd_x = cmd_c = cmd_space = cmd_lshift = cmd_rshift = false;
+		Quit = showMouse = cmd_s = cmd_a = cmd_w = cmd_d = keyDown = cmd_mouseleft = cmd_mouseleftUp = cmd_mouseright = cmd_mouserightUp = once = cmd_z = cmd_x = cmd_c = cmd_space = cmd_lshift = cmd_rshift = cmd_q = cmd_e = false;
 	}
 
 	std::vector<int> Input::keys;
@@ -100,6 +100,14 @@ namespace myengine
 				{
 					cmd_rshift = true;
 				}
+				else if (eventQueue.key.keysym.sym == SDLK_q)
+				{
+					cmd_q = true;
+				}
+				else if (eventQueue.key.keysym.sym == SDLK_e)
+				{
+					cmd_e = true;
+				}
 
 
 			}
@@ -132,6 +140,15 @@ namespace myengine
 				{
 					cmd_rshift = false;
 				}
+				else if (eventQueue.key.keysym.sym == SDLK_q)
+				{
+					cmd_q = false;
+				}
+				else if (eventQueue.key.keysym.sym == SDLK_e)
+				{
+					cmd_e = false;
+				}
+
 			}
 
 			/// move the mouse back to the middle of the screen each frame

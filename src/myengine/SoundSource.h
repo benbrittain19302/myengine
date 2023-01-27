@@ -16,11 +16,15 @@ namespace myengine
 
 		void setSound(std::shared_ptr<Sound> _sound);
 
+		void setLoop(bool _loop);
+
 	private:
+		bool loop;
+
 		std::shared_ptr<Sound> m_sound;
 
 		ALuint m_sourceId;
 
-		void onTick();
+		void onTick(float deltaTs);
 	};
 }

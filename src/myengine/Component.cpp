@@ -3,13 +3,13 @@
 
 namespace myengine
 {
-	void Component::onTick() { } ///< Empty base onTick function
+	void Component::onTick(float deltaTs) { } ///< Empty base onTick function
 	void Component::onDisplay() { } ///< Empty base onDisplay function
 	void Component::onInit() { } ///< Empty base onInit function
 
-	void Component::tick()
+	void Component::tick(float deltaTs)
 	{
-		onTick(); ///< When ticking, call overridden onTick if it exists
+		onTick(deltaTs); ///< When ticking, call overridden onTick if it exists
 	}
 
 	void Component::display()

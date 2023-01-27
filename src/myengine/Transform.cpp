@@ -51,4 +51,14 @@ namespace myengine
 	{ 
 		return m_scale; 
 	}
+
+	rend::vec3 Transform::getDirection()
+	{
+		return rend::vec3(rend::sin(rend::radians(m_rotation.y)), 0, rend::cos(rend::radians(m_rotation.y)));
+	}	
+
+	rend::vec3 Transform::getLeft()
+	{
+		return rend::vec3(rend::sin(rend::radians(m_rotation.y + 90)), 0, rend::cos(rend::radians(m_rotation.y + 90)));
+	}
 }
