@@ -10,7 +10,7 @@ namespace myengine
 {
 
 	TriangleRenderer::TriangleRenderer() :
-		m_shader("../src/assests/shaders/basic.vert", "../src/assests/shaders/basic.frag")
+		m_shader("assests/shaders/basic.vert", "assests/shaders/basic.frag")
 		//m_shadowShader(), ///< Shadow Shader initialisation here
 	{
 		 

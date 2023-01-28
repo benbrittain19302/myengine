@@ -8,6 +8,7 @@
 #include <rend/rend.h>
 
 #include <stdexcept>
+#include <iostream>
 
 namespace myengine
 {
@@ -102,6 +103,7 @@ namespace myengine
 
 		while (m_running) ///< Whilst Game is running
 		{
+			system("CLS");
 			m_input->update();
 			if (m_input->Quit)
 			{
@@ -141,6 +143,11 @@ namespace myengine
 			if (deltaTs < (1.0f / 60.0f))	
 			{
 				SDL_Delay((unsigned int)(((1.0f / 60.0f) - deltaTs) * 1000.0f));
+				std::cout << "FPS: 60" << std::endl;
+			}
+			else
+			{
+				std::cout << "FPS: " << 1 / deltaTs << std::endl;
 			}
 		}
 	}

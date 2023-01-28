@@ -18,6 +18,8 @@ namespace myengine
 
 		void setLoop(bool _loop);
 
+		bool isPlaying();
+
 	private:
 		bool loop;
 

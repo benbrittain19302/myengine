@@ -39,6 +39,15 @@ namespace myengine
 		loop = _loop;
 	}
 
+	bool SoundSource::isPlaying()
+	{
+		ALenum state;
+
+		alGetSourcei(m_sourceId, AL_SOURCE_STATE, &state);
+
+		return state == AL_PLAYING;
+	}
+
 	void SoundSource::onTick(float deltaTs)
 	{
 		rend::vec3 myPos = getEntity()->getTransform()->getPosition();
@@ -49,11 +58,7 @@ namespace myengine
 
 		if (loop)
 		{
-			ALenum state;
-
-			alGetSourcei(m_sourceId, AL_SOURCE_STATE, &state);
-
-			if (!(state == AL_PLAYING))
+			if (!isPlaying())
 			{
 				play();
 			}

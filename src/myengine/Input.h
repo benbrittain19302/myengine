@@ -25,7 +25,7 @@ namespace myengine
 		int mouse_x, mouse_y;
 
 		bool cmd_mouseleft, cmd_mouseleftUp, cmd_mouseright, cmd_mouserightUp;
-		bool cmd_s, cmd_a, cmd_d, cmd_w, cmd_z, cmd_x, cmd_c, cmd_space, cmd_lshift, cmd_rshift, cmd_q, cmd_e, cmd_r, cmd_f;
+		bool cmd_s, cmd_a, cmd_d, cmd_w, cmd_z, cmd_x, cmd_c, cmd_space, cmd_lshift, cmd_rshift, cmd_lctrl, cmd_rctrl, cmd_q, cmd_e, cmd_r, cmd_f;
 		bool once;
 
 		glm::vec2 getMouseDelta();

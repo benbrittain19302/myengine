@@ -80,6 +80,9 @@ target_link_libraries(myengine SDL2 SDL2Main rend openal32)
 
 add_executable(game
 	src/game/main.cpp
+
+	src/game/gameStructs.h
+	src/game/gameStructs.cpp
 )
 
 target_link_libraries(game myengine)
