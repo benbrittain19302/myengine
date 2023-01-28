@@ -7,5 +7,7 @@ namespace myengine
 	struct Rigidbody : Component
 	{
 		void onTick(float deltaTs);
+	private:
+		int m_colcount;
 	};
 }

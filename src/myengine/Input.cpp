@@ -8,7 +8,8 @@ namespace myengine
 	*/
 	Input::Input()
 	{
-		Quit = showMouse = cmd_s = cmd_a = cmd_w = cmd_d = keyDown = cmd_mouseleft = cmd_mouseleftUp = cmd_mouseright = cmd_mouserightUp = once = cmd_z = cmd_x = cmd_c = cmd_space = cmd_lshift = cmd_rshift = cmd_q = cmd_e = false;
+		Quit = showMouse = cmd_s = cmd_a = cmd_w = cmd_d = keyDown = cmd_mouseleft = cmd_mouseleftUp = cmd_mouseright = cmd_mouserightUp = 
+			once = cmd_z = cmd_x = cmd_c = cmd_space = cmd_lshift = cmd_rshift = cmd_q = cmd_e = cmd_r = cmd_f = false;
 	}
 
 	std::vector<int> Input::keys;
@@ -108,6 +109,14 @@ namespace myengine
 				{
 					cmd_e = true;
 				}
+				else if (eventQueue.key.keysym.sym == SDLK_f)
+				{
+					cmd_f = true;
+				}
+				else if (eventQueue.key.keysym.sym == SDLK_r)
+				{
+					cmd_r = true;
+				}
 
 
 			}
@@ -147,6 +156,14 @@ namespace myengine
 				else if (eventQueue.key.keysym.sym == SDLK_e)
 				{
 					cmd_e = false;
+				}
+				else if (eventQueue.key.keysym.sym == SDLK_f)
+				{
+					cmd_f = false;
+				}
+				else if (eventQueue.key.keysym.sym == SDLK_r)
+				{
+					cmd_r = false;
 				}
 
 			}

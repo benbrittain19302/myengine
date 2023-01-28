@@ -26,6 +26,8 @@ namespace myengine
 			{
 				if (getEntity()->getComponent<BoxCollider>()->colliding((*itr)))
 				{
+					//std::cout << "COLLIDE" << m_colcount << std::endl;
+					//m_colcount++;
 					rend::vec3 otherPos = other->getTransform()->getPosition();
 					rend::vec3 otherSize = (*itr)->getSize();
 

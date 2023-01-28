@@ -124,6 +124,7 @@ namespace myengine
 			* Define Renderer for screen and clear the screen
 			*/
 			rend::Renderer r(INITIAL_WIDTH, INITIAL_HEIGHT);
+			r.clearColor(rend::vec3(0.73f, 0.73f, 0.73f));
 			r.clear();
 
 			/**
