@@ -14,11 +14,11 @@ int main(int argc, char *argv[])
 	std::shared_ptr<Entity> playerEntity = core->addEntity();
 	playerEntity->addComponent<Player>();
 	std::shared_ptr<TriangleRenderer> tr = playerEntity->addComponent<TriangleRenderer>();
-	tr->setMesh(core->getResources()->load<Model>("assests/models/curuthers.obj"));
-	tr->setTexture(core->getResources()->load<ETexture>("assests/models/textures/Whiskers_diffuse.png"));
+	tr->setMesh(core->getResources()->load<Model>("../src/assests/models/curuthers.obj"));
+	tr->setTexture(core->getResources()->load<ETexture>("../src/assests/models/textures/Whiskers_diffuse.png"));
 
 	std::shared_ptr<SoundSource> ss = playerEntity->addComponent<SoundSource>();
-	std::shared_ptr<Sound> bingChilling = core->getResources()->load<Sound>("assests/sounds/bingchilling.ogg");
+	std::shared_ptr<Sound> bingChilling = core->getResources()->load<Sound>("../src/assests/sounds/bingchilling.ogg");
 	ss->setSound(bingChilling);
 
 	playerEntity->getTransform()->setPosition(rend::vec3(1, 0, -4));
@@ -45,8 +45,8 @@ int main(int argc, char *argv[])
 	floor->getTransform()->setScale(rend::vec3(250.0f, 1.0f, 250.0f));
 
 	std::shared_ptr<TriangleRenderer> trfloor = floor->addComponent<TriangleRenderer>();
-	trfloor->setMesh(core->getResources()->load<Model>("assests/models/floor.obj"));
-	trfloor->setTexture(core->getResources()->load<ETexture>("assests/models/textures/floor.png"));
+	trfloor->setMesh(core->getResources()->load<Model>("../src/assests/models/floor.obj"));
+	trfloor->setTexture(core->getResources()->load<ETexture>("../src/assests/models/textures/floor.png"));
 
 	std::shared_ptr<BoxCollider> fBC = floor->addComponent<BoxCollider>();
 	fBC->setSize(rend::vec3(5000.0f, 1.0f, 5000.0f));
@@ -61,8 +61,8 @@ int main(int argc, char *argv[])
 	fBCwallN->setSize(rend::vec3(1000, 1000, 10.0f));
 
 	std::shared_ptr<TriangleRenderer> trfloorWallN = wallN->addComponent<TriangleRenderer>();
-	trfloorWallN->setMesh(core->getResources()->load<Model>("assests/models/floor.obj"));
-	trfloorWallN->setTexture(core->getResources()->load<ETexture>("assests/models/textures/sky.png"));
+	trfloorWallN->setMesh(core->getResources()->load<Model>("../src/assests/models/floor.obj"));
+	trfloorWallN->setTexture(core->getResources()->load<ETexture>("../src/assests/models/textures/sky.png"));
 
 	std::shared_ptr<Entity> wallE = core->addEntity();
 	std::shared_ptr<Transform> wallET = wallE->getTransform();
@@ -74,8 +74,8 @@ int main(int argc, char *argv[])
 	fBCwallE->setSize(rend::vec3(10.0f, 1000, 1000));
 
 	std::shared_ptr<TriangleRenderer> trfloorWallE = wallE->addComponent<TriangleRenderer>();
-	trfloorWallE->setMesh(core->getResources()->load<Model>("assests/models/floor.obj"));
-	trfloorWallE->setTexture(core->getResources()->load<ETexture>("assests/models/textures/sky.png"));
+	trfloorWallE->setMesh(core->getResources()->load<Model>("../src/assests/models/floor.obj"));
+	trfloorWallE->setTexture(core->getResources()->load<ETexture>("../src/assests/models/textures/sky.png"));
 
 	std::shared_ptr<Entity> wallS = core->addEntity();
 	std::shared_ptr<Transform> wallST = wallS->getTransform();
@@ -87,8 +87,8 @@ int main(int argc, char *argv[])
 	fBCwallS->setSize(rend::vec3(1000, 1000, 10.0f));
 
 	std::shared_ptr<TriangleRenderer> trfloorWallS = wallS->addComponent<TriangleRenderer>();
-	trfloorWallS->setMesh(core->getResources()->load<Model>("assests/models/floor.obj"));
-	trfloorWallS->setTexture(core->getResources()->load<ETexture>("assests/models/textures/sky.png"));
+	trfloorWallS->setMesh(core->getResources()->load<Model>("../src/assests/models/floor.obj"));
+	trfloorWallS->setTexture(core->getResources()->load<ETexture>("../src/assests/models/textures/sky.png"));
 
 	std::shared_ptr<Entity> wallW = core->addEntity();
 	std::shared_ptr<Transform> wallWT = wallW->getTransform();
@@ -100,8 +100,8 @@ int main(int argc, char *argv[])
 	fBCwallW->setSize(rend::vec3(10.0f, 1000, 1000));
 
 	std::shared_ptr<TriangleRenderer> trfloorWallW = wallW->addComponent<TriangleRenderer>();
-	trfloorWallW->setMesh(core->getResources()->load<Model>("assests/models/floor.obj"));
-	trfloorWallW->setTexture(core->getResources()->load<ETexture>("assests/models/textures/sky.png"));
+	trfloorWallW->setMesh(core->getResources()->load<Model>("../src/assests/models/floor.obj"));
+	trfloorWallW->setTexture(core->getResources()->load<ETexture>("../src/assests/models/textures/sky.png"));
 
 	///< Obstacle Creation
 
@@ -117,8 +117,8 @@ int main(int argc, char *argv[])
 		milkCollider->setSize(rend::vec3(1.2f, 2.0f, 1.2f));
 
 		std::shared_ptr<TriangleRenderer> milkCarton = pickups.at(i)->addComponent<TriangleRenderer>();
-		milkCarton->setMesh(core->getResources()->load<Model>("assests/models/Milk.obj"));
-		milkCarton->setTexture(core->getResources()->load<ETexture>("assests/models/textures/Milk.png"));
+		milkCarton->setMesh(core->getResources()->load<Model>("../src/assests/models/Milk.obj"));
+		milkCarton->setTexture(core->getResources()->load<ETexture>("../src/assests/models/textures/Milk.png"));
 
 		std::shared_ptr<Milk> milkPickup = pickups.at(i)->addComponent<Milk>();
 		milkPickup->setData(playerEntity, milkCollider);
@@ -137,8 +137,8 @@ int main(int argc, char *argv[])
 		bcOb->setSize(rend::vec3(1.0f, 2.0f, 1.0f));
 
 		std::shared_ptr<TriangleRenderer> Cube = obstacles.at(i)->addComponent<TriangleRenderer>();
-		Cube->setMesh(core->getResources()->load<Model>("assests/models/Block.obj"));
-		Cube->setTexture(core->getResources()->load<ETexture>("assests/models/textures/GrassBlock.png"));
+		Cube->setMesh(core->getResources()->load<Model>("../src/assests/models/Block.obj"));
+		Cube->setTexture(core->getResources()->load<ETexture>("../src/assests/models/textures/GrassBlock.png"));
 
 		std::shared_ptr<Obstacle> CubeOb = obstacles.at(i)->addComponent<Obstacle>();
 		CubeOb->setData(playerEntity, bcOb);
@@ -149,13 +149,13 @@ int main(int argc, char *argv[])
 	std::shared_ptr<Entity> aEntity = core->addEntity();
 	std::shared_ptr<Announcement> ancmt = aEntity->addComponent<Announcement>();
 	std::shared_ptr<SoundSource> announcementSource = aEntity->addComponent<SoundSource>();
-	std::shared_ptr<Sound> announcement = core->getResources()->load<Sound>("assests/sounds/announcement.ogg");
+	std::shared_ptr<Sound> announcement = core->getResources()->load<Sound>("../src/assests/sounds/announcement.ogg");
 	announcementSource->setSound(announcement);
 	announcementSource->play();
 
 	std::shared_ptr<Entity> emptySound = core->addEntity();
 	std::shared_ptr<SoundSource> songSource = floor->addComponent<SoundSource>();
-	std::shared_ptr<Sound> songSound = core->getResources()->load<Sound>("assests/sounds/rockefellerstreet.ogg");
+	std::shared_ptr<Sound> songSound = core->getResources()->load<Sound>("../src/assests/sounds/rockefellerstreet.ogg");
 	songSource->setSound(songSound);
 	std::shared_ptr<Song> song = emptySound->addComponent<Song>();
 
@@ -163,6 +163,7 @@ int main(int argc, char *argv[])
 	song->setData(songSource, playerEntity->getTransform());
 
 	core->start();
+	core->~Core();
 
 	int totalScore = 0;
 

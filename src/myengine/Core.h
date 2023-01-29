@@ -72,7 +72,7 @@ namespace myengine
 
 		std::shared_ptr<Entity> m_camera; ///< Reference to Camera Entity
 
-		int m_dummy;
+		//int m_dummy;
 
 		bool m_running; ///< Is Game running bool
 
