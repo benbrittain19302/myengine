@@ -13,8 +13,6 @@ struct Player : Component
 private:
 	std::shared_ptr<Input> m_input;
 
-	bool m_angleUpdate;
-
 	std::shared_ptr<Transform> m_transform;
 
 	float m_angle;
@@ -30,9 +28,9 @@ struct CamController : Component
 	void setPlayer(std::shared_ptr<Player> _player);
 
 private:
-	bool rCam;
+	bool m_rCam;
 
-	bool camTog;
+	bool m_camTog;
 
 	std::shared_ptr<Input> m_input;
 

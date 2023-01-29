@@ -7,19 +7,16 @@ using namespace myengine;
 
 void Player::onTick(float deltaTs)
 {
-	m_angleUpdate = false;
 	//std::cout << "Ticking" << std::endl;
 	rend::vec3 newPos = m_transform->getPosition();
 
 	if (m_input->cmd_q)
 	{
 		m_angle += 40.0f * deltaTs;
-		m_angleUpdate = true;
 	}
 	if (m_input->cmd_e)
 	{
 		m_angle -= 40.0f * deltaTs;
-		m_angleUpdate = true;
 	}
 	if (m_angle > 360 || m_angle < -360)
 	{
@@ -76,17 +73,17 @@ float Player::getAngle()
 
 void CamController::onTick(float deltaTs)
 {
-	if (m_input->cmd_lctrl && !camTog)
+	if (m_input->cmd_lctrl && !m_camTog)
 	{
-		rCam = !rCam;
-		camTog = true;
+		m_rCam = !m_rCam;
+		m_camTog = true;
 	}
 	else if (!m_input->cmd_lctrl)
 	{
-		camTog = false;
+		m_camTog = false;
 	}
 
-	if (rCam)
+	if (m_rCam)
 	{
 		m_posOffset.x = 1;
 	}
@@ -165,8 +162,8 @@ void CamController::onInit()
 
 	m_xAng = -15.0f;
 
-	rCam = true;
-	camTog = false;
+	m_rCam = true;
+	m_camTog = false;
 }
 
 void CamController::setPlayer(std::shared_ptr<Player> _player)
